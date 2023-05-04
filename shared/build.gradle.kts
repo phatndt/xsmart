@@ -20,9 +20,15 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                implementation(Dependencies.KOIN_CORE)
+                implementation("dev.gitlive:firebase-auth:1.8.0")
+                implementation("dev.gitlive:firebase-firestore:1.8.0")
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
