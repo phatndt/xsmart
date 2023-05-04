@@ -1,0 +1,22 @@
+object Versions {
+    const val ACTIVITY_COMPOSE_VERSION = "1.5.1"
+    const val COMPOSE_UI_VERSION = "1.2.1"
+    const val COMPOSE_FOUNDATION_VERSION = "1.2.1"
+    const val MATERIAL3 = "1.0.1"
+    const val ANDROID_LIFECYCLE = "1.0.1"
+    const val MATERIAL2 = "1.3.1"
+    const val COMPOSE_NAVIGATIION = "2.5.3"
+
+    const val LOTTIE = "6.0.0"
+    const val FIREBASE_BOM = "31.2.3"
+    const val FIREBASE_AUTH = "21.1.0"
+    const val FIREBASE_FIRESTORE = "24.4.5"
+    const val KOTLIN_COROUTINE = "1.6.4"
+    const val HILT = "2.44.2"
+    const val HILT_NAVIGATION_COMPSE = "1.0.0"
+    const val LIFECYCLE_RUNTIME_COMPOSE = "2.6.0"
+    const val SDP = "1.1.0"
+    const val KOTLIN_SERIALIZATION = "1.4.1"
+    const val ACCOMPANIST_NAVIGATION_ANIMATION = "0.28.0"
+    const val SQLDELIGHT = "2.0.0-alpha05"
+}

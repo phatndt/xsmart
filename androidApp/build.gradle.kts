@@ -1,17 +1,21 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.example.xsmart.android"
-    compileSdk = 32
+    compileSdk = Config.COMPILE_SDK
     defaultConfig {
         applicationId = "com.example.xsmart.android"
-        minSdk = 21
-        targetSdk = 32
+        minSdk = Config.MIN_SDK
+        targetSdk  = Config.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
     buildFeatures {
         compose = true
@@ -29,14 +33,32 @@ android {
             isMinifyEnabled = false
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.compose.foundation:foundation:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.activity:activity-compose:1.5.1")
+    implementation(Dependencies.COMPOSE_UI)
+    implementation(Dependencies.COMPOSE_UI_TOOL)
+    implementation(Dependencies.COMPOSE_UI_TOOL_PREVIEW)
+    implementation(Dependencies.COMPOSE_FOUNDATION)
+    implementation(Dependencies.ACTIVITY_COMPOSE)
+    implementation(Dependencies.COMPOSE_MATERIAL2)
+    implementation(Dependencies.COMPOSE_MATERIAL3)
+    implementation(Dependencies.ANDROID_LIFECYCLE)
+    implementation(Dependencies.COMPOSE_UI_TEXT_GOOGLE_FONT)
+    implementation(Dependencies.COMPOSE_NAVIGATION)
+    implementation(Dependencies.COMPOSE_MATERIAL_ICON_EXTENDED)
+    implementation(Dependencies.ACCOMPANIST_NAVIGATION_ANIMATION)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("io.insert-koin:koin-android:3.2.0")
+    implementation("io.insert-koin:koin-core:$3.2.0")
+    runtimeOnly("io.insert-koin:koin-androidx-compose:3.2.0")
+
 }
