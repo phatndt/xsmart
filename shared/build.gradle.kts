@@ -27,6 +27,7 @@ kotlin {
                 implementation(Dependencies.KOIN_CORE)
                 implementation("dev.gitlive:firebase-auth:1.8.0")
                 implementation("dev.gitlive:firebase-firestore:1.8.0")
+                implementation(Dependencies.SQLDELIGHT_RUNTIME)
             }
         }
         val commonTest by getting {
@@ -34,7 +35,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies  {
+                implementation(Dependencies.SQLDELIGHT_ANDROID_DRIVER)
+            }
+        }
         val androidTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -44,6 +49,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation(Dependencies.SQLDELIGHT_NATIVE_DRIVER)
+            }
         }
         val iosX64Test by getting
         val iosArm64Test by getting
