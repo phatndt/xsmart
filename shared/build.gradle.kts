@@ -2,6 +2,8 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("app.cash.sqldelight")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -28,7 +30,10 @@ kotlin {
                 implementation("dev.gitlive:firebase-auth:1.8.0")
                 implementation("dev.gitlive:firebase-firestore:1.8.0")
                 implementation(Dependencies.SQLDELIGHT_RUNTIME)
+                implementation(Dependencies.Kotlin.COROUTINE_CORE)
+                implementation(Dependencies.Kotlin.SERIALIZATION)
             }
+
         }
         val commonTest by getting {
             dependencies {
@@ -66,10 +71,27 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.xsmart"
+    namespace = "my.phatndt.xsmart"
     compileSdk = 32
     defaultConfig {
         minSdk = 21
         targetSdk = 32
+    }
+
+    sourceSets {
+        val main by getting
+        main.resources.setSrcDirs(
+            listOf(
+                "src/commonMain/resources",
+            )
+        )
+    }
+}
+
+sqldelight {
+    databases {
+        create("XSmartDatabase") {
+            packageName.set("my.phatndt.xsmart.cache")
+        }
     }
 }

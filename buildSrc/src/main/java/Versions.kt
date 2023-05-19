@@ -19,4 +19,5 @@ object Versions {
     const val KOTLIN_SERIALIZATION = "1.4.1"
     const val ACCOMPANIST_NAVIGATION_ANIMATION = "0.28.0"
     const val SQLDELIGHT = "2.0.0-alpha05"
+    const val KOIN = "3.2.0"
 }
