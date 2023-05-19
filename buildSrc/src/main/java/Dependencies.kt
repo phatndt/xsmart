@@ -41,8 +41,6 @@ object Dependencies {
     const val SDP = "com.intuit.sdp:sdp-android:${Versions.SDP}"
     const val RETROFIT = "com.squareup.retrofit2:retrofit:2.9.0"
     const val GSON = "com.google.code.gson:gson"
-    const val KOTLIN_SERIALIZATION =
-        "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLIN_SERIALIZATION}"
     const val RETROFIT_KOTLIN_SERIALIZATION =
         "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
     const val ACCOMPANIST_NAVIGATION_ANIMATION =
@@ -61,4 +59,15 @@ object Dependencies {
     const val SQLDELIGHT_NATIVE_DRIVER = "app.cash.sqldelight:native-driver:${Versions.SQLDELIGHT}"
     const val SQLDELIGHT_SQLITE_DRIVER = "app.cash.sqldelight:sqlite-driver:${Versions.SQLDELIGHT}"
     const val SQLDELIGHT_RUNTIME = "app.cash.sqldelight:runtime:${Versions.SQLDELIGHT}"
+
+    object Kotlin {
+        const val COROUTINE_CORE =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLIN_COROUTINE}"
+        const val SERIALIZATION =
+            "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KOTLIN_SERIALIZATION}"
+    }
+
+    object Koin {
+        const val ANDROIDX_COMPOSE = "io.insert-koin:koin-androidx-compose:${Versions.KOIN}"
+    }
 }

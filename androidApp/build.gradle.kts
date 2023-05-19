@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "com.example.xsmart.android"
+    namespace = "my.phatndt.xsmart.android"
     compileSdk = Config.COMPILE_SDK
     defaultConfig {
-        applicationId = "com.example.xsmart.android"
+        applicationId = "my.phatndt.xsmart.android"
         minSdk = Config.MIN_SDK
         targetSdk  = Config.TARGET_SDK
         versionCode = 1
@@ -21,7 +21,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.4.0"
     }
     packagingOptions {
         resources {
@@ -61,4 +61,5 @@ dependencies {
     implementation("io.insert-koin:koin-core:$3.2.0")
     runtimeOnly("io.insert-koin:koin-androidx-compose:3.2.0")
 
+    implementation(Dependencies.Koin.ANDROIDX_COMPOSE)
 }
