@@ -39,6 +39,7 @@ import my.phatndt.xsmart.android.core.ui.theme.XSmartColor.UnitConverterColor
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorHomeRoute
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorRoute
+import my.phatndt.xsmart.android.features.currencyconverter.presentation.view.CurrencyConverterRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -162,7 +163,7 @@ fun XSmartNavHost(navHostController: NavHostController = rememberNavController()
                     }
                 }
                 composable(Destinations.CurrencyConverter.route) {
-                    CurrencyConverterScreen()
+                    CurrencyConverterRoute()
                 }
                 composable(Destinations.Compass.route) {
                     CompassScreen()

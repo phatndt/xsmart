@@ -32,6 +32,12 @@ kotlin {
                 implementation(Dependencies.SQLDELIGHT_RUNTIME)
                 implementation(Dependencies.Kotlin.COROUTINE_CORE)
                 implementation(Dependencies.Kotlin.SERIALIZATION)
+                implementation(Dependencies.Kotlin.DATETIME)
+                implementation(Dependencies.Ktor.KTOR_CLIENT_CORE)
+                implementation(Dependencies.Ktor.KTOR_CLIENT_CONTENT_NEGOTIATION)
+                implementation(Dependencies.Ktor.KTOR_JSON)
+                implementation(Dependencies.Ktor.KTOR_LOGGING)
+                implementation(Dependencies.FirebaseKotlinSdk.CLOUD_FIRESTORE)
             }
 
         }
@@ -43,6 +49,8 @@ kotlin {
         val androidMain by getting {
             dependencies  {
                 implementation(Dependencies.SQLDELIGHT_ANDROID_DRIVER)
+                implementation(Dependencies.Ktor.KTOR_CLIENT_OKHTTP)
+                implementation(Dependencies.Ktor.KTOR_CLIENT_ANDROID)
             }
         }
         val androidTest by getting
@@ -56,6 +64,7 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(Dependencies.SQLDELIGHT_NATIVE_DRIVER)
+                implementation(Dependencies.Ktor.KTOR_CLIENT_DRAWIN)
             }
         }
         val iosX64Test by getting

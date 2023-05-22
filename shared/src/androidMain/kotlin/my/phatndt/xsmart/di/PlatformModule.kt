@@ -1,5 +1,6 @@
 package my.phatndt.xsmart.di
 
+import io.ktor.client.HttpClient
 import my.phatndt.xsmart.core.database.AppDatabase
 import my.phatndt.xsmart.core.database.DatabaseDriverFactory
 import my.phatndt.xsmart.core.shared.ResourceReader

@@ -36,4 +36,6 @@ object XSmartColor {
     val CompassColor = Color(0xFF56596c)
     val TextColor1 = Color(0xFF323232)
     val TextColor2 = Color(0xFFB0BECB)
+
+    val White = Color(0xFFFFFFFF)
 }

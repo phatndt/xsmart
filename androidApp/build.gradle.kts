@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -56,6 +57,7 @@ dependencies {
     implementation(Dependencies.COMPOSE_NAVIGATION)
     implementation(Dependencies.COMPOSE_MATERIAL_ICON_EXTENDED)
     implementation(Dependencies.ACCOMPANIST_NAVIGATION_ANIMATION)
+    implementation(Dependencies.Compose.CONSTRAINT_LAYOUT)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("io.insert-koin:koin-android:3.2.0")
     implementation("io.insert-koin:koin-core:$3.2.0")

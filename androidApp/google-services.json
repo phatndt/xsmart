@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1032402154738",
+    "project_id": "xsmart-2b847",
+    "storage_bucket": "xsmart-2b847.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1032402154738:android:a05ed427774eae2f2a4c6b",
+        "android_client_info": {
+          "package_name": "my.phatndt.xsmart.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1032402154738-g55kl2qbo0qrav5ri4148a9cio8l8rkm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.phatndt.xsmart.android",
+            "certificate_hash": "b99bf9adc4e572fb8c4746b837baa3ad82d60757"
+          }
+        },
+        {
+          "client_id": "1032402154738-071cdr06gcjpcuuv95pj6h3s4kf3luqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0E_d0AzOYvKSAIe3vHjXO7KfZIjeaI8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1032402154738-071cdr06gcjpcuuv95pj6h3s4kf3luqi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
