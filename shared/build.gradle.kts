@@ -7,7 +7,13 @@ plugins {
 }
 
 kotlin {
-    android()
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -53,7 +59,7 @@ kotlin {
                 implementation(Dependencies.Ktor.KTOR_CLIENT_ANDROID)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -94,6 +100,11 @@ android {
                 "src/commonMain/resources",
             )
         )
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }
 

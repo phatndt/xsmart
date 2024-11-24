@@ -25,6 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -65,7 +68,7 @@ fun XSmart() {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun XSmartNavHost(navHostController: NavHostController = rememberNavController()) {
+fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
     val items = listOf(
         TabItem.UnitConverter,
         TabItem.CurrencyConverter,
@@ -74,6 +77,15 @@ fun XSmartNavHost(navHostController: NavHostController = rememberNavController()
     )
     var converterType by remember { mutableStateOf(items.first()) }
     var expanded by remember { mutableStateOf(false) }
+    navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        when (destination.route) {
+            Destinations.UnitConverter.route -> converterType = TabItem.UnitConverter
+            Destinations.CurrencyConverter.route -> converterType = TabItem.CurrencyConverter
+            Destinations.BmiCalculator.route -> converterType = TabItem.BmiCalculator
+            Destinations.Compass.route -> converterType = TabItem.Compass
+            else -> Unit
+        }
+    }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -85,7 +97,7 @@ fun XSmartNavHost(navHostController: NavHostController = rememberNavController()
                             if (converterType != items.first()) {
                                 converterType =
                                     items.first()
-                                navHostController.navigate(Destinations.UnitConverter.route)
+                                navController.navigate(Destinations.UnitConverter.route)
                             }
                         }) {
                         Icon(Icons.Rounded.Home, tint = Color.White, contentDescription = null)
@@ -125,13 +137,49 @@ fun XSmartNavHost(navHostController: NavHostController = rememberNavController()
                                             expanded = false
                                             converterType = itemValue
                                             if (index == 0) {
-                                                navHostController.navigate(Destinations.UnitConverter.route)
+                                                navController.navigate(Destinations.UnitConverter.route) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    // Avoid multiple copies of the same destination when
+                                                    // reselecting the same item
+                                                    launchSingleTop = true
+                                                    // Restore state when reselecting a previously selected item
+                                                    restoreState = true
+                                                }
                                             } else if (index == 1) {
-                                                navHostController.navigate(Destinations.CurrencyConverter.route)
+                                                navController.navigate(Destinations.CurrencyConverter.route) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    // Avoid multiple copies of the same destination when
+                                                    // reselecting the same item
+                                                    launchSingleTop = true
+                                                    // Restore state when reselecting a previously selected item
+                                                    restoreState = true
+                                                }
                                             } else if (index == 2) {
-                                                navHostController.navigate(Destinations.BmiCalculatorHome.route)
+                                                navController.navigate(Destinations.BmiCalculatorHome.route) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    // Avoid multiple copies of the same destination when
+                                                    // reselecting the same item
+                                                    launchSingleTop = true
+                                                    // Restore state when reselecting a previously selected item
+                                                    restoreState = true
+                                                }
                                             } else if (index == 3) {
-                                                navHostController.navigate(Destinations.Compass.route)
+                                                navController.navigate(Destinations.Compass.route) {
+                                                    popUpTo(navController.graph.findStartDestination().id) {
+                                                        saveState = true
+                                                    }
+                                                    // Avoid multiple copies of the same destination when
+                                                    // reselecting the same item
+                                                    launchSingleTop = true
+                                                    // Restore state when reselecting a previously selected item
+                                                    restoreState = true
+                                                }
                                             }
                                         },
                                         enabled = (itemValue != converterType),
@@ -148,30 +196,29 @@ fun XSmartNavHost(navHostController: NavHostController = rememberNavController()
             )
         },
     ) {
-        Box(modifier = Modifier.padding(it)) {
-            NavHost(
-                navController = navHostController,
-                startDestination = Destinations.UnitConverter.route,
-                route = "/"
-            ) {
-                composable(Destinations.UnitConverter.route) {
-                    UnitConverterScreen()
+        NavHost(
+            navController = navController,
+            startDestination = Destinations.UnitConverter.route,
+            route = "/",
+            modifier = Modifier.padding(it),
+        ) {
+            composable(Destinations.UnitConverter.route) {
+                UnitConverterScreen()
+            }
+            composable(Destinations.BmiCalculatorHome.route) {
+                BmiCalculatorHomeRoute() {
+                    navController.navigate(Destinations.BmiCalculator.route)
                 }
-                composable(Destinations.BmiCalculatorHome.route) {
-                    BmiCalculatorHomeRoute() {
-                        navHostController.navigate(Destinations.BmiCalculator.route)
-                    }
-                }
-                composable(Destinations.CurrencyConverter.route) {
-                    CurrencyConverterRoute()
-                }
-                composable(Destinations.Compass.route) {
-                    CompassScreen()
-                }
-                composable(Destinations.BmiCalculator.route) {
-                    BmiCalculatorRoute() {
-                        navHostController.navigate(Destinations.BmiCalculatorHome.route)
-                    }
+            }
+            composable(Destinations.CurrencyConverter.route) {
+                CurrencyConverterRoute()
+            }
+            composable(Destinations.Compass.route) {
+                CompassScreen()
+            }
+            composable(Destinations.BmiCalculator.route) {
+                BmiCalculatorRoute() {
+                    navController.navigate(Destinations.BmiCalculatorHome.route)
                 }
             }
         }
@@ -183,12 +230,15 @@ fun setTopBarColor(tabItem: TabItem): Color {
         TabItem.UnitConverter -> {
             UnitConverterColor
         }
+
         TabItem.CurrencyConverter -> {
             CurrencyConverterColor
         }
+
         TabItem.BmiCalculator -> {
             BmiCalculatorColor
         }
+
         TabItem.Compass -> {
             CompassColor
         }
