@@ -26,7 +26,7 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {
 val dataModule = module {
     single(named("ioDispatcher")) { CustomCoroutineDispatcher.ioDispatcher }
     single(named("defaultDispatcher")) { CustomCoroutineDispatcher.defaultDispatcher }
-    single<BmiRepository> { BmiRepositoryImpl(get(), get(qualifier = named("ioDispatcher"))) }
+    single<BmiRepository> { BmiRepositoryImpl(get(qualifier = named("ioDispatcher"))) }
     single {
         HttpClient {
             install(ContentNegotiation) {

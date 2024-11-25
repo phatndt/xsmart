@@ -30,29 +30,29 @@ class BmiViewModel(private val bmiRepository: BmiRepository) : ViewModel() {
 
     private fun getBmi() {
         viewModelScope.launch {
-            bmiRepository.getListBmi().collect {
-                when (it) {
-                    NetworkResponse.Loading -> {
-
-                    }
-
-                    is NetworkResponse.Success -> {
-                        _uiState.update { state ->
-                            state.copy(bmi = it.data.map { bmi ->
-                                BmiEntity(
-                                    bmi.id, bmi.bmi, bmi.time
-                                )
-                            }.sortedByDescending { bmi -> bmi.time })
-                        }
-                    }
-
-                    is NetworkResponse.Error -> {
-                        _uiState.update { state ->
-                            state.copy(errorMessage = it.exception.message)
-                        }
-                    }
-                }
-            }
+//            bmiRepository.getListBmi().collect {
+//                when (it) {
+//                    NetworkResponse.Loading -> {
+//
+//                    }
+//
+//                    is NetworkResponse.Success -> {
+//                        _uiState.update { state ->
+//                            state.copy(bmi = it.data.map { bmi ->
+//                                BmiEntity(
+//                                    bmi.id, bmi.bmi, bmi.time
+//                                )
+//                            }.sortedByDescending { bmi -> bmi.time })
+//                        }
+//                    }
+//
+//                    is NetworkResponse.Error -> {
+//                        _uiState.update { state ->
+//                            state.copy(errorMessage = it.exception.message)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

@@ -105,10 +105,4 @@ android {
     }
 }
 
-sqldelight {
-    databases {
-        create("XSmartDatabase") {
-            packageName.set("my.phatndt.xsmart.cache")
-        }
-    }
-}
+tasks.register("testClasses")
