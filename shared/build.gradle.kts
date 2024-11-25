@@ -26,6 +26,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
+            isStatic = true
         }
     }
 
@@ -33,8 +34,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Dependencies.KOIN_CORE)
-                implementation("dev.gitlive:firebase-auth:1.8.0")
-                implementation("dev.gitlive:firebase-firestore:1.8.0")
                 implementation(Dependencies.SQLDELIGHT_RUNTIME)
                 implementation(Dependencies.Kotlin.COROUTINE_CORE)
                 implementation(Dependencies.Kotlin.SERIALIZATION)
@@ -43,7 +42,6 @@ kotlin {
                 implementation(Dependencies.Ktor.KTOR_CLIENT_CONTENT_NEGOTIATION)
                 implementation(Dependencies.Ktor.KTOR_JSON)
                 implementation(Dependencies.Ktor.KTOR_LOGGING)
-                implementation(Dependencies.FirebaseKotlinSdk.CLOUD_FIRESTORE)
             }
 
         }
@@ -90,7 +88,6 @@ android {
     compileSdk = 32
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
     }
 
     sourceSets {

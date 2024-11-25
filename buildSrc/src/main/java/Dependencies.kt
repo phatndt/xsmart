@@ -21,14 +21,6 @@ object Dependencies {
     const val COMPOSE_MATERIAL_ICON_EXTENDED =
         "androidx.compose.material:material-icons-extended:${Versions.MATERIAL2}"
 
-    object FIREBASE {
-        const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE_BOM}"
-        const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx"
-        const val FIREBASE_AUTH = "com.google.firebase:firebase-auth-ktx:${Versions.FIREBASE_AUTH}"
-        const val FIREBASE_FIRESTORE =
-            "com.google.firebase:firebase-firestore-ktx:${Versions.FIREBASE_FIRESTORE}"
-    }
-
     const val KOTLIN_COROUTINE =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLIN_COROUTINE}"
 
@@ -79,9 +71,6 @@ object Dependencies {
         const val KTOR_CLIENT_CONTENT_NEGOTIATION = "io.ktor:ktor-client-content-negotiation:${Versions.KTOR}"
         const val KTOR_JSON = "io.ktor:ktor-serialization-kotlinx-json:${Versions.KTOR}"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:${Versions.KTOR}"
-    }
-    object FirebaseKotlinSdk {
-        const val CLOUD_FIRESTORE= "dev.gitlive:firebase-firestore:${Versions.FIREBASE_KOTLIN_SDK}"
     }
 
     object Compose {
