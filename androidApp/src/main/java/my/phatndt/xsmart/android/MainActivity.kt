@@ -19,7 +19,7 @@ import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorHomeRoute
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorRoute
 import my.phatndt.xsmart.android.features.dashboard.DashboardRoute
-import my.phatndt.xsmart.android.features.dashboard.FeatureType
+import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorRoute
 

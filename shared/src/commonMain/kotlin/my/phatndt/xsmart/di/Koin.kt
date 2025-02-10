@@ -5,7 +5,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
 import my.phatndt.xsmart.core.data.CustomCoroutineDispatcher
-import my.phatndt.xsmart.data.VnSalaryCalculatorRepoImpl
+import my.phatndt.xsmart.data.repo.VnSalaryCalculatorRepoImpl
 import my.phatndt.xsmart.domain.repo.VnSalaryCalculatorRepo
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCaseImpl
@@ -13,11 +13,8 @@ import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryR
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCaseImpl
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCaseImpl
-import my.phatndt.xsmart.feature.bmi.data.repository.BmiRepositoryImpl
-import my.phatndt.xsmart.feature.bmi.domain.repository.BmiRepository
-import my.phatndt.xsmart.feature.currency.data.datasource.RemoteApiDataSource
-import my.phatndt.xsmart.feature.currency.data.repository.CurrencyRepositoryImpl
-import my.phatndt.xsmart.feature.currency.domain.repository.CurrencyRepository
+import my.phatndt.xsmart.data.repo.bmi.BmiRepositoryImpl
+import my.phatndt.xsmart.domain.repo.bmi.BmiRepository
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.KoinAppDeclaration
@@ -47,14 +44,6 @@ val dataModule = module {
                 level = LogLevel.ALL
             }
         }
-    }
-    single { RemoteApiDataSource(get(qualifier = named("ioDispatcher")), get()) }
-    single<CurrencyRepository> {
-        CurrencyRepositoryImpl(
-            get(qualifier = named("ioDispatcher")),
-            get(qualifier = named("defaultDispatcher")),
-            get(),
-        )
     }
 
     single { VnSalaryCalculatorRepoImpl() } bind VnSalaryCalculatorRepo::class
