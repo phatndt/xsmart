@@ -21,6 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import my.phatndt.xsmart.android.core.ui.theme.Spacing
 import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerXLarge
+import my.phatndt.xsmart.android.features.dashboard.model.FeatureItem
+import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

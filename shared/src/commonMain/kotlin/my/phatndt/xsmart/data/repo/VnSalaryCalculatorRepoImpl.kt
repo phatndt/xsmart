@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.data
+package my.phatndt.xsmart.data.repo
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

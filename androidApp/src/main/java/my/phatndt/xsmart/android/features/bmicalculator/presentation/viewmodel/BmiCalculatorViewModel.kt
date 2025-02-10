@@ -6,20 +6,29 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import my.phatndt.xsmart.feature.bmi.domain.repository.BmiRepository
+import my.phatndt.xsmart.domain.repo.bmi.BmiRepository
 import java.text.DecimalFormat
 
 class BmiViewModel(private val bmiRepository: BmiRepository) : ViewModel() {
+
     private val _uiState = MutableStateFlow(BmiUIState())
     val uiState = _uiState.asStateFlow()
+
     fun calculateBmi(height: Double, weight: Double) {
         val bmi = (weight / (height * height)) * 10000
         val decimalFormat = DecimalFormat("##.##")
-        val bmiAfterFormat = decimalFormat.format(bmi).replace(",", ".")
+        val bmiAfterFormat = decimalFormat
+            .format(bmi)
+            .replace(",", ".")
         _uiState.update {
             it.copy(calculatedBmi = bmiAfterFormat.toDouble(), isShowDiaLog = true)
         }
-        insertBmi(bmiAfterFormat.toDouble(), System.currentTimeMillis().toString())
+        insertBmi(
+            bmiAfterFormat.toDouble(),
+            System
+                .currentTimeMillis()
+                .toString()
+        )
     }
 
     init {

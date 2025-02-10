@@ -37,7 +37,7 @@ import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
 import my.phatndt.xsmart.android.core.utils.getDateTimeFromString
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
-import my.phatndt.xsmart.feature.bmi.domain.entity.BmiEntity
+import my.phatndt.xsmart.model.entity.bmi.BmiEntity
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

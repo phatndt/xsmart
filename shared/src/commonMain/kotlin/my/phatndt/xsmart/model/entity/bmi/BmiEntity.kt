@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.feature.bmi.domain.entity
+package my.phatndt.xsmart.model.entity.bmi
 
 data class BmiEntity(
     val id: Long,

@@ -1,9 +1,9 @@
-package my.phatndt.xsmart.feature.bmi.data.model
+package my.phatndt.xsmart.data.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BmiModel(
+data class BmiDto(
     val id: Long,
     val bmi: Double,
     val time: String,

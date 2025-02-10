@@ -1,7 +1,7 @@
-package my.phatndt.xsmart.feature.bmi.data.repository
+package my.phatndt.xsmart.data.repo.bmi
 
 import kotlinx.coroutines.CoroutineDispatcher
-import my.phatndt.xsmart.feature.bmi.domain.repository.BmiRepository
+import my.phatndt.xsmart.domain.repo.bmi.BmiRepository
 
 class BmiRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher,
