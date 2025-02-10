@@ -7,8 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Female
-import androidx.compose.material.icons.filled.Male
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -37,7 +35,8 @@ fun BmiCalculatorRoute(
         {
             bmiViewModel.dismissDialog()
             onNavigateToBmiCalculatorHomeScreen()
-        }) { height, weight ->
+        },
+    ) { height, weight ->
         bmiViewModel.calculateBmi(height, weight)
     }
 }
@@ -68,20 +67,19 @@ fun BmiCalculatorScreen(
     if (state.isShowDiaLog) {
         AlertDialog(
             onDismissRequest = {
-
             },
             title = {
                 Text(text = "Title")
             },
             text = {
                 Column() {
-                    Text("Your Bmi is: ${state.calculatedBmi.toString()}")
+                    Text("Your Bmi is: ${state.calculatedBmi}")
                 }
             },
             buttons = {
                 Row(
                     modifier = Modifier.padding(all = 8.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
                 ) {
                     Button(
                         modifier = Modifier.fillMaxWidth(),
@@ -90,71 +88,28 @@ fun BmiCalculatorScreen(
                         Text("OK")
                     }
                 }
-            }
+            },
         )
     }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                horizontal = 16.dp, vertical = 16.dp,
+                horizontal = 16.dp,
+                vertical = 16.dp,
             )
+            .safeDrawingPadding(),
     ) {
-//        Text(text = "Gender", style = XSmartTextStyles.h4)
-//        Row() {
-//            gender.forEach {
-//                Button(
-//                    onClick = { onSelectionChange(it) },
-//                    colors = ButtonDefaults.buttonColors(backgroundColor = if (it == selectedOption) BmiCalculatorColor else Color.White),
-//                    modifier = Modifier.padding(end = 8.dp),
-//                    shape = RoundedCornerShape(8.dp)
-//                ) {
-//                    Icon(
-//                        imageVector = if (it == gender.first()) Icons.Filled.Male else Icons.Filled.Female,
-//                        tint = if (it == selectedOption) Color.White else BmiCalculatorColor,
-//                        contentDescription = null
-//                    )
-//                    Text(
-//                        text = it,
-//                        style = XSmartTextStyles.button,
-//                        color = if (it == selectedOption) Color.White else BmiCalculatorColor
-//                    )
-//                }
-//            }
-//        }
-//        Spacer(modifier = Modifier.height(16.dp))
-//        Text("Age (years)", style = XSmartTextStyles.h4)
-//        Text(age.toInt().toString(), style = XSmartTextStyles.h2)
-//        Row(
-//            verticalAlignment = Alignment.CenterVertically,
-//            horizontalArrangement = Arrangement.spacedBy(4.dp)
-//        ) {
-//            MinusIconButton {
-//                age -= 1
-//            }
-//            Slider(
-//                modifier = Modifier.weight(1f),
-//                value = age,
-//                onValueChange = {
-//                    age = it
-//                },
-//                valueRange = 0f..100f,
-//                colors = SliderDefaults.colors(
-//                    activeTickColor = BmiCalculatorColor,
-//                    thumbColor = BmiCalculatorColor,
-//                    activeTrackColor = BmiCalculatorColor,
-//                )
-//            )
-//            PlusIconButton {
-//                age += 1
-//            }
-//        }
-//        Spacer(modifier = Modifier.height(16.dp))
         Text("Height (cm)", style = XSmartTextStyles.h4)
-        Text(height.toInt().toString(), style = XSmartTextStyles.h2)
+        Text(
+            height
+                .toInt()
+                .toString(),
+            style = XSmartTextStyles.h2,
+        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             MinusIconButton {
                 height -= 1
@@ -170,7 +125,7 @@ fun BmiCalculatorScreen(
                     activeTickColor = BmiCalculatorColor,
                     thumbColor = BmiCalculatorColor,
                     activeTrackColor = BmiCalculatorColor,
-                )
+                ),
             )
             PlusIconButton {
                 height += 1
@@ -178,10 +133,15 @@ fun BmiCalculatorScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Text("Weight (kg)", style = XSmartTextStyles.h4)
-        Text(weight.toInt().toString(), style = XSmartTextStyles.h2)
+        Text(
+            weight
+                .toInt()
+                .toString(),
+            style = XSmartTextStyles.h2,
+        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(4.dp)
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
             MinusIconButton {
                 weight -= 1
@@ -197,7 +157,7 @@ fun BmiCalculatorScreen(
                     activeTickColor = BmiCalculatorColor,
                     thumbColor = BmiCalculatorColor,
                     activeTrackColor = BmiCalculatorColor,
-                )
+                ),
             )
             PlusIconButton {
                 weight += 1
@@ -211,8 +171,8 @@ fun BmiCalculatorScreen(
             content = "Calculate",
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = BmiCalculatorColor,
-                contentColor = Color.White
-            )
+                contentColor = Color.White,
+            ),
         )
     }
 }
@@ -224,14 +184,16 @@ fun MinusIconButton(onClick: () -> Unit) {
             .size(24.dp)
             .clip(RoundedCornerShape(4.dp))
             .background(
-                color = BmiCalculatorColor.copy(alpha = 0.25f), shape = RoundedCornerShape(4.dp)
+                color = BmiCalculatorColor.copy(alpha = 0.25f),
+                shape = RoundedCornerShape(4.dp),
             )
-            .clickable { onClick() }, contentAlignment = Alignment.Center
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center,
     ) {
         Icon(
             imageVector = Icons.Filled.Remove,
             tint = BmiCalculatorColor,
-            contentDescription = null
+            contentDescription = null,
         )
     }
 }
@@ -243,14 +205,16 @@ fun PlusIconButton(onClick: () -> Unit) {
             .size(24.dp)
             .clip(RoundedCornerShape(4.dp))
             .background(
-                color = BmiCalculatorColor.copy(alpha = 0.25f), shape = RoundedCornerShape(4.dp)
+                color = BmiCalculatorColor.copy(alpha = 0.25f),
+                shape = RoundedCornerShape(4.dp),
             )
-            .clickable { onClick() }, contentAlignment = Alignment.Center
+            .clickable { onClick() },
+        contentAlignment = Alignment.Center,
     ) {
         Icon(
             imageVector = Icons.Filled.Add,
             tint = BmiCalculatorColor,
-            contentDescription = null
+            contentDescription = null,
         )
     }
 }
@@ -260,7 +224,6 @@ fun PlusIconButton(onClick: () -> Unit) {
 fun BmiCalculatorScreenPreview() {
     XSmartTheme() {
         BmiCalculatorScreen(BmiUIState(), {}) { _, _ ->
-
         }
     }
 }

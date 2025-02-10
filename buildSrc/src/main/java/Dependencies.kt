@@ -44,7 +44,6 @@ object Dependencies {
     const val SEEKER = "io.github.2307vivek:seeker:1.0.2"
     const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:v3.1.0"
 
-
     const val KOIN_ANDROID = "io.insert-koin:koin-android:3.2.0"
     const val KOIN_CORE = "io.insert-koin:koin-core:3.2.0"
     const val SQLDELIGHT_ANDROID_DRIVER = "app.cash.sqldelight:android-driver:${Versions.SQLDELIGHT}"
@@ -67,14 +66,13 @@ object Dependencies {
         const val KTOR_CLIENT_CORE = "io.ktor:ktor-client-core:${Versions.KTOR}"
         const val KTOR_CLIENT_OKHTTP = "io.ktor:ktor-client-okhttp:${Versions.KTOR}"
         const val KTOR_CLIENT_DRAWIN = "io.ktor:ktor-client-darwin:${Versions.KTOR}"
-        const val KTOR_CLIENT_ANDROID  = "io.ktor:ktor-client-android:${Versions.KTOR}"
+        const val KTOR_CLIENT_ANDROID = "io.ktor:ktor-client-android:${Versions.KTOR}"
         const val KTOR_CLIENT_CONTENT_NEGOTIATION = "io.ktor:ktor-client-content-negotiation:${Versions.KTOR}"
         const val KTOR_JSON = "io.ktor:ktor-serialization-kotlinx-json:${Versions.KTOR}"
         const val KTOR_LOGGING = "io.ktor:ktor-client-logging:${Versions.KTOR}"
     }
 
     object Compose {
-        const val CONSTRAINT_LAYOUT =  "androidx.constraintlayout:constraintlayout-compose:1.0.1"
-
+        const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
     }
 }

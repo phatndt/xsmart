@@ -10,5 +10,5 @@ data class CountryModel(
     val countryName: String,
     val currencyCode: String,
     val image: String,
-    val population: String
+    val population: String,
 )

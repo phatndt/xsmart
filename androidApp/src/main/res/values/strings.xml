@@ -1,4 +1,6 @@
 <resources>
     <string name="title_activity_unit_converter">UnitConverter</string>
     <string name="app_name">XSmart</string>
+    <string name="full">Full</string>
+    <string name="other">Other</string>
 </resources>

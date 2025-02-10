@@ -6,8 +6,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import my.phatndt.xsmart.core.data.NetworkResponse
-import my.phatndt.xsmart.feature.bmi.domain.entity.BmiEntity
 import my.phatndt.xsmart.feature.bmi.domain.repository.BmiRepository
 import java.text.DecimalFormat
 
