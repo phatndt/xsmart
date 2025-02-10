@@ -13,7 +13,8 @@ import my.phatndt.xsmart.feature.currency.data.model.CurrencyModel
 import my.phatndt.xsmart.feature.currency.data.model.Meta
 
 class RemoteApiDataSource(
-    private val ioDispatcher: CoroutineDispatcher, private val httpClient: HttpClient,
+    private val ioDispatcher: CoroutineDispatcher,
+    private val httpClient: HttpClient,
 ) {
     suspend fun getCurrencyInDate(): CurrencyModel {
         return withContext(ioDispatcher) {
@@ -21,7 +22,7 @@ class RemoteApiDataSource(
                 url {
                     parameters.append(
                         "apikey",
-                        "TNSg75BUpJJmrqKq3MbbQLCLv87Bs4xg4QlRZ1OL"
+                        "TNSg75BUpJJmrqKq3MbbQLCLv87Bs4xg4QlRZ1OL",
                     )
                 }
             }.let {
@@ -30,10 +31,10 @@ class RemoteApiDataSource(
                     meta = Meta(
                         lastUpdatedAt = result.meta?.lastUpdatedAt?.let { date ->
                             Instant.parse(
-                                date
+                                date,
                             ).toEpochMilliseconds().toString()
                         },
-                    )
+                    ),
                 )
             }
         }

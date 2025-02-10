@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
 import my.phatndt.xsmart.android.features.currencyconverter.presentation.state.CurrencyUIState
 import my.phatndt.xsmart.core.data.NetworkResponse
 import my.phatndt.xsmart.feature.currency.data.model.CountryModel
@@ -36,7 +35,6 @@ class CurrencyViewModel(private val currencyRepository: CurrencyRepository) : Vi
             currencyRepository.getCurrencyInDate().collect {
                 when (it) {
                     NetworkResponse.Loading -> {
-
                     }
 
                     is NetworkResponse.Success -> {
@@ -62,7 +60,7 @@ class CurrencyViewModel(private val currencyRepository: CurrencyRepository) : Vi
                         _uiState.update { state ->
                             state.copy(
                                 currencyRate = map?.sortedBy { map -> map.third.code },
-                                exchangeRate = listOf()
+                                exchangeRate = listOf(),
                             )
                         }
                         updateShowLoadingDialog(false)
@@ -79,13 +77,15 @@ class CurrencyViewModel(private val currencyRepository: CurrencyRepository) : Vi
     fun calculateExchangeRate(value: Double) {
         val result = _uiState.value.currencyRate?.map {
             value.times(it.third?.value ?: 0.0).div(
-                _uiState.value.currentCurrencyRate?.value ?: 0.0
+                _uiState.value.currentCurrencyRate?.value ?: 0.0,
             )
         }
         _uiState.update { state ->
-            state.copy(currencyRate = _uiState.value.currencyRate?.mapIndexed { index, triple ->
-                Triple(result?.get(index), triple.second, triple.third)
-            })
+            state.copy(
+                currencyRate = _uiState.value.currencyRate?.mapIndexed { index, triple ->
+                    Triple(result?.get(index), triple.second, triple.third)
+                },
+            )
         }
     }
 
@@ -93,7 +93,7 @@ class CurrencyViewModel(private val currencyRepository: CurrencyRepository) : Vi
         _uiState.update { state -> state.copy(isShowDialog = boolean) }
     }
 
-     fun updateShowPickerCurrencyDialog(boolean: Boolean) {
+    fun updateShowPickerCurrencyDialog(boolean: Boolean) {
         _uiState.update { state -> state.copy(isShowPickerCurrencyDialog = boolean) }
     }
 

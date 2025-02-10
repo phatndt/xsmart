@@ -1,7 +1,6 @@
 package my.phatndt.xsmart.android.features.currencyconverter.presentation.state
 
 import my.phatndt.xsmart.feature.currency.data.model.CurrencyRate
-import java.security.KeyStore.Builder
 
 data class CurrencyUIState(
     val currencyRate: List<Triple<Double?, String?, CurrencyRate?>>? = null,

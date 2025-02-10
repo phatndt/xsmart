@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
@@ -60,10 +61,12 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                horizontal = 16.dp, vertical = 16.dp,
-            )
+                horizontal = 16.dp,
+                vertical = 16.dp,
+            ).safeDrawingPadding(),
     ) {
-        Card(elevation = 4.dp,
+        Card(
+            elevation = 4.dp,
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -71,7 +74,8 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
                 .padding(bottom = 16.dp),
             onClick = {
                 visible = !visible
-            }) {
+            },
+        ) {
             if (!state.bmi.isNullOrEmpty()) {
                 Row(
                     modifier = Modifier.padding(24.dp),
@@ -82,26 +86,25 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
                     Text(
                         state.bmi.first().bmi.toString(),
                         modifier = Modifier.padding(horizontal = 12.dp),
-                        style = XSmartTextStyles.h3
+                        style = XSmartTextStyles.h3,
                     )
                     Text(
                         setBmiLevel(state.bmi.first().bmi).type,
                         style = XSmartTextStyles.h4,
-                        color = setBmiLevel(state.bmi.last().bmi).color
+                        color = setBmiLevel(state.bmi.last().bmi).color,
                     )
                 }
-
             } else {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(24.dp),
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         if (state.bmi != null) "Calculate your Bmi now!" else "Nothing to show",
-                        style = XSmartTextStyles.h4
+                        style = XSmartTextStyles.h4,
                     )
                 }
             }
@@ -123,13 +126,13 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
                                 .fillMaxWidth()
                                 .padding(16.dp),
                             verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.SpaceBetween
+                            horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
                             Text(
                                 it.description,
                                 style = XSmartTextStyles.h5,
                                 color = Color.Gray,
-                                fontWeight = FontWeight.W500
+                                fontWeight = FontWeight.W500,
                             )
                             Text(it.type, style = XSmartTextStyles.h5, color = it.color)
                         }
@@ -147,7 +150,7 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
         if (!state.bmi.isNullOrEmpty()) {
             Text(
                 "Recently calculated Bmi",
-                style = XSmartTextStyles.h4
+                style = XSmartTextStyles.h4,
             )
             LazyColumn {
                 items(count = state.bmi.size) {
@@ -174,12 +177,12 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
                                 Text(
                                     setBmiLevel(state.bmi[it].bmi).type,
                                     style = XSmartTextStyles.h4,
-                                    color = setBmiLevel(state.bmi[it].bmi).color
+                                    color = setBmiLevel(state.bmi[it].bmi).color,
                                 )
                             }
                             Text(
                                 state.bmi[it].bmi.toString(),
-                                style = XSmartTextStyles.h4
+                                style = XSmartTextStyles.h4,
                             )
                         }
                     }
@@ -191,26 +194,32 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
             onClick = onNavigateToBmiCalculatorScreen,
             content = "Calculate BMI now!",
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = BmiCalculatorColor, contentColor = Color.White
-            )
+                backgroundColor = BmiCalculatorColor,
+                contentColor = Color.White,
+            ),
         )
-
     }
 }
 
 enum class BmiLevel(val type: String, val description: String, val color: Color) {
     UNDERWEIGHT("Underweight", "Less than 18.5", Color(0xFF72D5FF)),
     NORMAL(
-        "Normal", "18.5 to 24.99", Color(0xFF82D266)
+        "Normal",
+        "18.5 to 24.99",
+        Color(0xFF82D266),
     ),
     OVERWEIGHT("Overweight", "25 to 29.99", Color(0xFFFFEA7C)),
     OBESE_I(
-        "Obese level 1", "30 to 34.99", Color(0xFFFFBA6A)
+        "Obese level 1",
+        "30 to 34.99",
+        Color(0xFFFFBA6A),
     ),
     OBESE_II("Obese level 2", "35 to 39.99", Color(0xFFFF9960)),
     OBESE_III(
-        "Obese level 3", "Above 40", Color(0xFFFF7764)
-    )
+        "Obese level 3",
+        "Above 40",
+        Color(0xFFFF7764),
+    ),
 }
 
 fun setBmiLevel(value: Double): BmiLevel {

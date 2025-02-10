@@ -26,7 +26,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
     }
 
@@ -55,6 +55,7 @@ kotlin {
                 implementation(Dependencies.SQLDELIGHT_ANDROID_DRIVER)
                 implementation(Dependencies.Ktor.KTOR_CLIENT_OKHTTP)
                 implementation(Dependencies.Ktor.KTOR_CLIENT_ANDROID)
+                implementation(libs.androidx.annotation)
             }
         }
         val androidUnitTest by getting
@@ -87,7 +88,7 @@ android {
     namespace = "my.phatndt.xsmart"
     compileSdk = 32
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
     }
 
     sourceSets {

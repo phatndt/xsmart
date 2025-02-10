@@ -1,9 +1,7 @@
 package my.phatndt.xsmart.feature.currency.data.model
 
-import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 data class CurrencyModel(
@@ -26,5 +24,3 @@ data class Meta(
     @SerialName("last_updated_at")
     val lastUpdatedAt: String? = null,
 )
-
-

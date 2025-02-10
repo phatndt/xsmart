@@ -45,6 +45,8 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    // A - androidx
+    implementation(libs.androidx.activity.ktx)
     implementation(Dependencies.COMPOSE_UI)
     implementation(Dependencies.COMPOSE_UI_TOOL)
     implementation(Dependencies.COMPOSE_UI_TOOL_PREVIEW)
@@ -53,6 +55,7 @@ dependencies {
     implementation(Dependencies.COMPOSE_MATERIAL2)
     implementation(Dependencies.COMPOSE_MATERIAL3)
     implementation(Dependencies.ANDROID_LIFECYCLE)
+    implementation(Dependencies.LIFECYCLE_RUNTIME_COMPOSE)
     implementation(Dependencies.COMPOSE_UI_TEXT_GOOGLE_FONT)
     implementation(Dependencies.COMPOSE_NAVIGATION)
     implementation(Dependencies.COMPOSE_MATERIAL_ICON_EXTENDED)
@@ -64,4 +67,5 @@ dependencies {
     runtimeOnly("io.insert-koin:koin-androidx-compose:3.2.0")
 
     implementation(Dependencies.Koin.ANDROIDX_COMPOSE)
+    implementation(libs.kotlin.couroutines.core)
 }

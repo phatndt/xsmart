@@ -37,7 +37,7 @@ fun XSmartButton(
             .then(modifier)
             .fillMaxWidth()
             .defaultMinSize(
-                minHeight = 48.dp
+                minHeight = 48.dp,
             ),
         interactionSource = interactionSource,
         border = border,
