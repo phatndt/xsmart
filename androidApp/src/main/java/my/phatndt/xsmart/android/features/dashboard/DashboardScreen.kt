@@ -18,9 +18,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import my.phatndt.xsmart.android.R
 import my.phatndt.xsmart.android.core.ui.theme.Spacing
 import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerXLarge
+import my.phatndt.xsmart.android.core.utils.DeferredText
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureItem
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import org.koin.androidx.compose.koinViewModel
@@ -36,7 +39,7 @@ fun DashboardRoute(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
     features: List<FeatureItem>,
@@ -49,7 +52,7 @@ fun DashboardScreen(
                 .safeDrawingPadding(),
         ) {
             Text(
-                text = "X Smart",
+                text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
                 modifier = Modifier.padding(
                     start = Spacing.large,
@@ -70,7 +73,7 @@ fun DashboardScreen(
                         Column(
                             modifier = Modifier.padding(Spacing.large),
                         ) {
-                            Text(text = features[it].name)
+                            Text(text = features[it].name.asString())
                             Icon(
                                 imageVector = features[it].icon,
                                 contentDescription = null,
@@ -90,12 +93,12 @@ fun DashboardScreenPreview() {
     DashboardScreen(
         listOf(
             FeatureItem(
-                "Vietnam Salary Calculator",
+                DeferredText.Constant("Vietnam Salary Calculator"),
                 Icons.Outlined.Money,
                 FeatureType.VN_SALARY_CALCULATOR,
             ),
             FeatureItem(
-                "BMI Calculator",
+                DeferredText.Constant("BMI Calculator"),
                 Icons.Outlined.ScubaDiving,
                 FeatureType.BMI_CALCULATOR,
             ),

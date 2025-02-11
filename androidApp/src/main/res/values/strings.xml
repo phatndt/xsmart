@@ -3,4 +3,17 @@
     <string name="app_name">XSmart</string>
     <string name="full">Full</string>
     <string name="other">Other</string>
+    <string name="vn_salary_area_i">I</string>
+    <string name="vn_salary_area_iI">II</string>
+    <string name="vn_salary_area_iii">III</string>
+    <string name="vn_salary_area_iv">IV</string>
+    <string name="vn_salary_area_title">Area</string>
+    <string name="vn_salary_btn_text_gross_to_net">Gross to Net</string>
+    <string name="vn_salary_insurance_title">Insurance salary</string>
+    <string name="vn_salary_number_of_dependents_placeholder">Number of dependents</string>
+    <string name="vn_salary_placeholder_income">Income</string>
+    <string name="vn_salary_title_screen">VN salary calculator</string>
+    <string name="vn_salary_error_can_not_calculate_salary">Can not calculate salary, please try later!</string>
+    <string name="feature_name_vietnam_salary_calculator">Vietnam Salary Calculator</string>
+    <string name="feature_name_bmi_calculator">BMI Calculator</string>
 </resources>

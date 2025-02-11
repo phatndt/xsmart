@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -61,13 +62,14 @@ fun VnSalaryCalculatorRoute(
     val snackBarState = remember {
         SnackbarHostState()
     }
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = UUID.randomUUID()) {
         viewModel.effect.collect { effects ->
             when (effects) {
                 is VnSalaryCalculatorUiEffect.NavigateToDetailSalary -> onNavigateToDetail(effects.data)
                 VnSalaryCalculatorUiEffect.ShowDialogCanNotCalculateSalary -> {
-                    snackBarState.showSnackbar("Can not calculate salary, please try later!")
+                    snackBarState.showSnackbar(context.getString(R.string.vn_salary_error_can_not_calculate_salary))
                 }
             }
         }
@@ -111,7 +113,7 @@ fun VnSalaryCalculatorScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "VN salary calculator",
+                    text = stringResource(R.string.vn_salary_title_screen),
                     style = MaterialTheme.typography.titleMedium,
                 )
             },
@@ -139,7 +141,7 @@ fun VnSalaryCalculatorScreen(
                     onAction(VnSalaryCalculatorUiIntent.IncomeChangeIntent(it))
                 },
                 label = {
-                    Text(text = "Income")
+                    Text(text = stringResource(R.string.vn_salary_placeholder_income))
                 },
                 modifier = Modifier.paddingHorizontalXlLarge(),
             )
@@ -150,7 +152,7 @@ fun VnSalaryCalculatorScreen(
                     onAction(VnSalaryCalculatorUiIntent.NumberOfDependentsChangeIntent(it))
                 },
                 label = {
-                    Text(text = "Number of dependents")
+                    Text(text = stringResource(R.string.vn_salary_number_of_dependents_placeholder))
                 },
                 modifier = Modifier.paddingHorizontalXlLarge(),
                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -159,7 +161,7 @@ fun VnSalaryCalculatorScreen(
             )
             XSmartSpacerLarge()
             Text(
-                text = "Insurance Salary",
+                text = stringResource(R.string.vn_salary_insurance_title),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.paddingHorizontalXlLarge(),
             )
@@ -195,7 +197,7 @@ fun VnSalaryCalculatorScreen(
                         .padding(top = Spacing.medium)
                         .paddingHorizontalXlLarge(),
                     label = {
-                        Text(text = "Insurance salary")
+                        Text(text = stringResource(R.string.vn_salary_insurance_title))
                     },
                     keyboardOptions = KeyboardOptions.Default.copy(
                         keyboardType = KeyboardType.Number,
@@ -212,7 +214,7 @@ fun VnSalaryCalculatorScreen(
             onClick = {
                 onAction(VnSalaryCalculatorUiIntent.CalculatorSalary)
             },
-            content = "Gross to Net",
+            content = stringResource(R.string.vn_salary_btn_text_gross_to_net),
             modifier = Modifier
                 .paddingHorizontalXlLarge()
                 .padding(bottom = Spacing.large),
@@ -227,7 +229,7 @@ fun AreaComposable(
     onAction: (VnSalaryCalculatorUiIntent) -> Unit = {},
 ) {
     Text(
-        text = "Area",
+        text = stringResource(R.string.vn_salary_area_title),
         style = MaterialTheme.typography.titleMedium,
         modifier = Modifier
             .padding(top = Spacing.large)
@@ -260,10 +262,10 @@ fun getInsuranceDisplayText(type: InsuranceType): String = when (type) {
 
 @Composable
 fun getAreaDisplayType(type: Area): String = when (type) {
-    Area.I -> "I"
-    Area.II -> "II"
-    Area.III -> "III"
-    Area.IV -> "IV"
+    Area.I -> stringResource(R.string.vn_salary_area_i)
+    Area.II -> stringResource(R.string.vn_salary_area_iI)
+    Area.III -> stringResource(R.string.vn_salary_area_iii)
+    Area.IV -> stringResource(R.string.vn_salary_area_iv)
 }
 
 @Preview(
