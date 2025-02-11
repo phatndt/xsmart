@@ -2,9 +2,11 @@ package my.phatndt.xsmart.android.features.dashboard
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Money
+import my.phatndt.xsmart.android.R
 import my.phatndt.xsmart.android.core.base.BaseViewModel
 import my.phatndt.xsmart.android.core.base.UiIntent
 import my.phatndt.xsmart.android.core.base.UiSideEffects
+import my.phatndt.xsmart.android.core.utils.DeferredText
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureItem
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.dashboard.state.DashboardUiState
@@ -15,12 +17,12 @@ class DashboardViewModel : BaseViewModel<DashboardUiState, UiIntent, UiSideEffec
             copy(
                 features = listOf(
                     FeatureItem(
-                        "Vietnam Salary Calculator",
+                        DeferredText.StringResource(R.string.feature_name_vietnam_salary_calculator),
                         Icons.Outlined.Money,
                         FeatureType.VN_SALARY_CALCULATOR,
                     ),
                     FeatureItem(
-                        "Vietnam Salary Calculator",
+                        DeferredText.StringResource(R.string.feature_name_bmi_calculator),
                         Icons.Outlined.Money,
                         FeatureType.BMI_CALCULATOR,
                     ),
