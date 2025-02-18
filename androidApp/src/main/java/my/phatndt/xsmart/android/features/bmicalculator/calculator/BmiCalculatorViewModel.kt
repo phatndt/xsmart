@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel
+package my.phatndt.xsmart.android.features.bmicalculator.calculator
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

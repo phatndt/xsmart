@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.features.bmicalculator.presentation.view
+package my.phatndt.xsmart.android.features.bmicalculator.calculator
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,8 +19,6 @@ import my.phatndt.xsmart.android.core.ui.theme.BmiCalculatorColor
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTextStyles
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

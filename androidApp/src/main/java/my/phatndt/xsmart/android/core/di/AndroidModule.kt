@@ -1,6 +1,6 @@
 package my.phatndt.xsmart.android.core.di
 
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
+import my.phatndt.xsmart.android.features.bmicalculator.calculator.BmiViewModel
 import my.phatndt.xsmart.android.features.dashboard.DashboardViewModel
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailViewModel
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorViewModel

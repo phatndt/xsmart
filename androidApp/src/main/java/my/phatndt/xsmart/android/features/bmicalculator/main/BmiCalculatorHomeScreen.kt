@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.features.bmicalculator.presentation.view
+package my.phatndt.xsmart.android.features.bmicalculator.main
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
@@ -35,8 +35,8 @@ import my.phatndt.xsmart.android.core.ui.theme.XSmartTextStyles
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
 import my.phatndt.xsmart.android.core.utils.getDateTimeFromString
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
+import my.phatndt.xsmart.android.features.bmicalculator.calculator.BmiUIState
+import my.phatndt.xsmart.android.features.bmicalculator.calculator.BmiViewModel
 import my.phatndt.xsmart.model.entity.bmi.BmiEntity
 import org.koin.androidx.compose.koinViewModel
 
@@ -119,7 +119,8 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
                     .padding(bottom = 16.dp),
             ) {
                 Column() {
-                    BmiLevel.values().forEach {
+                    BmiLevel
+                        .values().forEach {
                         Row(
                             modifier = Modifier
                                 .height(48.dp)

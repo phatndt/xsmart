@@ -16,8 +16,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorHomeRoute
-import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorRoute
+import my.phatndt.xsmart.android.features.bmicalculator.main.BmiCalculatorHomeRoute
+import my.phatndt.xsmart.android.features.bmicalculator.calculator.BmiCalculatorRoute
 import my.phatndt.xsmart.android.features.dashboard.DashboardRoute
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
