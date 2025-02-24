@@ -20,3 +20,5 @@ dependencyResolutionManagement {
 rootProject.name = "X_Smart"
 include(":androidApp")
 include(":shared")
+include(":core-shared")
+include(":core-shared:datastore")

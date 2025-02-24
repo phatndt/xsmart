@@ -42,6 +42,7 @@ kotlin {
                 implementation(Dependencies.Ktor.KTOR_CLIENT_CONTENT_NEGOTIATION)
                 implementation(Dependencies.Ktor.KTOR_JSON)
                 implementation(Dependencies.Ktor.KTOR_LOGGING)
+                implementation(libs.androidx.datstore.core)
             }
 
         }
@@ -56,6 +57,7 @@ kotlin {
                 implementation(Dependencies.Ktor.KTOR_CLIENT_OKHTTP)
                 implementation(Dependencies.Ktor.KTOR_CLIENT_ANDROID)
                 implementation(libs.androidx.annotation)
+                implementation(libs.androidx.datstore.android)
             }
         }
         val androidUnitTest by getting

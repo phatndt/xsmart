@@ -1,4 +1,7 @@
 [versions]
+# A - android sdk verion
+compileSdk = "34"
+minSdk = "24"
 agp = "8.4.1"
 kotlin = "1.9.20"
 compose = "1.5.4"
@@ -7,19 +10,31 @@ compose-material3 = "1.1.2"
 androidx-activityCompose = "1.5.1"
 androidx-annotation = "1.9.0"
 kotlin-coroutines = "1.6.4"
-
+# D
+androidx-datastore = "1.1.2"
+# K - Koin
+koin-core = "3.2.0"
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+# A androidx
 androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activityCompose" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+# A-D datastore
+androidx-datstore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
+androidx-datstore-android = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
+androidx-datstore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "androidx-datastore" }
+androidx-datstore-preferences-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
-# k Kotlin
-kotlin-couroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "kotlin-coroutines"}
+# K - Koin
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-core" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-core" }
+# K - Kotlin
+kotlin-couroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "kotlin-coroutines" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
