@@ -46,7 +46,8 @@ android {
 dependencies {
     implementation(project(":shared"))
     // A - androidx
-    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.core)
     implementation(Dependencies.COMPOSE_UI)
     implementation(Dependencies.COMPOSE_UI_TOOL)
     implementation(Dependencies.COMPOSE_UI_TOOL_PREVIEW)
