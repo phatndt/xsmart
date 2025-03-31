@@ -7,11 +7,11 @@ plugins {
 
 android {
     namespace = "my.phatndt.xsmart.android"
-    compileSdk = Config.COMPILE_SDK
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "my.phatndt.xsmart.android"
-        minSdk = Config.MIN_SDK
-        targetSdk  = Config.TARGET_SDK
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk  = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
         vectorDrawables {

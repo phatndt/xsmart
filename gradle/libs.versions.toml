@@ -1,7 +1,8 @@
 [versions]
 # A - android sdk verion
-compileSdk = "34"
+compileSdk = "35"
 minSdk = "24"
+targetSdk = "35"
 agp = "8.4.1"
 kotlin = "1.9.20"
 compose = "1.5.4"
