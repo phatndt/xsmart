@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -26,9 +27,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -97,6 +101,8 @@ fun VnSalaryCalculatorScreen(
     }
     // </editor-fold>
 
+    val localFocusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
@@ -147,6 +153,15 @@ fun VnSalaryCalculatorScreen(
                     .padding(top = Spacing.medium)
                     .paddingHorizontalXlLarge(),
                 maxLines = 1,
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        if (uiState.numberOfDependents.isNullOrEmpty()) {
+                            localFocusManager.moveFocus(FocusDirection.Down)
+                        }
+                    })
             )
             Text(
                 text = stringResource(R.string.vn_salary_number_of_dependents_placeholder),
@@ -166,8 +181,14 @@ fun VnSalaryCalculatorScreen(
                 modifier = Modifier
                     .padding(top = Spacing.medium)
                     .paddingHorizontalXlLarge(),
-                keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        localFocusManager.clearFocus()
+                    },
                 ),
                 maxLines = 1,
             )
@@ -289,8 +310,8 @@ fun InsuranceComposable(
         label = {
             Text(text = stringResource(R.string.vn_salary_insurance_title))
         },
-        keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = KeyboardType.Number,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
         ),
         maxLines = 1,
         enabled = selectedInsurance == InsuranceType.OTHER,

@@ -115,7 +115,7 @@ fun XSmartAmountTextField(
         trailingIcon = trailingIcon,
         supportingText = supportingText,
         isError = isError,
-        visualTransformation = VisualTransformation.None,
+        visualTransformation = AmountVisualTransformation(),
         keyboardOptions = keyboardOptions.copy(
             keyboardType = KeyboardType.Number,
         ),
