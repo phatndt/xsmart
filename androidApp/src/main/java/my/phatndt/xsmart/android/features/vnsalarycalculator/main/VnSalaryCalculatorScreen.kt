@@ -1,11 +1,10 @@
 package my.phatndt.xsmart.android.features.vnsalarycalculator.main
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -16,15 +15,16 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.ShapeDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -37,10 +37,6 @@ import my.phatndt.xsmart.android.core.extension.paddingHorizontalXlLarge
 import my.phatndt.xsmart.android.core.ui.theme.Spacing
 import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
-import my.phatndt.xsmart.android.core.ui.widget.XSmartRadioButton
-import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerLarge
-import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerMedium
-import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerXLarge
 import my.phatndt.xsmart.android.core.ui.widget.XSmartTextField
 import my.phatndt.xsmart.android.core.ui.widget.textfield.XSmartAmountTextField
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.InsuranceType
@@ -99,15 +95,12 @@ fun VnSalaryCalculatorScreen(
     val areaTypes = remember {
         Area.entries.toList()
     }
-
-    var isVisibleInsuranceManualInput by remember {
-        mutableStateOf(false)
-    }
     // </editor-fold>
 
     Column(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.background)
+            .safeDrawingPadding()
             .imePadding(),
     ) {
         CenterAlignedTopAppBar(
@@ -134,18 +127,34 @@ fun VnSalaryCalculatorScreen(
                 .weight(1f)
                 .verticalScroll(state = rememberScrollState()),
         ) {
-            XSmartSpacerXLarge()
+            Text(
+                text = stringResource(R.string.vn_salary_placeholder_income),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier.paddingHorizontalXlLarge(),
+            )
             XSmartAmountTextField(
                 value = uiState.income.orEmpty(),
                 onValueChange = {
                     onAction(VnSalaryCalculatorUiIntent.IncomeChangeIntent(it))
                 },
                 label = {
-                    Text(text = stringResource(R.string.vn_salary_placeholder_income))
+                    Text(
+                        text = stringResource(R.string.vn_salary_placeholder_income),
+                        modifier = Modifier.background(color = Color.Transparent)
+                    )
                 },
-                modifier = Modifier.paddingHorizontalXlLarge(),
+                modifier = Modifier
+                    .padding(top = Spacing.medium)
+                    .paddingHorizontalXlLarge(),
+                maxLines = 1,
             )
-            XSmartSpacerLarge()
+            Text(
+                text = stringResource(R.string.vn_salary_number_of_dependents_placeholder),
+                style = MaterialTheme.typography.titleMedium,
+                modifier = Modifier
+                    .padding(top = Spacing.large)
+                    .paddingHorizontalXlLarge(),
+            )
             XSmartTextField(
                 value = uiState.numberOfDependents.orEmpty(),
                 onValueChange = {
@@ -154,59 +163,23 @@ fun VnSalaryCalculatorScreen(
                 label = {
                     Text(text = stringResource(R.string.vn_salary_number_of_dependents_placeholder))
                 },
-                modifier = Modifier.paddingHorizontalXlLarge(),
+                modifier = Modifier
+                    .padding(top = Spacing.medium)
+                    .paddingHorizontalXlLarge(),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
                 ),
+                maxLines = 1,
             )
-            XSmartSpacerLarge()
-            Text(
-                text = stringResource(R.string.vn_salary_insurance_title),
-                style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.paddingHorizontalXlLarge(),
+            InsuranceComposable(
+                selectedInsurance = uiState.insuranceType,
+                insuranceTypes = insuranceTypes,
+                otherInsuranceAmount = uiState.insuranceSalary.orEmpty(),
+                onAction = onAction,
             )
-            XSmartSpacerMedium()
-            LazyRow(modifier = Modifier.paddingHorizontalXlLarge()) {
-                items(
-                    insuranceTypes.size,
-                    key = { index ->
-                        insuranceTypes[index]
-                    },
-                ) { index ->
-                    XSmartRadioButton(
-                        selected = insuranceTypes[index] == uiState.insuranceType,
-                        text = getInsuranceDisplayText(insuranceTypes[index]),
-                        onCheckedChange = {
-                            onAction(
-                                VnSalaryCalculatorUiIntent.InsuranceTypeChangeIntent(
-                                    insuranceTypes[index],
-                                ),
-                            )
-                            isVisibleInsuranceManualInput = insuranceTypes[index] == InsuranceType.OTHER
-                        },
-                    )
-                }
-            }
-            AnimatedVisibility(visible = isVisibleInsuranceManualInput) {
-                XSmartAmountTextField(
-                    value = uiState.insuranceSalary.orEmpty(),
-                    onValueChange = {
-                        onAction(VnSalaryCalculatorUiIntent.NumberOfDependentsChangeIntent(it))
-                    },
-                    modifier = Modifier
-                        .padding(top = Spacing.medium)
-                        .paddingHorizontalXlLarge(),
-                    label = {
-                        Text(text = stringResource(R.string.vn_salary_insurance_title))
-                    },
-                    keyboardOptions = KeyboardOptions.Default.copy(
-                        keyboardType = KeyboardType.Number,
-                    ),
-                )
-            }
             AreaComposable(
-                selectedArea = uiState.area,
-                listOfArea = areaTypes,
+                selectedItem = uiState.area,
+                items = areaTypes,
                 onAction = onAction,
             )
         }
@@ -224,8 +197,8 @@ fun VnSalaryCalculatorScreen(
 
 @Composable
 fun AreaComposable(
-    selectedArea: Area,
-    listOfArea: List<Area>,
+    selectedItem: Area,
+    items: List<Area>,
     onAction: (VnSalaryCalculatorUiIntent) -> Unit = {},
 ) {
     Text(
@@ -235,20 +208,23 @@ fun AreaComposable(
             .padding(top = Spacing.large)
             .paddingHorizontalXlLarge(),
     )
-    XSmartSpacerMedium()
-    LazyRow(modifier = Modifier.paddingHorizontalXlLarge()) {
-        items(
-            listOfArea.size,
-            key = { index ->
-                listOfArea[index]
-            },
-        ) { index ->
-            XSmartRadioButton(
-                selected = listOfArea[index] == selectedArea,
-                text = getAreaDisplayType(listOfArea[index]),
-                onCheckedChange = {
-                    onAction(VnSalaryCalculatorUiIntent.AreaChangeIntent(listOfArea[index]))
+    SingleChoiceSegmentedButtonRow(
+        modifier = Modifier
+            .padding(top = Spacing.medium)
+            .paddingHorizontalXlLarge(),
+    ) {
+        items.forEachIndexed { index, area ->
+            SegmentedButton(
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = index,
+                    count = items.size,
+                    baseShape = ShapeDefaults.Small,
+                ),
+                onClick = {
+                    onAction(VnSalaryCalculatorUiIntent.AreaChangeIntent(area))
                 },
+                selected = area == selectedItem,
+                label = { Text(getAreaDisplayType(area)) },
             )
         }
     }
@@ -268,12 +244,65 @@ fun getAreaDisplayType(type: Area): String = when (type) {
     Area.IV -> stringResource(R.string.vn_salary_area_iv)
 }
 
+@Composable
+fun InsuranceComposable(
+    selectedInsurance: InsuranceType,
+    insuranceTypes: List<InsuranceType>,
+    otherInsuranceAmount: String,
+    onAction: (VnSalaryCalculatorUiIntent) -> Unit,
+) {
+    Text(
+        text = stringResource(R.string.vn_salary_insurance_title),
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier
+            .padding(top = Spacing.large)
+            .paddingHorizontalXlLarge(),
+    )
+    SingleChoiceSegmentedButtonRow(
+        modifier = Modifier
+            .padding(top = Spacing.medium)
+            .paddingHorizontalXlLarge(),
+    ) {
+        insuranceTypes.forEachIndexed { index, label ->
+            SegmentedButton(
+                shape = SegmentedButtonDefaults.itemShape(
+                    index = index,
+                    count = insuranceTypes.size,
+                    baseShape = ShapeDefaults.Small,
+                ),
+                onClick = {
+                    onAction(VnSalaryCalculatorUiIntent.InsuranceTypeChangeIntent(label))
+                },
+                selected = label == selectedInsurance,
+                label = { Text(getInsuranceDisplayText(label)) },
+            )
+        }
+    }
+    XSmartAmountTextField(
+        value = otherInsuranceAmount,
+        onValueChange = {
+            onAction(VnSalaryCalculatorUiIntent.InsuranceSalaryChangeIntent(it))
+        },
+        modifier = Modifier
+            .padding(top = Spacing.medium)
+            .paddingHorizontalXlLarge(),
+        label = {
+            Text(text = stringResource(R.string.vn_salary_insurance_title))
+        },
+        keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardType = KeyboardType.Number,
+        ),
+        maxLines = 1,
+        enabled = selectedInsurance == InsuranceType.OTHER,
+    )
+}
+
 @Preview(
     showSystemUi = true,
 )
 @Composable
 fun VnSalaryCalculatorScreenPreview() {
-    XSmartTheme() {
+    XSmartTheme {
         VnSalaryCalculatorScreen(
             VnSalaryCalculatorUiState(
                 income = "2000000",

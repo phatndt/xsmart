@@ -12,6 +12,7 @@ androidx-annotation = "1.9.0"
 androidx-activity="1.7.0"
 androidx-appcompat="1.7.0"
 androidx-biometric="1.2.0-alpha05"
+androidx-compose = "2025.02.00"
 kotlin-coroutines = "1.6.4"
 # D
 androidx-datastore = "1.1.2"
@@ -33,16 +34,19 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 # A-B
 androidx-biometric = { module = "androidx.biometric:biometric-ktx", version.ref = "androidx-biometric" }
+# A-C Compsoe
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 # A-D datastore
 androidx-datstore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
 androidx-datstore-android = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
 androidx-datstore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "androidx-datastore" }
 androidx-datstore-preferences-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
+
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 # K - Koin
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-core" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-core" }

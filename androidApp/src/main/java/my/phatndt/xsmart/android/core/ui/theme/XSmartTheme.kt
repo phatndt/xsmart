@@ -26,12 +26,12 @@ fun XSmartTheme(
 ) {
     val colorScheme = if (darkTheme) {
         darkColorScheme(
-            primary = Color(0xFFBB86FC),
+            primary = Color(0xFFFFFFFF),
             secondary = Color(0xFF03DAC5),
         )
     } else {
         lightColorScheme(
-            background = Color(0xFFFFFADF),
+            background = Color(0xFFFFFFFF),
             primary = Color(0xFF332966),
             secondary = Color(0xFF46afff),
         )

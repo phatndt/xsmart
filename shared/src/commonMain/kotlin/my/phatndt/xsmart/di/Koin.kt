@@ -6,15 +6,15 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.serialization.kotlinx.json.*
 import my.phatndt.xsmart.core.data.CustomCoroutineDispatcher
 import my.phatndt.xsmart.data.repo.VnSalaryCalculatorRepoImpl
+import my.phatndt.xsmart.data.repo.bmi.BmiRepositoryImpl
 import my.phatndt.xsmart.domain.repo.VnSalaryCalculatorRepo
+import my.phatndt.xsmart.domain.repo.bmi.BmiRepository
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCaseImpl
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCaseImpl
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCaseImpl
-import my.phatndt.xsmart.data.repo.bmi.BmiRepositoryImpl
-import my.phatndt.xsmart.domain.repo.bmi.BmiRepository
 import org.koin.core.context.startKoin
 import org.koin.core.qualifier.named
 import org.koin.dsl.KoinAppDeclaration

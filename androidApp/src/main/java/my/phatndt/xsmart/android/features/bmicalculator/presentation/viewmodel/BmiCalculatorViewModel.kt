@@ -27,7 +27,7 @@ class BmiViewModel(private val bmiRepository: BmiRepository) : ViewModel() {
             bmiAfterFormat.toDouble(),
             System
                 .currentTimeMillis()
-                .toString()
+                .toString(),
         )
     }
 

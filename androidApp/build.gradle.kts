@@ -46,6 +46,9 @@ android {
 dependencies {
     implementation(project(":shared"))
     // A - androidx
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.core)
     implementation(Dependencies.COMPOSE_UI)
@@ -54,7 +57,6 @@ dependencies {
     implementation(Dependencies.COMPOSE_FOUNDATION)
     implementation(Dependencies.ACTIVITY_COMPOSE)
     implementation(Dependencies.COMPOSE_MATERIAL2)
-    implementation(Dependencies.COMPOSE_MATERIAL3)
     implementation(Dependencies.ANDROID_LIFECYCLE)
     implementation(Dependencies.LIFECYCLE_RUNTIME_COMPOSE)
     implementation(Dependencies.COMPOSE_UI_TEXT_GOOGLE_FONT)

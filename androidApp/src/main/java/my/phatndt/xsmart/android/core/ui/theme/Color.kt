@@ -1,5 +1,7 @@
 package my.phatndt.xsmart.android.core.ui.theme
 
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -39,3 +41,6 @@ object XSmartColor {
 
     val White = Color(0xFFFFFFFF)
 }
+
+@Composable
+fun TextFieldDefaults.colorTextField() = this.colors()
