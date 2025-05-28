@@ -12,8 +12,8 @@ android {
         applicationId = "my.phatndt.xsmart.android"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk  = libs.versions.compileSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = libs.versions.app.version.code.get().toInt()
+        versionName =  libs.versions.app.version.name.get()
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -29,9 +29,33 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    signingConfigs {
+        getByName("debug") {
+
+        }
+
+        create("release") {
+            storeFile = file("../upload-keystore.jks")
+            storePassword = providers.gradleProperty("STORE_PASSWORD").getOrElse("")
+            keyAlias = providers.gradleProperty("KEY_ALIAS").getOrElse("")
+            keyPassword = providers.gradleProperty("KEY_PASSWORD").getOrElse("")
+        }
+    }
     buildTypes {
-        getByName("release") {
+        release {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            signingConfig = signingConfigs.getByName("release")
+        }
+        debug {
             isMinifyEnabled = false
+            isShrinkResources = false
+            isDebuggable = true
         }
     }
     compileOptions {
