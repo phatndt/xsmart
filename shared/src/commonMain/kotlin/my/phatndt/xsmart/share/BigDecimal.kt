@@ -1,11 +1,6 @@
 package my.phatndt.xsmart.share
 
-expect class KmmBigDecimal : Comparable<KmmBigDecimal> {
-    constructor(value: String)
-    constructor(value: Double)
-    constructor(value: Int)
-    constructor(value: Long)
-}
+expect class KmmBigDecimal : Comparable<KmmBigDecimal>
 
 expect operator fun KmmBigDecimal.plus(other: KmmBigDecimal): KmmBigDecimal
 
