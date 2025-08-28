@@ -1,6 +1,6 @@
 package my.phatndt.xsmart.model.entity.vnsalarycalculator
 
-import my.phatndt.xsmart.share.KmmBigDecimal
+import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 
 object VnSalaryCalculatorConstant {
     // Employee insurance rates

@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.share
+package my.phatndt.xsmart.share.common.amount
 
 expect class KmmBigDecimal : Comparable<KmmBigDecimal>
 

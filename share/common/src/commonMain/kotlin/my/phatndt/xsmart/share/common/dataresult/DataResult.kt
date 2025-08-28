@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.core.shared
+package my.phatndt.xsmart.share.common.dataresult
 
 sealed interface DataResult<out T> {
     data class Success<T>(val data: T) : DataResult<T>

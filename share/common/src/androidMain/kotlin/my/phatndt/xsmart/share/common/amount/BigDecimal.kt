@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.share
+package my.phatndt.xsmart.share.common.amount
 
 import java.math.BigDecimal
 import java.math.RoundingMode

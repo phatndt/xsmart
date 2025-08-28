@@ -69,6 +69,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    implementation(project(":share:common"))
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     implementation(libs.androidx.activity)

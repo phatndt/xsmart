@@ -7,14 +7,14 @@ import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.Insuranc
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiEffect
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiIntent
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiState
-import my.phatndt.xsmart.core.shared.DataResult
+import my.phatndt.xsmart.share.common.dataresult.DataResult
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
 import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.CalculatorMode
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorEntity
-import my.phatndt.xsmart.share.AmountFormatter
-import my.phatndt.xsmart.share.KmmBigDecimal
+import my.phatndt.xsmart.share.common.amount.AmountFormatter
+import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 
 class VnSalaryCalculatorViewModel(
     private val calculateVnSalaryUseCase: CalculateVnSalaryUseCase,

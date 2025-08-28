@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.share
+package my.phatndt.xsmart.share.common.amount
 
 expect object AmountFormatter {
     fun toDisplayAmount(value: KmmBigDecimal?): String

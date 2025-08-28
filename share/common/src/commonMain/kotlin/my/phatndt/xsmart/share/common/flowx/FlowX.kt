@@ -1,7 +1,8 @@
-package my.phatndt.xsmart.core.shared
+package my.phatndt.xsmart.share.common.flowx
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
+import my.phatndt.xsmart.share.common.dataresult.DataResult
 import kotlin.contracts.ExperimentalContracts
 
 @OptIn(ExperimentalContracts::class)

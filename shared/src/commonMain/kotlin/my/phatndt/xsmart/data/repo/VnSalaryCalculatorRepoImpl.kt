@@ -3,7 +3,7 @@ package my.phatndt.xsmart.data.repo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import my.phatndt.xsmart.core.shared.DataResult
+import my.phatndt.xsmart.share.common.dataresult.DataResult
 import my.phatndt.xsmart.domain.repo.VnSalaryCalculatorRepo
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 

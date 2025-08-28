@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.share
+package my.phatndt.xsmart.share.common.amount
 
 import android.icu.math.BigDecimal
 import android.icu.number.NumberFormatter

@@ -2,17 +2,17 @@ package my.phatndt.xsmart.domain.usecase.vnsalarycalculator
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import my.phatndt.xsmart.core.shared.DataResult
+import my.phatndt.xsmart.share.common.dataresult.DataResult
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.CalculatorMode
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.TaxBracket
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorConfig
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
-import my.phatndt.xsmart.share.KmmBigDecimal
-import my.phatndt.xsmart.share.minus
-import my.phatndt.xsmart.share.plus
-import my.phatndt.xsmart.share.times
+import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.common.amount.minus
+import my.phatndt.xsmart.share.common.amount.plus
+import my.phatndt.xsmart.share.common.amount.times
 
 class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
     override fun invoke(
