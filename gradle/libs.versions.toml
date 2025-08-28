@@ -1,62 +1,148 @@
 [versions]
-# A - android sdk verion
-compileSdk = "35"
-minSdk = "24"
-targetSdk = "35"
-app-version-code = "1"
-app-version-name = "1.0.0"
+# A
 agp = "8.4.1"
-kotlin = "1.9.20"
-compose = "1.5.4"
-compose-material3 = "1.1.2"
+androidx-activity = "1.7.0"
 androidx-activityCompose = "1.5.1"
 androidx-annotation = "1.9.0"
-androidx-activity="1.7.0"
-androidx-appcompat="1.7.0"
-androidx-biometric="1.2.0-alpha05"
+androidx-appcompat = "1.7.0"
+androidx-biometric = "1.2.0-alpha05"
 androidx-compose = "2025.02.00"
-kotlin-coroutines = "1.6.4"
-# D
 androidx-datastore = "1.1.2"
-# K - Koin
-koin-core = "3.2.0"
+androidx-lifecycle = "2.7.0"
+accompanist = "0.36.0"
+app-version-code = "1"
+app-version-name = "1.0.0"
+appcompat = "1.7.0"
+
+# C
+compileSdk = "35"
+compose = "1.5.4"
+compose-material3 = "1.1.2"
+constraintlayout-compose = "1.0.1"
 coreKtx = "1.15.0"
+
+# D
+datastore-legacy = "1.0.0"
+
+# E
+espressoCore = "3.6.1"
+
+# G
+gson = "2.11.0"
+
+# J
 junit = "4.13.2"
 junitVersion = "1.2.1"
-espressoCore = "3.6.1"
-appcompat = "1.7.0"
+
+# K
+koin = "3.2.0"
+koin-core = "3.2.0"
+kotlin = "1.9.20"
+kotlin-coroutines = "1.6.4"
+kotlin-serialization = "1.6.3"
+kotlinx-datetime = "0.6.0"
+ktor = "2.3.0"
+
+# L
+lottie = "6.5.0"
+lifecycle-runtime-compose = "2.7.0"
+
+# M
 material = "1.12.0"
+material2 = "1.6.8"
+minSdk = "24"
+mpandroidchart = "3.1.0"
+
+# R
+retrofit = "2.9.0"
+retrofit-kotlin-serialization = "0.8.0"
+
+# S
+sdp = "1.1.0"
+seeker = "1.0.2"
+sqldelight = "2.0.2"
+
+# T
+targetSdk = "35"
+
 [libraries]
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-# A androidx
-androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
+# A
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+androidx-annotation = { group = "androidx.annotation", name = "annotation", version.ref = "androidx-annotation" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
-# A-B
 androidx-biometric = { module = "androidx.biometric:biometric-ktx", version.ref = "androidx-biometric" }
-# A-C Compsoe
+
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidx-compose" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
-# A-D datastore
-androidx-datstore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
-androidx-datstore-android = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
-androidx-datstore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "androidx-datastore" }
-androidx-datstore-preferences-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
 
-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-# K - Koin
-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-core" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "material2" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material2" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+androidx-compose-ui-platform = { module = "androidx.compose.ui:ui-platform", version.ref = "compose" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+androidx-compose-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "compose" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
+
+androidx-datstore-android = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
+androidx-datstore-core = { group = "androidx.datastore", name = "datastore-core", version.ref = "androidx-datastore" }
+androidx-datstore-preferences-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
+androidx-datstore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "androidx-datastore" }
+
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.7.7" } # ← set as needed
+
+androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
+
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
+
+# J
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+# K
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-core" }
-# K - Kotlin
-kotlin-couroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "kotlin-coroutines" }
+koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-core" }
+
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+# L
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+
+# M
+material = { module = "com.google.android.material:material", version.ref = "material" }
+mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
+
+# S
+sdp-android = { module = "com.intuit.sdp:sdp-android", version.ref = "sdp" }
+seeker = { module = "io.github.2307vivek:seeker", version.ref = "seeker" }
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqldelight" }
+sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
