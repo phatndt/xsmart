@@ -69,30 +69,33 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    // A - androidx
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
-    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.core)
-    implementation(Dependencies.COMPOSE_UI)
-    implementation(Dependencies.COMPOSE_UI_TOOL)
-    implementation(Dependencies.COMPOSE_UI_TOOL_PREVIEW)
-    implementation(Dependencies.COMPOSE_FOUNDATION)
-    implementation(Dependencies.ACTIVITY_COMPOSE)
-    implementation(Dependencies.COMPOSE_MATERIAL2)
-    implementation(Dependencies.ANDROID_LIFECYCLE)
-    implementation(Dependencies.LIFECYCLE_RUNTIME_COMPOSE)
-    implementation(Dependencies.COMPOSE_UI_TEXT_GOOGLE_FONT)
-    implementation(Dependencies.COMPOSE_NAVIGATION)
-    implementation(Dependencies.COMPOSE_MATERIAL_ICON_EXTENDED)
-    implementation(Dependencies.ACCOMPANIST_NAVIGATION_ANIMATION)
-    implementation(Dependencies.Compose.CONSTRAINT_LAYOUT)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation("io.insert-koin:koin-android:3.2.0")
-    implementation("io.insert-koin:koin-core:$3.2.0")
-    runtimeOnly("io.insert-koin:koin-androidx-compose:3.2.0")
+    implementation(libs.androidx.activity.compose)
 
-    implementation(Dependencies.Koin.ANDROIDX_COMPOSE)
-    implementation(libs.kotlin.couroutines.core)
+    implementation(libs.androidx.core)
+
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material.icons.extended)
+
+    implementation(libs.androidx.constraintlayout.compose)
+
+    implementation(libs.androidx.navigation.compose)
+    
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+
+    implementation(libs.accompanist.navigation.animation)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.kotlinx.coroutines.core)
 }
