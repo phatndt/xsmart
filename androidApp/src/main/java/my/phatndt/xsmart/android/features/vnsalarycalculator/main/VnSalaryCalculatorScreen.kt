@@ -47,15 +47,15 @@ import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.Insuranc
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiEffect
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiIntent
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiState
-import my.phatndt.xsmart.model.entity.vnsalarycalculator.Area
-import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 
 @Composable
 fun VnSalaryCalculatorRoute(
     viewModel: VnSalaryCalculatorViewModel = koinViewModel(),
-    onNavigateToDetail: (VnSalaryCalculatorEntity) -> Unit,
+    onNavigateToDetail: (my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity) -> Unit,
     onBack: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -97,7 +97,7 @@ fun VnSalaryCalculatorScreen(
     }
 
     val areaTypes = remember {
-        Area.entries.toList()
+        my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area.entries.toList()
     }
     // </editor-fold>
 
@@ -218,8 +218,8 @@ fun VnSalaryCalculatorScreen(
 
 @Composable
 fun AreaComposable(
-    selectedItem: Area,
-    items: List<Area>,
+    selectedItem: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area,
+    items: List<my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area>,
     onAction: (VnSalaryCalculatorUiIntent) -> Unit = {},
 ) {
     Text(
@@ -258,11 +258,11 @@ fun getInsuranceDisplayText(type: InsuranceType): String = when (type) {
 }
 
 @Composable
-fun getAreaDisplayType(type: Area): String = when (type) {
-    Area.I -> stringResource(R.string.vn_salary_area_i)
-    Area.II -> stringResource(R.string.vn_salary_area_iI)
-    Area.III -> stringResource(R.string.vn_salary_area_iii)
-    Area.IV -> stringResource(R.string.vn_salary_area_iv)
+fun getAreaDisplayType(type: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area): String = when (type) {
+    my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area.I -> stringResource(R.string.vn_salary_area_i)
+    my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area.II -> stringResource(R.string.vn_salary_area_iI)
+    my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area.III -> stringResource(R.string.vn_salary_area_iii)
+    my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area.IV -> stringResource(R.string.vn_salary_area_iv)
 }
 
 @Composable

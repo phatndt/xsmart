@@ -8,11 +8,11 @@ import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalary
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiIntent
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiState
 import my.phatndt.xsmart.share.common.dataresult.DataResult
-import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
-import my.phatndt.xsmart.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
-import my.phatndt.xsmart.model.entity.vnsalarycalculator.Area
-import my.phatndt.xsmart.model.entity.vnsalarycalculator.CalculatorMode
-import my.phatndt.xsmart.model.entity.vnsalarycalculator.VnSalaryCalculatorEntity
+import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
+import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 
@@ -75,16 +75,16 @@ class VnSalaryCalculatorViewModel(
     private suspend fun performSalaryCalculation(
         income: KmmBigDecimal,
         insurance: KmmBigDecimal,
-        area: Area,
+        area: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area,
         numberOfDependents: Int,
-        mode: CalculatorMode,
+        mode: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode,
     ) {
         calculateVnSalaryUseCase(income, insurance, area, numberOfDependents, mode).collect { result ->
             handleCalculationResult(result)
         }
     }
 
-    private suspend fun handleCalculationResult(result: DataResult<VnSalaryCalculatorEntity>) {
+    private suspend fun handleCalculationResult(result: DataResult<my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity>) {
         when (result) {
             is DataResult.Failure -> handleFailure()
             is DataResult.Success -> handleSuccess(result.data)
@@ -97,7 +97,7 @@ class VnSalaryCalculatorViewModel(
         }
     }
 
-    private suspend fun handleSuccess(salaryData: VnSalaryCalculatorEntity) {
+    private suspend fun handleSuccess(salaryData: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity) {
         saveCalculateVnSalaryResultUseCase(salaryData).collect { result ->
             when (result) {
                 is DataResult.Failure -> handleFailure()
@@ -106,7 +106,7 @@ class VnSalaryCalculatorViewModel(
         }
     }
 
-    private fun navigateToDetailSalary(salaryData: VnSalaryCalculatorEntity) {
+    private fun navigateToDetailSalary(salaryData: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity) {
         handleSideEffects {
             VnSalaryCalculatorUiEffect.NavigateToDetailSalary(salaryData)
         }

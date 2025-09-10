@@ -9,7 +9,7 @@ kotlin {
 // which platforms this KMP module supports.
 // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "my.phatndt.xsmart.share.data"
+        namespace = "my.phatndt.xsmart.share.di"
         compileSdk = 35
         minSdk = 24
     }
@@ -21,7 +21,7 @@ kotlin {
 // A step-by-step guide on how to include this library in an XCode
 // project can be found here:
 // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "dataKit"
+    val xcfName = "diKit"
 
     iosX64 {
         binaries.framework {
@@ -49,10 +49,10 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(project(":share:common"))
-                implementation(project(":share:domain"))
+                implementation(projects.share.common)
+                implementation(projects.share.domain)
+                implementation(projects.share.data)
                 implementation(libs.koin.core)
-                implementation(libs.kotlinx.serialization.json)
                 implementation(libs.kotlinx.coroutines.core)
             }
         }
