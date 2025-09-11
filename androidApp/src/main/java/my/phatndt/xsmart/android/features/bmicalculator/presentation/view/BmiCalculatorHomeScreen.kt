@@ -37,7 +37,7 @@ import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
 import my.phatndt.xsmart.android.core.utils.getDateTimeFromString
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
-import my.phatndt.xsmart.model.entity.bmi.BmiEntity
+import my.phatndt.xsmart.share.domain.entity.bmi.BmiEntity
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -237,6 +237,12 @@ fun setBmiLevel(value: Double): BmiLevel {
 @Composable
 fun BmiCalculatorHomeScreenPreview() {
     XSmartTheme() {
-        BmiCalculatorHomeScreen(BmiUIState(bmi = listOf(BmiEntity(1, 17.24, "1683340656634")))) {}
+        BmiCalculatorHomeScreen(BmiUIState(bmi = listOf(
+            my.phatndt.xsmart.share.domain.entity.bmi.BmiEntity(
+                1,
+                17.24,
+                "1683340656634"
+            )
+        ))) {}
     }
 }

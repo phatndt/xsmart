@@ -4,7 +4,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.input.VisualTransformation
-import my.phatndt.xsmart.share.AmountFormatter
+import my.phatndt.xsmart.share.common.amount.AmountFormatter
 
 class AmountVisualTransformation : VisualTransformation {
     override fun filter(text: AnnotatedString): TransformedText {
