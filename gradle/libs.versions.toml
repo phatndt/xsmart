@@ -7,7 +7,7 @@ app-version-code = "1"
 app-version-name = "1.0.0"
 
 # A
-agp = "8.4.1"
+agp = "8.13.0"
 androidx-activity = "1.7.0"
 androidx-activityCompose = "1.5.1"
 androidx-annotation = "1.9.0"
@@ -23,7 +23,7 @@ appcompat = "1.7.0"
 compose = "1.5.4"
 compose-material3 = "1.1.2"
 constraintlayout-compose = "1.0.1"
-coreKtx = "1.15.0"
+coreKtx = "1.17.0"
 
 # D
 datastore-legacy = "1.0.0"
@@ -41,7 +41,7 @@ junitVersion = "1.2.1"
 # K
 koin = "3.2.0"
 koin-core = "3.2.0"
-kotlin = "1.9.20"
+kotlin = "2.1.20"
 kotlin-coroutines = "1.6.4"
 kotlin-serialization = "1.6.3"
 kotlinx-datetime = "0.6.0"
@@ -143,6 +143,9 @@ sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", versi
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
