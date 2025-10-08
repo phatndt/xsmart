@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "my.phatndt.xsmart.android"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk  = libs.versions.compileSdk.get().toInt()
+        targetSdk  = libs.versions.targetSdk.get().toInt()
         versionCode = libs.versions.app.version.code.get().toInt()
         versionName =  libs.versions.app.version.name.get()
         vectorDrawables {

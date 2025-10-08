@@ -10,8 +10,8 @@ kotlin {
 // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
         namespace = "my.phatndt.xsmart.share.domain"
-        compileSdk = 35
-        minSdk = 24
+        compileSdk = libs.versions.compileSdk.get().toInt()
+        minSdk = libs.versions.minSdk.get().toInt()
     }
 
 // For iOS targets, this is also where you should
