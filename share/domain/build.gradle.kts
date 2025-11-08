@@ -1,26 +1,11 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.androidLibrary)
 }
 
 kotlin {
+    androidTarget()
 
-// Target declarations - add or remove as needed below. These define
-// which platforms this KMP module supports.
-// See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
-    androidLibrary {
-        namespace = "my.phatndt.xsmart.share.domain"
-        compileSdk = libs.versions.compileSdk.get().toInt()
-        minSdk = libs.versions.minSdk.get().toInt()
-    }
-
-// For iOS targets, this is also where you should
-// configure native binary output. For more information, see:
-// https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
-
-// A step-by-step guide on how to include this library in an XCode
-// project can be found here:
-// https://developer.android.com/kotlin/multiplatform/migrate
     val xcfName = "domainKit"
 
     iosX64 {
@@ -80,4 +65,12 @@ kotlin {
         }
     }
 
+}
+
+android {
+    namespace = "my.phatndt.xsmart.share.domain"
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        libs.versions.minSdk.get().toInt()
+    }
 }
