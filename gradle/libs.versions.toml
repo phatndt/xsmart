@@ -15,7 +15,7 @@ androidx-appcompat = "1.7.0"
 androidx-biometric = "1.2.0-alpha05"
 androidx-compose = "2025.02.00"
 androidx-datastore = "1.1.2"
-androidx-lifecycle = "2.7.0"
+androidx-lifecycle = "2.8.7"
 accompanist = "0.36.0"
 appcompat = "1.7.0"
 
@@ -49,7 +49,6 @@ ktor = "2.3.0"
 
 # L
 lottie = "6.5.0"
-lifecycle-runtime-compose = "2.7.0"
 
 # M
 material = "1.12.0"
@@ -91,9 +90,9 @@ androidx-datstore-core = { group = "androidx.datastore", name = "datastore-core"
 androidx-datstore-preferences-android = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
 androidx-datstore-preferences-core = { group = "androidx.datastore", name = "datastore-preferences-core", version.ref = "androidx-datastore" }
 
-androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
+androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
-
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.7.7" } # ← set as needed
 
 androidx-core = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -129,7 +128,6 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 # M
-material = { module = "com.google.android.material:material", version.ref = "material" }
 mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 
 # S

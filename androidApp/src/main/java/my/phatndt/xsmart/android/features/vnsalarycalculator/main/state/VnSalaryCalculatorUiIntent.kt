@@ -1,8 +1,8 @@
 package my.phatndt.xsmart.android.features.vnsalarycalculator.main.state
 
-import my.phatndt.xsmart.android.core.base.UiIntent
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.InsuranceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
+import my.xsmart.share.android.base.UiIntent
 
 sealed interface VnSalaryCalculatorUiIntent : UiIntent {
     data class IncomeChangeIntent(val value: String) : VnSalaryCalculatorUiIntent

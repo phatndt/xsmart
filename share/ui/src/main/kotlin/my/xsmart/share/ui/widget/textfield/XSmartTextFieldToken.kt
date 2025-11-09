@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.widget.textfield
+package my.xsmart.share.ui.widget.textfield
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.dp

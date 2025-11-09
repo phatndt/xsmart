@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.theme
+package my.xsmart.share.ui.theme
 
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import my.phatndt.xsmart.android.R
 
 @Composable
 fun XSmartTheme(
@@ -37,15 +36,6 @@ fun XSmartTheme(
         )
     }
 
-    val fontName =
-        FontFamily(
-            Font(R.font.roboto_thin, weight = FontWeight.W100, style = FontStyle.Normal),
-            Font(R.font.roboto_light, weight = FontWeight.W300, style = FontStyle.Normal),
-            Font(R.font.roboto_regular, weight = FontWeight.W400, style = FontStyle.Normal),
-            Font(R.font.roboto_medium, weight = FontWeight.W500, style = FontStyle.Normal),
-            Font(R.font.roboto_bold, weight = FontWeight.W700, style = FontStyle.Normal),
-        )
-
     val typography = MaterialTheme.typography
 
     val shapes = Shapes(
@@ -64,12 +54,12 @@ fun XSmartTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = typography,
-        shapes = shapes,
-        content = content,
-    )
+   MaterialTheme(
+       colorScheme = colorScheme,
+       typography = typography,
+       shapes = shapes,
+       content = content
+   )
 }
 
 fun solution(inputString: String): Boolean {

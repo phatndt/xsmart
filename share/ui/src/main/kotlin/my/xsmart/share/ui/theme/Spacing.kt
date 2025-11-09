@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.theme
+package my.xsmart.share.ui.theme
 
 import androidx.compose.ui.unit.dp
 

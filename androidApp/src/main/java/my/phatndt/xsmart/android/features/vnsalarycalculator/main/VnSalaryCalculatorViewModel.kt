@@ -2,7 +2,8 @@ package my.phatndt.xsmart.android.features.vnsalarycalculator.main
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import my.phatndt.xsmart.android.core.base.BaseViewModel
+import my.xsmart.share.android.base.BaseViewModel
+
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.InsuranceType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiEffect
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiIntent

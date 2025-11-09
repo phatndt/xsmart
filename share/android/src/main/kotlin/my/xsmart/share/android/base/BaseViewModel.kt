@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.base
+package my.xsmart.share.android.base
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

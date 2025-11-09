@@ -58,12 +58,14 @@ android {
             isDebuggable = true
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -72,6 +74,8 @@ dependencies {
     implementation(projects.share.common)
     implementation(projects.share.domain)
     implementation(projects.share.di)
+    implementation(projects.share.android)
+    implementation(projects.share.ui)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     implementation(libs.androidx.activity)

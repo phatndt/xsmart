@@ -2,9 +2,6 @@ package my.phatndt.xsmart.android.features.vnsalarycalculator.detail
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import my.phatndt.xsmart.android.core.base.BaseViewModel
-import my.phatndt.xsmart.android.core.base.UiIntent
-import my.phatndt.xsmart.android.core.base.UiSideEffects
 import my.phatndt.xsmart.android.core.utils.DeferredText
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.state.ItemDataModel
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.state.VnSalaryCalculatorDetailUiState
@@ -12,6 +9,9 @@ import my.phatndt.xsmart.share.common.flowx.collectFold
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCase
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
+import my.xsmart.share.android.base.BaseViewModel
+import my.xsmart.share.android.base.UiIntent
+import my.xsmart.share.android.base.UiSideEffects
 
 class VnSalaryCalculatorDetailViewModel(
     private val getCalculateVnSalaryResultUseCase: GetCalculateVnSalaryResultUseCase,

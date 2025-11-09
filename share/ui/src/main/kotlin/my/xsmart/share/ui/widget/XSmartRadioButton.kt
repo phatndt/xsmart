@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.widget
+package my.xsmart.share.ui.widget
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -10,12 +10,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.tooling.preview.Preview
-import my.phatndt.xsmart.android.core.ui.theme.Spacing
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
+import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.XSmartTheme
 
 @Composable
 fun XSmartRadioButton(
@@ -26,7 +27,9 @@ fun XSmartRadioButton(
 ) {
     Row(
         modifier = modifier.clickable(
-            interactionSource = MutableInteractionSource(),
+            interactionSource = remember {
+                MutableInteractionSource()
+            },
             indication = null,
         ) {
             onCheckedChange?.invoke()

@@ -37,18 +37,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import my.phatndt.xsmart.android.R
-import my.phatndt.xsmart.android.core.extension.paddingHorizontalXlLarge
-import my.phatndt.xsmart.android.core.ui.theme.Spacing
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
-import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
-import my.phatndt.xsmart.android.core.ui.widget.XSmartTextField
-import my.phatndt.xsmart.android.core.ui.widget.textfield.XSmartAmountTextField
+import my.xsmart.share.ui.extension.paddingHorizontalXlLarge
+import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.XSmartTheme
+import my.xsmart.share.ui.widget.XSmartButton
+import my.xsmart.share.ui.widget.XSmartTextField
+import my.xsmart.share.ui.widget.textfield.XSmartAmountTextField
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.InsuranceType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiEffect
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiIntent
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.state.VnSalaryCalculatorUiState
-import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
-import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import org.koin.androidx.compose.koinViewModel
 import java.util.UUID
 

@@ -3,9 +3,9 @@ package my.phatndt.xsmart.android.features.dashboard
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Money
 import my.phatndt.xsmart.android.R
-import my.phatndt.xsmart.android.core.base.BaseViewModel
-import my.phatndt.xsmart.android.core.base.UiIntent
-import my.phatndt.xsmart.android.core.base.UiSideEffects
+import my.xsmart.share.android.base.BaseViewModel
+import my.xsmart.share.android.base.UiIntent
+import my.xsmart.share.android.base.UiSideEffects
 import my.phatndt.xsmart.android.core.utils.DeferredText
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureItem
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType

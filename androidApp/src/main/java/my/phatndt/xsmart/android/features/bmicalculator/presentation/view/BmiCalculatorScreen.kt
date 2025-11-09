@@ -8,6 +8,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,10 +17,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import my.phatndt.xsmart.android.core.ui.theme.BmiCalculatorColor
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTextStyles
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
-import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
+import my.xsmart.share.ui.theme.BmiCalculatorColor
+import my.xsmart.share.ui.theme.XSmartTextStyles
+import my.xsmart.share.ui.theme.XSmartTheme
+import my.xsmart.share.ui.widget.XSmartButton
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -169,8 +170,8 @@ fun BmiCalculatorScreen(
                 calculateBmi(height.toDouble(), weight.toDouble())
             },
             content = "Calculate",
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = BmiCalculatorColor,
+            colors = ButtonDefaults.buttonColors().copy(
+                containerColor = BmiCalculatorColor,
                 contentColor = Color.White,
             ),
         )

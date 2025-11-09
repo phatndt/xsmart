@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.widget
+package my.xsmart.share.ui.widget
 
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Column
@@ -15,8 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import my.phatndt.xsmart.android.core.ui.theme.Spacing
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
+import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.XSmartTheme
 
 data class XSmartRadioButtonGroupModel(
     val id: Int,

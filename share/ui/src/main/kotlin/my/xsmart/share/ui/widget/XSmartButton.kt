@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.android.core.ui.widget
+package my.xsmart.share.ui.widget
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
@@ -8,14 +8,19 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTextStyles
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
+import my.xsmart.share.ui.theme.XSmartTextStyles
+import my.xsmart.share.ui.theme.XSmartTheme
 
 @SuppressLint("ModifierParameter")
 @Composable

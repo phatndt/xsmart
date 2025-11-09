@@ -1,17 +1,12 @@
-package my.phatndt.xsmart.android.core.ui.widget
+package my.xsmart.share.ui.widget.textfield
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -19,16 +14,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
-import my.phatndt.xsmart.android.core.ui.theme.colorTextField
-import my.phatndt.xsmart.android.core.ui.widget.textfield.XSmartTextFieldToken
+import my.xsmart.share.ui.theme.colorTextField
+import my.xsmart.share.ui.widget.XSmartTextField
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun XSmartTextField(
+fun XSmartAmountTextField(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
@@ -40,37 +35,37 @@ fun XSmartTextField(
     trailingIcon: @Composable() (() -> Unit)? = null,
     supportingText: @Composable() (() -> Unit)? = null,
     isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    singleLine: Boolean = true,
+    singleLine: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
-    maxLength: Int = Int.MAX_VALUE,
+    maxLength: Int = 17,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = XSmartTextFieldToken.ContainerShape,
     colors: TextFieldColors = TextFieldDefaults.colorTextField(),
 ) {
-    TextField(
+    XSmartTextField(
         value = value,
-        onValueChange = {
-            onValueChange(it.copy(text = it.text.take(maxLength)))
-        },
+        onValueChange = onValueChange,
         modifier = Modifier
             .fillMaxWidth()
             .then(modifier),
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,
-        placeholder = label,
+        label = label,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         supportingText = supportingText,
         isError = isError,
-        visualTransformation = visualTransformation,
-        keyboardOptions = keyboardOptions,
+        visualTransformation = VisualTransformation.None,
+        keyboardOptions = keyboardOptions.copy(
+            keyboardType = KeyboardType.Number,
+        ),
         keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
+        maxLength = maxLength,
         interactionSource = interactionSource,
         colors = colors,
         shape = shape,
@@ -79,7 +74,7 @@ fun XSmartTextField(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun XSmartTextField(
+fun XSmartAmountTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -91,57 +86,50 @@ fun XSmartTextField(
     trailingIcon: @Composable() (() -> Unit)? = null,
     supportingText: @Composable() (() -> Unit)? = null,
     isError: Boolean = false,
-    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     singleLine: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
-    maxLength: Int = Int.MAX_VALUE,
+    maxLength: Int = 17,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = XSmartTextFieldToken.ContainerShape,
-    colors: TextFieldColors = TextFieldDefaults.colorTextField(
-    ),
+    colors: TextFieldColors = TextFieldDefaults.colorTextField(),
 ) {
-    TextField(
+    XSmartTextField(
         value = value,
-        onValueChange = {
-            onValueChange(it.take(maxLength))
-        },
+        onValueChange = onValueChange,
         modifier = Modifier
             .fillMaxWidth()
             .then(modifier),
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,
-        placeholder = label,
+        label = label,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         supportingText = supportingText,
         isError = isError,
-        visualTransformation = visualTransformation,
-        keyboardOptions = keyboardOptions,
+        keyboardOptions = keyboardOptions.copy(
+            keyboardType = KeyboardType.Number,
+        ),
         keyboardActions = keyboardActions,
         singleLine = singleLine,
         maxLines = maxLines,
+        maxLength = maxLength,
         interactionSource = interactionSource,
-        shape = shape,
         colors = colors,
+        shape = shape,
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun XSmartTextFieldPreview() {
-    XSmartTheme {
-        Column {
-            XSmartTextField(
-                value = "asdasdasdas",
-                onValueChange = {},
-                label = {
-                    Text(text = "Label")
-                },
-            )
-        }
-    }
+fun XSmartAmountTextFieldPreview() {
+    XSmartAmountTextField(
+        value = "Hello",
+        onValueChange = {},
+        label = {
+            Text(text = "Label")
+        },
+    )
 }
