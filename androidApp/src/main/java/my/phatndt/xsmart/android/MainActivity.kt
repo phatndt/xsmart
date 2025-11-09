@@ -26,7 +26,7 @@ import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalcul
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.enableEdgeToEdge(window)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             XSmartTheme {
                 Surface(
