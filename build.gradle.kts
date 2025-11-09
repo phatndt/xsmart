@@ -9,7 +9,6 @@ plugins {
     kotlin("plugin.serialization").version("1.8.0").apply(false)
     id("com.google.gms.google-services").version("4.3.15").apply(false)
     alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
-    alias(libs.plugins.compose.compiler) apply false
 }
 
 tasks.register("clean", Delete::class) {
