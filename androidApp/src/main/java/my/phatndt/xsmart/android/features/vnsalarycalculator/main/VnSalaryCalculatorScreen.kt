@@ -159,7 +159,8 @@ fun VnSalaryCalculatorScreen(
                         if (uiState.numberOfDependents.isNullOrEmpty()) {
                             localFocusManager.moveFocus(FocusDirection.Down)
                         }
-                    })
+                    },
+                )
             )
             Text(
                 text = stringResource(R.string.vn_salary_number_of_dependents_placeholder),

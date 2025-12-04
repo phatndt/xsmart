@@ -22,6 +22,8 @@ import my.phatndt.xsmart.android.features.dashboard.DashboardRoute
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorRoute
+import my.xsmart.feature.salarycalculator.SalaryRoutes
+import my.xsmart.feature.salarycalculator.salaryCalculatorNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +32,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             XSmartTheme {
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background,
                 ) {
                     XSmart()
@@ -63,6 +64,10 @@ fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
 
                     FeatureType.BMI_CALCULATOR -> {
                         navController.navigate(Destinations.BmiCalculatorHome.route)
+                    }
+
+                    FeatureType.VN_SALARY_CALCULATOR_V2 -> {
+                        navController.navigate(SalaryRoutes.GRAPH)
                     }
                 }
             }
@@ -96,6 +101,7 @@ fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
                 navController.navigate(Destinations.BmiCalculator.route)
             }
         }
+        salaryCalculatorNavigation(navController)
     }
 }
 

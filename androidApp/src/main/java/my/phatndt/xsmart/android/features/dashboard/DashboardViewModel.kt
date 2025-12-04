@@ -1,6 +1,7 @@
 package my.phatndt.xsmart.android.features.dashboard
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.MonetizationOn
 import androidx.compose.material.icons.outlined.Money
 import my.phatndt.xsmart.android.R
 import my.xsmart.share.android.base.BaseViewModel
@@ -25,6 +26,11 @@ class DashboardViewModel : BaseViewModel<DashboardUiState, UiIntent, UiSideEffec
                         DeferredText.StringResource(R.string.feature_name_bmi_calculator),
                         Icons.Outlined.Money,
                         FeatureType.BMI_CALCULATOR,
+                    ),
+                    FeatureItem(
+                        DeferredText.StringResource(R.string.feature_name_vietnam_salary_calculator),
+                        Icons.Outlined.MonetizationOn,
+                        FeatureType.VN_SALARY_CALCULATOR_V2,
                     ),
                 ),
             )

@@ -33,12 +33,23 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 }
 
 dependencies {
     implementation(projects.share.common)
     implementation(projects.share.domain)
     implementation(projects.share.di)
+    implementation(projects.share.android)
+    implementation(projects.share.ui)
 
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
