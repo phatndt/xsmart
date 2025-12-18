@@ -1,6 +1,7 @@
 package my.phatndt.xsmart.android
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
@@ -22,6 +24,7 @@ import my.phatndt.xsmart.android.features.dashboard.DashboardRoute
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorRoute
+import my.xsmart.feature.salarycalculator.SalaryCalculatorActivity
 import my.xsmart.feature.salarycalculator.SalaryRoutes
 import my.xsmart.feature.salarycalculator.salaryCalculatorNavigation
 
@@ -50,6 +53,7 @@ fun XSmart() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
+    val context = LocalContext.current
     NavHost(
         navController = navController,
         startDestination = Destinations.Dashboard.route,
@@ -67,7 +71,8 @@ fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
                     }
 
                     FeatureType.VN_SALARY_CALCULATOR_V2 -> {
-                        navController.navigate(SalaryRoutes.GRAPH)
+                        context.startActivity(Intent(context, SalaryCalculatorActivity::class.java))
+//                        navController.navigate(SalaryRoutes.GRAPH)
                     }
                 }
             }

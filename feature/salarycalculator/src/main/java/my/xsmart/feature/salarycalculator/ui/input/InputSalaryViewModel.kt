@@ -45,12 +45,20 @@ class InputSalaryViewModel(
             }
 
             InputSalaryUiIntent.CalculatorSalary -> calculateVnSalary()
+
+            is InputSalaryUiIntent.ChangeAllowanceMoney -> setUiState {
+                copy(allowance = intent.value)
+            }
+
+            is InputSalaryUiIntent.ChangeAllowanceType -> setUiState {
+                copy(allowanceType = intent.value)
+            }
         }
     }
 
     private fun calculateVnSalary() {
         val income = AmountFormatter.parseAmount(uiState.value.income)
-        val numberOfDependents = uiState.value.numberOfDependents?.toIntOrNull()
+        val numberOfDependents = uiState.value.numberOfDependents
         val insurance = calculateInsuranceAmount()
         val area = uiState.value.area
         val mode = uiState.value.calculatorMode

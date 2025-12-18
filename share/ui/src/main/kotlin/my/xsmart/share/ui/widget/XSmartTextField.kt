@@ -82,6 +82,7 @@ fun XSmartTextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
+    placeholder: @Composable() (() -> Unit)? = null,
     label: @Composable() (() -> Unit)? = null,
     leadingIcon: @Composable() (() -> Unit)? = null,
     trailingIcon: @Composable() (() -> Unit)? = null,
@@ -106,10 +107,11 @@ fun XSmartTextField(
         modifier = Modifier
             .fillMaxWidth()
             .then(modifier),
+        label = label,
         enabled = enabled,
         readOnly = readOnly,
         textStyle = textStyle,
-        placeholder = label,
+        placeholder = placeholder,
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         supportingText = supportingText,
