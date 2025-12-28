@@ -22,6 +22,37 @@ import androidx.compose.ui.unit.dp
 import my.xsmart.share.ui.theme.XSmartTextStyles
 import my.xsmart.share.ui.theme.XSmartTheme
 
+
+@SuppressLint("ModifierParameter")
+@Composable
+fun XSmartButton(
+    onClick: () -> Unit,
+    isFinish: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    border: BorderStroke? = null,
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    val isPressed = interactionSource.collectIsPressedAsState()
+    Button(
+        onClick = onClick,
+        enabled = isFinish,
+        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier
+            .then(modifier)
+            .fillMaxWidth()
+            .defaultMinSize(
+                minHeight = 48.dp,
+            ),
+        interactionSource = interactionSource,
+        border = border,
+        colors = colors,
+    ) {
+        content()
+    }
+}
+
 @SuppressLint("ModifierParameter")
 @Composable
 fun XSmartButton(

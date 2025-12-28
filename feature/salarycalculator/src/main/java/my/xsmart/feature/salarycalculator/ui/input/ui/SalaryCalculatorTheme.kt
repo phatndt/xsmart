@@ -24,54 +24,89 @@ import androidx.compose.ui.platform.LocalContext
 import my.xsmart.share.ui.theme.AppTypography
 import my.xsmart.share.ui.widget.XSmartRadioOptionCardDefault
 
+// TailwindColors.kt
 
-val Primary = Color(0xFF0D7FF2)
-val OnPrimary = Color(0xFFFFFFFF)
+/* ---------- Brand ---------- */
+val twPrimary = Color(0xFF0D7FF2)
+val twPrimarySoft = Color(0xFF7FBBF8)
+val twPrimaryContainer = Color(0xFFB5D7FB)
 
-val PrimaryContainer = Color(0xFFB5D7FB)
-val OnPrimaryContainer = Color(0xFF10182B)
+/* ---------- Background ---------- */
+val twBackgroundLight = Color(0xFFF5F7F8)
+val twBackgroundDark = Color(0xFF101922)
+val twCardDark = Color(0xFF1C2A38)
 
-val Secondary = Color(0xFF7FBBF8)
-val OnSecondary = Color(0xFF10182B)
+/* ---------- Slate / Neutral ---------- */
+val twSlate900 = Color(0xFF10182B)
+val twSlate600 = Color(0xFF4A5669)
+val twSlate400 = Color(0xFF8994A5)
+val twSlate200 = Color(0xFFD1D6DE)
+val twSlate100 = Color(0xFFE9ECF0)
 
-val Background = Color(0xFFF5F7F8)
-val OnBackground = Color(0xFF10182B)
+/* ---------- Accent ---------- */
+val twRose = Color(0xFFBA1A1A)
 
-val Surface = Color(0xFFFFFFFF)
-val OnSurface = Color(0xFF10182B)
+/* ---------- Result Screen Colors ---------- */
+// Teal colors for insurance
+val Teal500 = Color(0xFF14B8A6)
+val Teal600 = Color(0xFF0D9488)
+val Teal400 = Color(0xFF2DD4BF)
 
-val Outline = Color(0xFF8994A5)
+// Rose colors for tax
+val Rose500 = Color(0xFFF43F5E)
+val Rose600 = Color(0xFFE11D48)
+val Rose400 = Color(0xFFFB7185)
 
-val Tertiary = Color(0xFF4A5669)
-val OnTertiary = Color(0xFFFFFFFF)
+//
+val Indigo500 = Color(0xFF6366F1)
 
-/* ---------- Secondary container ---------- */
-val SecondaryContainer = Color(0xFFDCEBFD)
-val OnSecondaryContainer = Color(0xFF10182B)
+/* ---------- Primary ---------- */
+val Primary: Color = twPrimary
+val OnPrimary: Color = Color.White
 
-/* ---------- Tertiary container ---------- */
-val TertiaryContainer = Color(0xFFE3E6EA)
-val OnTertiaryContainer = Color(0xFF10182B)
+val PrimaryContainer: Color = twPrimaryContainer
+val OnPrimaryContainer: Color = twSlate900
 
-/* ---------- Surface variant ---------- */
-val SurfaceVariant = Color(0xFFE9ECF0)
-val OnSurfaceVariant = Color(0xFF4A5669)
+/* ---------- Secondary ---------- */
+val Secondary: Color = Teal500
+val OnSecondary: Color = Color.White
+
+val SecondaryContainer: Color = twPrimarySoft.copy(alpha = 0.35f)
+val OnSecondaryContainer: Color = twSlate900
+
+/* ---------- Tertiary ---------- */
+val Tertiary: Color = Rose500
+val OnTertiary: Color = Color.White
+
+val TertiaryContainer: Color = twSlate100
+val OnTertiaryContainer: Color = twSlate900
+
+/* ---------- Background / Surface ---------- */
+val Background: Color = twBackgroundLight
+val OnBackground: Color = twSlate900
+
+val Surface: Color = Color.White
+val OnSurface: Color = twSlate900
+
+val SurfaceVariant: Color = twSlate100
+val OnSurfaceVariant: Color = twSlate600
+
+/* ---------- Outline ---------- */
+val Outline: Color = twSlate400
+val OutlineVariant: Color = twSlate200
 
 /* ---------- Error ---------- */
-val Error = Color(0xFFBA1A1A)
-val OnError = Color(0xFFFFFFFF)
-val ErrorContainer = Color(0xFFFFDAD6)
-val OnErrorContainer = Color(0xFF410002)
+val Error: Color = twRose
+val OnError: Color = Color.White
+val ErrorContainer: Color = twRose.copy(alpha = 0.15f)
+val OnErrorContainer: Color = twRose
 
 /* ---------- Inverse ---------- */
-val InverseSurface = Color(0xFF10182B)
-val InverseOnSurface = Color(0xFFF5F7F8)
-val InversePrimary = Color(0xFF7FBBF8)
-
-/* ---------- Misc ---------- */
-val SurfaceTint = Primary
-val OutlineVariant = Color(0xFFD1D6DE)
-val Scrim = Color(0x66000000)
+val InverseSurface: Color = twSlate900
+val InverseOnSurface: Color = twBackgroundLight
+val InversePrimary: Color = twPrimarySoft
+val SurfaceTint: Color = Primary
+val Scrim: Color = Color(0x66000000)
 
 private val LightColorScheme = lightColorScheme(
     primary = Primary,

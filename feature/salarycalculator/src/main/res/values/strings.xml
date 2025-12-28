@@ -72,4 +72,50 @@
 
     <!-- Action Button -->
     <string name="button_cta_calculate_net_salary">Calculate Net Salary</string>
+
+    <!-- Result Screen -->
+    <string name="title_calculation_result">Calculation Result</string>
+    <string name="label_your_net_salary">Your Net Salary</string>
+    <string name="label_monthly_income">Monthly Income</string>
+    <string name="button_view_chart">View Chart</string>
+    
+    <!-- Salary Breakdown Section -->
+    <string name="title_salary_breakdown">Salary Breakdown</string>
+    <string name="label_net_salary">Net Salary</string>
+    <string name="label_insurance">Insurance</string>
+    <string name="label_income_tax">Income Tax</string>
+    
+    <!-- Detailed Calculation Section -->
+    <string name="title_detailed_calculation">Detailed Calculation</string>
+    <string name="label_gross_salary">Gross Salary</string>
+    <string name="label_social_insurance">Social Insurance</string>
+    <string name="label_health_insurance">Health Insurance</string>
+    <string name="label_unemployment_insurance">Unemployment Ins.</string>
+    <string name="label_before_tax_income">Before Tax Income</string>
+    <string name="label_personal_deduction">Personal Deduction</string>
+    <string name="label_dependent_deduction">Dependent Deduction</string>
+    <string name="label_allowances_exempt">Allowances (Exempt)</string>
+    <string name="label_personal_income_tax">Personal Income Tax</string>
+    <string name="label_taxable_income">Taxable Income</string>
+    <string name="label_tax_structure">Tax structure</string>
+    <string name="label_tax_amount">Tax Amount</string>
+    
+    <!-- Tax Brackets -->
+    <string name="label_tax_bracket_5">5%</string>
+    <string name="label_tax_bracket_10">10%</string>
+    <string name="label_tax_bracket_15">15%</string>
+    <string name="label_tax_bracket_20">20%</string>
+    <string name="label_tax_bracket_25">25%</string>
+    <string name="label_tax_range_up_to_10m">Up to 10 mil</string>
+    <string name="label_tax_range_10_to_30m">10 to 30 mil</string>
+    <string name="label_tax_range_30_to_60m">30 to 60 mil</string>
+    <string name="label_tax_range_60_to_100m">60 to 100 mil</string>
+    <string name="label_tax_range_over_100m">Over 100 mil</string>
+    
+    <!-- Bottom Actions -->
+    <string name="button_recalculate">Recalculate</string>
+    <string name="button_share_pdf">Share PDF</string>
+    
+    <!-- Currency Conversion -->
+    <string name="label_usd_equivalent">≈ %1$s USD</string>
 </resources>

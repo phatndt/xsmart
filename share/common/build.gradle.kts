@@ -62,6 +62,8 @@ kotlin {
         androidMain {
             dependencies {
                 implementation(libs.androidx.annotation)
+                implementation(libs.androidx.appcompat)
+                implementation(libs.androidx.compose.ui)
             }
         }
 

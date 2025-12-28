@@ -9,6 +9,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.Font
@@ -70,3 +71,9 @@ fun solution(inputString: String): Boolean {
     }
     return true
 }
+
+val LocalSpacing = compositionLocalOf { AppSpacing }
+
+val MaterialTheme.spacing: AppSpacing
+    @Composable
+    get() = LocalSpacing.current
