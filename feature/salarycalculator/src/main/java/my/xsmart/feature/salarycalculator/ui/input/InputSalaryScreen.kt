@@ -71,7 +71,7 @@ import my.xsmart.feature.salarycalculator.ui.input.state.InputSalaryUiState
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.xsmart.feature.salarycalculator.R
-import my.xsmart.feature.salarycalculator.ui.input.model.AllowanceType
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.xsmart.feature.salarycalculator.ui.input.model.AreaModel
 import my.xsmart.feature.salarycalculator.ui.input.state.InputSalaryUiEffect
 import my.xsmart.feature.salarycalculator.ui.input.ui.SalaryCalculatorTextFieldDefault

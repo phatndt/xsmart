@@ -80,9 +80,7 @@ class VnSalaryCalculatorViewModel(
         numberOfDependents: Int,
         mode: my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode,
     ) {
-        calculateVnSalaryUseCase(income, insurance, area, numberOfDependents, mode).collect { result ->
-            handleCalculationResult(result)
-        }
+
     }
 
     private suspend fun handleCalculationResult(result: DataResult<my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity>) {

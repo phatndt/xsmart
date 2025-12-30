@@ -20,7 +20,7 @@ import kotlin.collections.forEach
 
 data class ProgressBarSegment(
     val label: String,
-    val percentage: Float,
+    val percentage: Double,
     val color: Color,
 )
 
@@ -39,12 +39,12 @@ fun HorizontalProgressBar(
         segments.forEach { segment ->
             Box(
                 modifier = Modifier
-                    .weight(segment.percentage)
+                    .weight(segment.percentage.toFloat())
                     .fillMaxSize()
                     .background(segment.color),
                 contentAlignment = Alignment.Center,
             ) {
-                if (segment.percentage > 5f) { // Only show text if segment is large enough
+                if (segment.percentage > 5.0) { // Only show text if segment is large enough
                     Text(
                         text = "${segment.percentage}%",
                         color = MaterialTheme.colorScheme.onPrimary,
@@ -65,17 +65,17 @@ fun SalaryBreakdownProgressBarPreview() {
             segments = listOf(
                 ProgressBarSegment(
                     label = "Net Salary",
-                    percentage = 85f,
+                    percentage = 85.0,
                     color = MaterialTheme.colorScheme.primary,
                 ),
                 ProgressBarSegment(
                     label = "Insurance",
-                    percentage = 10.5f,
+                    percentage = 10.5,
                     color = MaterialTheme.colorScheme.secondary,
                 ),
                 ProgressBarSegment(
                     label = "Tax",
-                    percentage = 4.5f,
+                    percentage = 4.5,
                     color = MaterialTheme.colorScheme.error,
                 ),
             ),

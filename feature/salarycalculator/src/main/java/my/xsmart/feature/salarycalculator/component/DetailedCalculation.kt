@@ -21,19 +21,20 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.ui.input.ui.*
-import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.spacing
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -45,9 +46,8 @@ data class TaxBracketUiState(
 )
 
 data class DetailedCalculationUiState(
-    val data: VnSalaryCalculatorEntity,
+    val data: VnSalaryCalculatorEntity? = null,
     val taxBrackets: List<TaxBracketUiState> = emptyList(),
-    val dependents: Int = 0
 )
 
 @Composable
@@ -55,9 +55,10 @@ fun DetailedCalculation(
     uiState: DetailedCalculationUiState,
     modifier: Modifier = Modifier
 ) {
+    uiState.data ?: return
     val data = uiState.data
-    val fmt = { value: KmmBigDecimal -> formatNumber(value) }
-    val fmtMoney = { value: KmmBigDecimal -> "${formatNumber(value)} VND" }
+    val fmt = { value: KmmBigDecimal -> AmountFormatter.toDisplayAmount(value) }
+    val fmtMoney = { value: KmmBigDecimal -> "${AmountFormatter.toDisplayAmount(value)} VND" }
 
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -68,13 +69,13 @@ fun DetailedCalculation(
     ) {
         Column(
             modifier = Modifier.padding(24.dp),
-            verticalArrangement = Arrangement.spacedBy(Spacing.medium)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.md)
         ) {
             Text(
                 text = stringResource(R.string.title_detailed_calculation),
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
-                color = twSlate900
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             // Gross Salary
@@ -92,8 +93,7 @@ fun DetailedCalculation(
                 Text(
                     text = fmt(data.grossSalary),
                     style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = twSlate900
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -108,7 +108,7 @@ fun DetailedCalculation(
                     .padding(start = 4.dp)
                     .drawLeftBorder(Teal500.copy(alpha = 0.2f), 2.dp)
                     .padding(start = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.smPlus)
             ) {
                 InsuranceRow(
                     label = stringResource(R.string.label_social_insurance),
@@ -146,10 +146,10 @@ fun DetailedCalculation(
                         color = twSlate700
                     )
                     Text(
-                        text = fmt(data.beforeTaxIncome),
+                        text = fmt(data.taxInfo.beforeTaxIncome),
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
-                        color = twSlate900
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             }
@@ -160,15 +160,15 @@ fun DetailedCalculation(
                     .padding(start = 4.dp)
                     .drawLeftBorder(Indigo500.copy(alpha = 0.2f), 2.dp)
                     .padding(start = 12.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.smPlus)
             ) {
                 DeductionRow(
                     label = stringResource(R.string.label_personal_deduction),
-                    amount = "-${fmt(data.personalDeduction)}"
+                    amount = "-${fmt(data.deduction.personal)}"
                 )
                 DeductionRow(
-                    label = stringResource(R.string.label_dependent_deduction) + " (${uiState.dependents})",
-                    amount = if (data.dependentDeduction == KmmBigDecimal("0")) "0" else "-${fmt(data.dependentDeduction)}"
+                    label = stringResource(R.string.label_dependent_deduction) + " (${uiState.data.dependents})",
+                    amount = if (data.deduction.dependent == KmmBigDecimal("0")) "0" else "-${fmt(data.deduction.dependent)}"
                 )
                 DeductionRow(
                     label = stringResource(R.string.label_allowances_exempt),
@@ -179,8 +179,8 @@ fun DetailedCalculation(
 
             // Tax Block
             TaxBlock(
-                taxableIncome = data.taxableIncome,
-                totalTax = data.tax,
+                taxableIncome = data.taxInfo.taxableIncome,
+                totalTax = data.taxInfo.totalTax,
                 brackets = uiState.taxBrackets
             )
 
@@ -199,13 +199,12 @@ fun DetailedCalculation(
                     text = stringResource(R.string.label_net_salary),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
-                    color = Primary
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     text = fmtMoney(data.netSalary),
                     style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = Primary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -226,11 +225,11 @@ private fun InsuranceRow(label: String, percent: String, amount: String) {
             Text(
                 text = label,
                 style = MaterialTheme.typography.bodySmall,
-                color = twSlate600
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Text(
                 text = percent,
-                style = TextStyle(fontSize = 10.sp),
+                style = MaterialTheme.typography.labelSmall,
                 fontWeight = FontWeight.Bold,
                 color = twSlate400,
                 modifier = Modifier
@@ -257,7 +256,7 @@ private fun DeductionRow(label: String, amount: String, isExempt: Boolean = fals
         Text(
             text = label,
             style = MaterialTheme.typography.bodySmall,
-            color = twSlate600
+            color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         Text(
             text = amount,
@@ -294,7 +293,7 @@ fun TaxBlock(
 
         Column(
             modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.md)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -322,7 +321,7 @@ fun TaxBlock(
                         text = stringResource(R.string.label_personal_income_tax),
                         style = MaterialTheme.typography.bodySmall,
                         fontWeight = FontWeight.Bold,
-                        color = twSlate900
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
                 TextButton(
@@ -332,7 +331,7 @@ fun TaxBlock(
                 ) {
                     Text(
                         text = stringResource(R.string.label_tax_structure),
-                        style = TextStyle(fontSize = 12.sp),
+                        style = MaterialTheme.typography.labelMedium,
                         color = twSlate500
                     )
                     Spacer(Modifier.width(4.dp))
@@ -352,13 +351,13 @@ fun TaxBlock(
                 Text(
                     text = stringResource(R.string.label_taxable_income),
                     style = MaterialTheme.typography.bodySmall,
-                    color = twSlate600
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
                     text = formatNumber(taxableIncome),
                     style = MaterialTheme.typography.bodySmall,
                     fontWeight = FontWeight.Bold,
-                    color = twSlate900
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
 
@@ -368,7 +367,7 @@ fun TaxBlock(
             )
 
             // Brackets
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.smPlus)) {
                 brackets.forEach { bracket ->
                     Row(
                         modifier = Modifier
@@ -387,7 +386,7 @@ fun TaxBlock(
                             Text(
                                 text = bracket.range,
                                 style = MaterialTheme.typography.labelSmall,
-                                color = twSlate600
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                         }
                         Text(
@@ -458,13 +457,7 @@ fun Modifier.drawLeftBorder(color: Color, width: Dp): Modifier = drawBehind {
     )
 }
 
-// Helper colors not in SalaryCalculatorTheme but used in React
-val twSlate700 = Color(0xFF334155)
-val twSlate800 = Color(0xFF1E293B)
-val twSlate500 = Color(0xFF64748B)
-val twSlate300 = Color(0xFFCBD5E1)
-val Rose100 = Color(0xFFFFE4E6)
-val Rose700 = Color(0xFFBE123C)
+
 
 @Preview(showBackground = true)
 @Composable
@@ -479,16 +472,20 @@ fun DetailedCalculationPreview() {
                         insurance = VnSalaryCalculatorInsuranceEntity(
                             socialInsurance = KmmBigDecimal("2400000"),
                             healthInsurance = KmmBigDecimal("450000"),
-                            unemploymentInsurance = KmmBigDecimal("300000")
+                            unemploymentInsurance = KmmBigDecimal("300000"),
                         ),
-                        beforeTaxIncome = KmmBigDecimal("26850000"),
-                        personalDeduction = KmmBigDecimal("11000000"),
-                        dependentDeduction = KmmBigDecimal("0"),
-                        taxableIncome = KmmBigDecimal("15850000"),
-                        tax = KmmBigDecimal("1085000"),
+                        taxInfo = TaxInfoEntity(
+                            beforeTaxIncome = KmmBigDecimal("26850000"),
+                            taxableIncome = KmmBigDecimal("15850000"),
+                            totalTax = KmmBigDecimal("1085000"),
+                            taxBrackets = emptyList()
+                        ),
+                        deduction = DeductionEntity(
+                            personal = KmmBigDecimal("11000000"),
+                            dependent = KmmBigDecimal("0"),
+                        ),
                         calculatorMode = CalculatorMode.GROSS_TO_NET,
                         allowance = KmmBigDecimal("0"),
-                        bonus = KmmBigDecimal("0")
                     ),
                     taxBrackets = listOf(
                         TaxBracketUiState(5, "0 - 5.000.000", KmmBigDecimal("250000"), true),
@@ -496,7 +493,6 @@ fun DetailedCalculationPreview() {
                         TaxBracketUiState(15, "10.000.000 - 18.000.000", KmmBigDecimal("335000"), true),
                         TaxBracketUiState(20, "18.000.000 - 32.000.000", KmmBigDecimal("0"), false)
                     ),
-                    dependents = 0
                 )
             )
         }

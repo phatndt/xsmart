@@ -53,12 +53,17 @@ import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.common.deferred.DeferredText
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 import my.xsmart.feature.salarycalculator.R
+import my.xsmart.feature.salarycalculator.component.DetailedCalculation
+import my.xsmart.feature.salarycalculator.component.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.component.InsuranceDetailRow
 import my.xsmart.feature.salarycalculator.component.SalaryBreakdownItem
 import my.xsmart.feature.salarycalculator.component.SalaryBreakdownItemDefault
+import my.xsmart.feature.salarycalculator.component.TaxBracketUiState
 import my.xsmart.feature.salarycalculator.component.drawLeftBorder
 import my.xsmart.feature.salarycalculator.ui.input.ui.Indigo500
 import my.xsmart.feature.salarycalculator.ui.input.ui.Primary
@@ -66,6 +71,8 @@ import my.xsmart.feature.salarycalculator.ui.input.ui.Rose500
 import my.xsmart.feature.salarycalculator.ui.input.ui.Rose600
 import my.xsmart.feature.salarycalculator.ui.input.ui.SalaryCalculatorTheme
 import my.xsmart.feature.salarycalculator.ui.input.ui.Teal500
+import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegment
+import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegmentType
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiEffect
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiIntent
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiState
@@ -78,9 +85,11 @@ import my.xsmart.share.ui.extension.paddingHorizontalLarge
 import my.xsmart.share.ui.theme.Spacing
 import my.xsmart.share.ui.widget.XSmartButton
 import org.koin.androidx.compose.koinViewModel
+import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.Locale
 import java.util.UUID
+import kotlin.math.abs
 
 // Extension function to convert KmmBigDecimal to Double for display
 private fun KmmBigDecimal.toDisplayDouble(): Double = this.toString().toDoubleOrNull() ?: 0.0
@@ -91,6 +100,11 @@ fun ResultRoute(
     onNavigateBack: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.value.isLoading) {
+        viewModel.loadData()
+    }
+
 
     LaunchedEffect(key1 = UUID.randomUUID()) {
         viewModel.effect.collect { effect ->
@@ -163,9 +177,40 @@ fun ResultScreen(
         ) {
             NetSalaryCard(calculationData = calculationData)
             Spacer(modifier = Modifier.height(Spacing.large))
-            SalaryBreakdownSection(uiState.salaryBreakdownItems, onAction = onAction)
+            SalaryBreakdownSection(uiState.salaryBreakdownItems.map {
+                when (it.type) {
+                    BreakdownSegmentType.NET_SALARY -> {
+                        SalaryBreakdownUiState(
+                            title = DeferredText.Resource(R.string.label_net_salary),
+                            percent = it.percentage,
+                            color = MaterialTheme.colorScheme.primary,
+                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount)),
+                        )
+                    }
+                    BreakdownSegmentType.INSURANCE -> {
+                        SalaryBreakdownUiState(
+                            title = DeferredText.Resource(R.string.label_insurance),
+                            percent = it.percentage,
+                            color = MaterialTheme.colorScheme.secondary,
+                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
+                        )
+                    }
+                    BreakdownSegmentType.TAX -> {
+                        SalaryBreakdownUiState(
+                            title = DeferredText.Resource(R.string.label_income_tax),
+                            percent = it.percentage,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
+                        )
+                    }
+                }
+            }, onAction = onAction)
             Spacer(modifier = Modifier.height(Spacing.large))
-            DetailedCalculationSection(calculationData = calculationData)
+            DetailedCalculation(
+                uiState.detailedCalculationUiState,
+                modifier = Modifier.paddingHorizontalLarge(),
+            )
+//            DetailedCalculationSection(calculationData = calculationData)
             Spacer(modifier = Modifier.height(Spacing.large))
             UsdEquivalent(netSalary = calculationData.netSalary.toDisplayDouble())
         }
@@ -368,7 +413,7 @@ fun DetailedCalculationSection(calculationData: VnSalaryCalculatorEntity) {
         // Before Tax Income
         TextTitleValueRow(
             title = stringResource(R.string.label_before_tax_income),
-            value = AmountFormatter.toDisplayAmount(calculationData.beforeTaxIncome),
+            value = AmountFormatter.toDisplayAmount(calculationData.taxInfo.beforeTaxIncome),
             percent = 0.5f,
             titleAttribute = SalaryBreakdownItemDefault.titleAttribute(
                 style = MaterialTheme.typography.titleMedium,
@@ -401,11 +446,11 @@ fun DetailedCalculationSection(calculationData: VnSalaryCalculatorEntity) {
             ) {
             InsuranceDetailRow(
                 label = stringResource(R.string.label_personal_deduction),
-                amount = AmountFormatter.toDisplayAmount(calculationData.personalDeduction),
+                amount = AmountFormatter.toDisplayAmount(calculationData.deduction.personal),
             )
             InsuranceDetailRow(
                 label = stringResource(R.string.label_dependent_deduction),
-                amount = AmountFormatter.toDisplayAmount(calculationData.dependentDeduction),
+                amount = AmountFormatter.toDisplayAmount(calculationData.deduction.dependent),
             )
             InsuranceDetailRow(
                 label = stringResource(R.string.label_allowances_exempt),
@@ -459,7 +504,7 @@ fun DetailRow(
             fontWeight = if (isBold) FontWeight.Bold else FontWeight.SemiBold,
         )
         Text(
-            text = formatCurrency(kotlin.math.abs(amount)),
+            text = formatCurrency(abs(amount)),
             style = if (isBold) MaterialTheme.typography.titleMedium else MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
         )
@@ -510,7 +555,7 @@ fun TaxCalculationCard(calculationData: VnSalaryCalculatorEntity) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Text(
-                text = formatCurrency(calculationData.taxableIncome.toDisplayDouble()),
+                text = formatCurrency(calculationData.taxInfo.taxableIncome.toDisplayDouble()),
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
             )
@@ -532,7 +577,7 @@ fun TaxCalculationCard(calculationData: VnSalaryCalculatorEntity) {
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
-                text = "-${formatCurrency(calculationData.tax.toDisplayDouble())}",
+                text = "-${formatCurrency(calculationData.taxInfo.totalTax.toDisplayDouble())}",
                 style = MaterialTheme.typography.titleMedium,
                 color = Rose600,
                 fontWeight = FontWeight.Bold,
@@ -624,53 +669,86 @@ fun ResultScreenPreview() {
                         healthInsurance = KmmBigDecimal("450000"),
                         unemploymentInsurance = KmmBigDecimal("300000"),
                     ),
-                    beforeTaxIncome = KmmBigDecimal("26850000"),
-                    personalDeduction = KmmBigDecimal("11000000"),
-                    dependentDeduction = KmmBigDecimal("0"),
-                    taxableIncome = KmmBigDecimal("15850000"),
-                    tax = KmmBigDecimal("1085000"),
+                    taxInfo = TaxInfoEntity(
+                        beforeTaxIncome = KmmBigDecimal("26850000"),
+                        taxableIncome = KmmBigDecimal("15850000"),
+                        totalTax = KmmBigDecimal("1085000"),
+                        taxBrackets = emptyList()
+                    ),
+                    deduction = DeductionEntity(
+                        personal = KmmBigDecimal("11000000"),
+                        dependent = KmmBigDecimal("0"),
+                    ),
                     calculatorMode = CalculatorMode.GROSS_TO_NET,
                     allowance = KmmBigDecimal("0"),
-                    bonus = KmmBigDecimal("0"),
                 ),
                 salaryBreakdownItems = listOf(
-                    SalaryBreakdownUiState(
-                        title = DeferredText.Resource(R.string.label_net_salary),
-                        amount = DeferredText.Constant("25,765,000 VND"),
-                        percent = 85f,
-                        color = MaterialTheme.colorScheme.primary,
+                    BreakdownSegment(
+                        type = BreakdownSegmentType.NET_SALARY,
+                        amount = BigDecimal("25765000"),
+                        percentage = 85.0,
                     ),
-                    SalaryBreakdownUiState(
-                        title = DeferredText.Resource(R.string.label_insurance),
-                        amount = DeferredText.Constant("-2,400,000 VND"),
-                        percent = 10f,
-                        color = Teal500,
+                    BreakdownSegment(
+                        type = BreakdownSegmentType.INSURANCE,
+                        amount = BigDecimal("2400000"),
+                        percentage = 85.0,
                     ),
-                    SalaryBreakdownUiState(
-                        title = DeferredText.Resource(R.string.label_income_tax),
-                        amount = DeferredText.Constant("-1,085,000 VND"),
-                        percent = 5f,
-                        color = Rose500,
+                    BreakdownSegment(
+                        type = BreakdownSegmentType.TAX,
+                        amount = BigDecimal("1085000"),
+                        percentage = 5.0,
                     ),
-                )
-
+                ),
+                detailedCalculationUiState = DetailedCalculationUiState(
+                    data = VnSalaryCalculatorEntity(
+                        grossSalary = KmmBigDecimal("30000000"),
+                        netSalary = KmmBigDecimal("25765000"),
+                        insurance = VnSalaryCalculatorInsuranceEntity(
+                            socialInsurance = KmmBigDecimal("2400000"),
+                            healthInsurance = KmmBigDecimal("450000"),
+                            unemploymentInsurance = KmmBigDecimal("300000"),
+                        ),
+                        taxInfo = TaxInfoEntity(
+                            beforeTaxIncome = KmmBigDecimal("26850000"),
+                            taxableIncome = KmmBigDecimal("15850000"),
+                            totalTax = KmmBigDecimal("1085000"),
+                            taxBrackets = emptyList()
+                        ),
+                        deduction = DeductionEntity(
+                            personal = KmmBigDecimal("11000000"),
+                            dependent = KmmBigDecimal("0"),
+                        ),
+                        calculatorMode = CalculatorMode.GROSS_TO_NET,
+                        allowance = KmmBigDecimal("0"),
+                    ),
+                    taxBrackets = listOf(
+                        TaxBracketUiState(
+                            percent = 5,
+                            range = "0 - 5.000.000",
+                            amount = KmmBigDecimal("250000"),
+                            isActive = true
+                        ),
+                        TaxBracketUiState(
+                            percent = 10,
+                            range = "5.000.000 - 10.000.000",
+                            amount = KmmBigDecimal("500000"),
+                            isActive = true
+                        ),
+                        TaxBracketUiState(
+                            percent = 15,
+                            range = "10.000.000 - 18.000.000",
+                            amount = KmmBigDecimal("335000"),
+                            isActive = true
+                        ),
+                        TaxBracketUiState(
+                            percent = 20,
+                            range = "18.000.000 - 32.000.000",
+                            amount = KmmBigDecimal("0"),
+                            isActive = false
+                        ),
+                    ),
+                ),
             ),
         )
-    }
-}
-
-fun normalizeToPercentages(data: List<Double>): List<Double> {
-    // 1. Calculate the sum of all values in the list
-    val sum = data.sum()
-
-    // 2. Check if the sum is zero to prevent division by zero
-    if (sum == 0.0) {
-        // Return a list of zeros if the sum is zero
-        return List(data.size) { 0.0 }
-    }
-
-    // 3. Normalize each value: divide by the sum and multiply by 100
-    return data.map { value ->
-        (value / sum) * 100
     }
 }

@@ -34,8 +34,8 @@ class VnSalaryCalculatorDetailViewModel(
                     setUiState {
                         copy(
                             data = it,
-                            listOfOverviewSalaryData = mapToListOfOverviewSalaryItemDataModel(it),
-                            listOfDetailSalaryData = mapToListOfDetailSalaryItemDataModel(it),
+                            listOfOverviewSalaryData = emptyList(),
+                            listOfDetailSalaryData = emptyList(),
                         )
                     }
                 },
@@ -46,69 +46,4 @@ class VnSalaryCalculatorDetailViewModel(
         }
     }
 
-    private fun mapToListOfOverviewSalaryItemDataModel(data: VnSalaryCalculatorEntity): List<ItemDataModel> {
-        return listOf(
-            ItemDataModel(
-                title = DeferredText.Constant("Gross salary"),
-                description = AmountFormatter.toDisplayAmount(data.grossSalary),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Insurance"),
-                description = AmountFormatter.toDisplayAmount(data.insurance.totalInsurance),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Tax"),
-                description = AmountFormatter.toDisplayAmount(data.tax),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Net salary"),
-                description = AmountFormatter.toDisplayAmount(data.netSalary),
-            ),
-        )
-    }
-
-    private fun mapToListOfDetailSalaryItemDataModel(data: VnSalaryCalculatorEntity): List<ItemDataModel> {
-        return listOf(
-            ItemDataModel(
-                title = DeferredText.Constant("Gross salary"),
-                description = AmountFormatter.toDisplayAmount(data.grossSalary),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Social Insurance"),
-                description = AmountFormatter.toDisplayAmount(data.insurance.socialInsurance),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Health Insurance"),
-                description = AmountFormatter.toDisplayAmount(data.insurance.healthInsurance),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Unemployment Insurance"),
-                description = AmountFormatter.toDisplayAmount(data.insurance.unemploymentInsurance),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Before tax"),
-                description = AmountFormatter.toDisplayAmount(data.beforeTaxIncome),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Personal deduction"),
-                description = AmountFormatter.toDisplayAmount(data.personalDeduction),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Dependent deduction"),
-                description = AmountFormatter.toDisplayAmount(data.dependentDeduction),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Taxable income"),
-                description = AmountFormatter.toDisplayAmount(data.taxableIncome),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Tax"),
-                description = AmountFormatter.toDisplayAmount(data.tax),
-            ),
-            ItemDataModel(
-                title = DeferredText.Constant("Net salary"),
-                description = AmountFormatter.toDisplayAmount(data.netSalary),
-            ),
-        )
-    }
 }

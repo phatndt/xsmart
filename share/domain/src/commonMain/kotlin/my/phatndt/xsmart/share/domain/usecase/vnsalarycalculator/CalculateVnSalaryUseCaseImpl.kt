@@ -3,31 +3,28 @@ package my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.common.amount.ZERO
 import my.phatndt.xsmart.share.common.amount.minus
 import my.phatndt.xsmart.share.common.amount.plus
 import my.phatndt.xsmart.share.common.amount.times
+import my.phatndt.xsmart.share.common.amount.toKmmBigDecimal
 import my.phatndt.xsmart.share.common.dataresult.DataResult
-import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.SalaryCalculatorRequest
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxBracket
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorConfig
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 
 class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
-    override fun invoke(
-        salary: KmmBigDecimal,
-        insuranceSalary: KmmBigDecimal,
-        area: Area,
-        numberOfDependents: Int,
-        calculatorMode: CalculatorMode,
-    ): Flow<DataResult<VnSalaryCalculatorEntity>> = flow {
+    override fun invoke(request: SalaryCalculatorRequest): Flow<DataResult<VnSalaryCalculatorEntity>> = flow {
         emit(
             DataResult.Success(
                 calculateNetSalary(
-                    salary,
-                    insuranceSalary,
-                    numberOfDependents,
+                    request,
                     VnSalaryCalculatorConfig(),
                 ),
             ),
@@ -35,71 +32,80 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
     }
 
     private fun calculateNetSalary(
-        grossSalary: KmmBigDecimal,
-        insuranceSalary: KmmBigDecimal,
-        numberOfDependents: Int,
+        request: SalaryCalculatorRequest,
         config: VnSalaryCalculatorConfig,
     ): VnSalaryCalculatorEntity {
-        val socialInsurance = insuranceSalary * config.socialInsuranceRate
-        val healthInsurance = insuranceSalary * config.healthInsuranceRate
-        val unemploymentInsurance = insuranceSalary * config.unemploymentInsuranceRate
-        val totalInsurance = socialInsurance + healthInsurance + unemploymentInsurance
+        val grossSalary = request.salary
+        // Insurance
+        val insurance = VnSalaryCalculatorInsuranceEntity(
+            socialInsurance = request.insuranceSalary * config.socialInsuranceRate,
+            healthInsurance = request.insuranceSalary * config.healthInsuranceRate,
+            unemploymentInsurance = request.insuranceSalary * config.unemploymentInsuranceRate,
+        )
 
-        val beforeTaxIncome = grossSalary - totalInsurance
+        // Deduction
+        val deduction = DeductionEntity(
+            personal = config.personalDeduction,
+            dependent = config.dependentDeduction * KmmBigDecimal(request.dependents),
+        )
 
-        var dependentDeduction = KmmBigDecimal(0)
-        for (i in 1..numberOfDependents) {
-            dependentDeduction += config.dependentDeduction
+        // Tax
+        val beforeTaxIncome = grossSalary - insurance.totalInsurance
+        val allowanceTax = if (request.allowanceType == AllowanceType.INCLUDED) {
+            request.allowances
+        } else {
+            ZERO
         }
-        val taxableIncome = beforeTaxIncome - config.personalDeduction - dependentDeduction
+        val taxableIncome = beforeTaxIncome - deduction.totalDeduction - allowanceTax
+        val taxBrackets = calculateTax(taxableIncome, config.taxBrackets)
+        val taxInfo = TaxInfoEntity(
+            beforeTaxIncome = beforeTaxIncome,
+            taxableIncome =taxableIncome,
+            totalTax = taxBrackets.first,
+            taxBrackets = taxBrackets.second,
+        )
 
-        val tax = calculateTax(taxableIncome, config.taxBrackets)
-
-        val netSalary = grossSalary - totalInsurance - tax
+        // Net salary
+        val netSalary = grossSalary - insurance.totalInsurance - taxBrackets.first
 
         return VnSalaryCalculatorEntity(
             grossSalary = grossSalary,
             netSalary = netSalary,
-            insurance = VnSalaryCalculatorInsuranceEntity(
-                socialInsurance = socialInsurance,
-                healthInsurance = healthInsurance,
-                unemploymentInsurance = unemploymentInsurance,
-            ),
-            personalDeduction = config.personalDeduction,
-            dependentDeduction = dependentDeduction,
-            beforeTaxIncome = beforeTaxIncome,
-            tax = tax,
-            taxableIncome = taxableIncome,
+            insurance = insurance,
+            deduction = deduction,
+            taxInfo = taxInfo,
             calculatorMode = CalculatorMode.GROSS_TO_NET,
-            allowance = KmmBigDecimal(0),
-            bonus = KmmBigDecimal(0),
+            allowance = request.allowances,
+            dependents = request.dependents,
+            config = config,
         )
     }
 
     private fun calculateTax(
         taxableIncome: KmmBigDecimal,
         taxBrackets: List<TaxBracket>,
-    ): KmmBigDecimal {
-        var tax = KmmBigDecimal(0)
-        var temp = KmmBigDecimal(0)
+    ): Pair<KmmBigDecimal, List<Pair<KmmBigDecimal, TaxBracket>>> {
+        var remainingAmount = taxableIncome
+        var totalTax = ZERO
+        val breakdowns = mutableListOf<Pair<KmmBigDecimal, TaxBracket>>()
 
         for (bracket in taxBrackets) {
-            if (temp > taxableIncome) break
-
-            val taxableInBracket =
-                if (taxableIncome - temp > (bracket.upperBound?.minus(bracket.lowerBound) ?: KmmBigDecimal(0))
-                ) {
-                    bracket.upperBound?.minus(bracket.lowerBound)
-                        ?: (taxableIncome - temp)
-                } else {
-                    taxableIncome - temp
-                }
-            if (taxableInBracket > KmmBigDecimal(0)) {
-                tax += (taxableInBracket * bracket.rate)
-                temp += taxableInBracket
+            if (remainingAmount <= ZERO) {
+                breakdowns += ZERO to bracket
+                break
             }
+
+            // no upper bound → unlimited
+            val bracketCapacity = bracket.upperBound?.minus(bracket.lowerBound) ?: remainingAmount
+
+            val taxableInBracket = minOf(remainingAmount, bracketCapacity)
+
+            val taxForBracket = taxableInBracket * bracket.rate.toKmmBigDecimal()
+            totalTax += taxForBracket
+            remainingAmount -= taxableInBracket
+            breakdowns += taxForBracket to bracket
         }
 
-        return tax
+        return totalTax to breakdowns
     }
 }

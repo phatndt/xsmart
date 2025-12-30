@@ -38,8 +38,12 @@ val twCardDark = Color(0xFF1C2A38)
 
 /* ---------- Slate / Neutral ---------- */
 val twSlate900 = Color(0xFF10182B)
+val twSlate800 = Color(0xFF1E293B)
+val twSlate700 = Color(0xFF334155)
 val twSlate600 = Color(0xFF4A5669)
+val twSlate500 = Color(0xFF64748B)
 val twSlate400 = Color(0xFF8994A5)
+val twSlate300 = Color(0xFFCBD5E1)
 val twSlate200 = Color(0xFFD1D6DE)
 val twSlate100 = Color(0xFFE9ECF0)
 
@@ -53,11 +57,13 @@ val Teal600 = Color(0xFF0D9488)
 val Teal400 = Color(0xFF2DD4BF)
 
 // Rose colors for tax
-val Rose500 = Color(0xFFF43F5E)
+val Rose700 = Color(0xFFBE123C)
 val Rose600 = Color(0xFFE11D48)
+val Rose500 = Color(0xFFF43F5E)
 val Rose400 = Color(0xFFFB7185)
+val Rose100 = Color(0xFFFFE4E6)
 
-//
+// Indigo colors for deductions
 val Indigo500 = Color(0xFF6366F1)
 
 /* ---------- Primary ---------- */

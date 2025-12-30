@@ -2,7 +2,7 @@ package my.xsmart.feature.salarycalculator.ui.input.state
 
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
-import my.xsmart.feature.salarycalculator.ui.input.model.AllowanceType
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.xsmart.feature.salarycalculator.ui.input.model.InsuranceType
 import my.xsmart.share.android.base.UiState
 

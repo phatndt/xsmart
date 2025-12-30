@@ -3,13 +3,13 @@ package my.phatndt.xsmart.share.common.amount
 import platform.Foundation.NSDecimalNumber
 
 actual class KmmBigDecimal(val nsDecimalNumber: NSDecimalNumber) : Comparable<KmmBigDecimal> {
-    constructor(value: String) : this(NSDecimalNumber(value))
+    actual constructor(value: String) : this(NSDecimalNumber(value))
 
-    constructor(value: Double) : this(NSDecimalNumber(value))
+    actual constructor(value: Double) : this(NSDecimalNumber(value))
 
-    constructor(value: Int) : this(NSDecimalNumber(value))
+    actual constructor(value: Int) : this(NSDecimalNumber(value))
 
-    override operator fun compareTo(other: KmmBigDecimal): Int {
+    actual override operator fun compareTo(other: KmmBigDecimal): Int {
         return this.nsDecimalNumber
             .compare(other.nsDecimalNumber)
             .toInt()

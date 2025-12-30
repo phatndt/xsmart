@@ -45,11 +45,11 @@ object VnSalaryCalculatorConstant {
     val BRACKET_7_UPPER: KmmBigDecimal? = null // No upper limit
 
     // Tax rates for each bracket
-    val RATE_1: KmmBigDecimal = KmmBigDecimal(0.05)
-    val RATE_2: KmmBigDecimal = KmmBigDecimal(0.10)
-    val RATE_3: KmmBigDecimal = KmmBigDecimal(0.15)
-    val RATE_4: KmmBigDecimal = KmmBigDecimal(0.20)
-    val RATE_5: KmmBigDecimal = KmmBigDecimal(0.25)
-    val RATE_6: KmmBigDecimal = KmmBigDecimal(0.30)
-    val RATE_7: KmmBigDecimal = KmmBigDecimal(0.35)
+    val RATE_1: Double = 0.05
+    val RATE_2: Double = 0.10
+    val RATE_3: Double = 0.15
+    val RATE_4: Double = 0.20
+    val RATE_5: Double = 0.25
+    val RATE_6: Double = 0.30
+    val RATE_7: Double = 0.35
 }

@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import my.xsmart.feature.salarycalculator.ui.input.InputSalaryRoute
 import my.xsmart.feature.salarycalculator.ui.input.ui.SalaryCalculatorTheme
+import my.xsmart.feature.salarycalculator.ui.result.ResultRoute
 import my.xsmart.share.ui.theme.XSmartTheme
 
 class SalaryCalculatorActivity : ComponentActivity() {
@@ -33,7 +34,12 @@ class SalaryCalculatorActivity : ComponentActivity() {
                         route = SalaryRoutes.GRAPH,
                     ) {
                         composable(route = SalaryRoutes.INPUT) {
-                            InputSalaryRoute(onNavigateToDetail = {}) { }
+                            InputSalaryRoute(onNavigateToDetail = {
+                                navController.navigate(SalaryRoutes.DETAIL)
+                            }) { }
+                        }
+                        composable(route = SalaryRoutes.DETAIL) {
+                            ResultRoute { }
                         }
                     }
                 }
