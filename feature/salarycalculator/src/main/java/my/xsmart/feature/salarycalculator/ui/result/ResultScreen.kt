@@ -4,11 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -36,7 +33,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -45,7 +41,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -59,28 +54,25 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculat
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.component.DetailedCalculation
-import my.xsmart.feature.salarycalculator.component.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.component.InsuranceDetailRow
 import my.xsmart.feature.salarycalculator.component.SalaryBreakdownItem
 import my.xsmart.feature.salarycalculator.component.SalaryBreakdownItemDefault
-import my.xsmart.feature.salarycalculator.component.TaxBracketUiState
 import my.xsmart.feature.salarycalculator.component.drawLeftBorder
 import my.xsmart.feature.salarycalculator.ui.input.ui.Indigo500
 import my.xsmart.feature.salarycalculator.ui.input.ui.Primary
-import my.xsmart.feature.salarycalculator.ui.input.ui.Rose500
 import my.xsmart.feature.salarycalculator.ui.input.ui.Rose600
 import my.xsmart.feature.salarycalculator.ui.input.ui.SalaryCalculatorTheme
-import my.xsmart.feature.salarycalculator.ui.input.ui.Teal500
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegment
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegmentType
+import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiEffect
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiIntent
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.SalaryBreakdownUiState
+import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
 import my.xsmart.share.ui.component.progressbar.HorizontalProgressBar
 import my.xsmart.share.ui.component.progressbar.ProgressBarSegment
 import my.xsmart.share.ui.component.row.TextTitleValueRow
-import my.xsmart.share.ui.component.row.TextTitleValueRowDefault
 import my.xsmart.share.ui.extension.paddingHorizontalLarge
 import my.xsmart.share.ui.theme.Spacing
 import my.xsmart.share.ui.widget.XSmartButton
@@ -722,25 +714,25 @@ fun ResultScreenPreview() {
                         allowance = KmmBigDecimal("0"),
                     ),
                     taxBrackets = listOf(
-                        TaxBracketUiState(
+                        TaxBracketModel(
                             percent = 5,
                             range = "0 - 5.000.000",
                             amount = KmmBigDecimal("250000"),
                             isActive = true
                         ),
-                        TaxBracketUiState(
+                        TaxBracketModel(
                             percent = 10,
                             range = "5.000.000 - 10.000.000",
                             amount = KmmBigDecimal("500000"),
                             isActive = true
                         ),
-                        TaxBracketUiState(
+                        TaxBracketModel(
                             percent = 15,
                             range = "10.000.000 - 18.000.000",
                             amount = KmmBigDecimal("335000"),
                             isActive = true
                         ),
-                        TaxBracketUiState(
+                        TaxBracketModel(
                             percent = 20,
                             range = "18.000.000 - 32.000.000",
                             amount = KmmBigDecimal("0"),

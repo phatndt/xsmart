@@ -1,34 +1,17 @@
 package my.xsmart.feature.salarycalculator.ui.result
 
 import android.util.Log
-import androidx.compose.material3.MaterialTheme
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.ZERO
-import my.phatndt.xsmart.share.common.deferred.DeferredText
 import my.phatndt.xsmart.share.common.flowx.collectFold
-import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCase
-import my.xsmart.feature.salarycalculator.R
-import my.xsmart.feature.salarycalculator.component.DetailedCalculationUiState
-import my.xsmart.feature.salarycalculator.component.TaxBracketUiState
-import my.xsmart.feature.salarycalculator.ui.input.ui.Rose500
-import my.xsmart.feature.salarycalculator.ui.input.ui.Teal500
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegment
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegmentType
+import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiEffect
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiIntent
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiState
-import my.xsmart.feature.salarycalculator.ui.result.state.SalaryBreakdownUiState
+import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
 import my.xsmart.share.android.base.BaseViewModel
 
 class ResultViewModel(
@@ -110,9 +93,10 @@ class ResultViewModel(
                             detailedCalculationUiState = DetailedCalculationUiState(
                                 data = salary,
                                 taxBrackets = salary.taxInfo.taxBrackets.map { bracket ->
-                                    TaxBracketUiState(
+                                    TaxBracketModel(
                                         percent = (bracket.second.rate * 100).toInt(),
-                                        range = "${bracket.second.lowerBound}-${bracket.second.upperBound ?: "None"}",
+                                        min = bracket.second.lowerBound,
+                                        max = bracket.second.upperBound,
                                         amount = bracket.first,
                                         isActive = bracket.first != ZERO
                                     )

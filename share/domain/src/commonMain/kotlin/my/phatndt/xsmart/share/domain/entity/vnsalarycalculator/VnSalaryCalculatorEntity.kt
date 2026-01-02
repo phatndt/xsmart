@@ -32,7 +32,6 @@ data class DeductionEntity(
         get() = personal + dependent
 }
 
-
 data class TaxInfoEntity(
     val beforeTaxIncome: KmmBigDecimal,
     val taxableIncome: KmmBigDecimal,

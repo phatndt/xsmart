@@ -34,21 +34,12 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculat
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.ui.input.ui.*
+import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
+import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
 import my.xsmart.share.ui.theme.spacing
 import java.text.NumberFormat
 import java.util.Locale
 
-data class TaxBracketUiState(
-    val percent: Int,
-    val range: String,
-    val amount: KmmBigDecimal,
-    val isActive: Boolean
-)
-
-data class DetailedCalculationUiState(
-    val data: VnSalaryCalculatorEntity? = null,
-    val taxBrackets: List<TaxBracketUiState> = emptyList(),
-)
 
 @Composable
 fun DetailedCalculation(
@@ -271,7 +262,7 @@ private fun DeductionRow(label: String, amount: String, isExempt: Boolean = fals
 fun TaxBlock(
     taxableIncome: KmmBigDecimal,
     totalTax: KmmBigDecimal,
-    brackets: List<TaxBracketUiState>
+    brackets: List<TaxBracketModel>
 ) {
     Box(
         modifier = Modifier
@@ -488,10 +479,10 @@ fun DetailedCalculationPreview() {
                         allowance = KmmBigDecimal("0"),
                     ),
                     taxBrackets = listOf(
-                        TaxBracketUiState(5, "0 - 5.000.000", KmmBigDecimal("250000"), true),
-                        TaxBracketUiState(10, "5.000.000 - 10.000.000", KmmBigDecimal("500000"), true),
-                        TaxBracketUiState(15, "10.000.000 - 18.000.000", KmmBigDecimal("335000"), true),
-                        TaxBracketUiState(20, "18.000.000 - 32.000.000", KmmBigDecimal("0"), false)
+                        TaxBracketModel(5, "0 - 5.000.000", KmmBigDecimal("250000"), true),
+                        TaxBracketModel(10, "5.000.000 - 10.000.000", KmmBigDecimal("500000"), true),
+                        TaxBracketModel(15, "10.000.000 - 18.000.000", KmmBigDecimal("335000"), true),
+                        TaxBracketModel(20, "18.000.000 - 32.000.000", KmmBigDecimal("0"), false)
                     ),
                 )
             )
