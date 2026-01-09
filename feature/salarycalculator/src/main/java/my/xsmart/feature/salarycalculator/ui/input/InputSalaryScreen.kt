@@ -26,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -92,6 +93,7 @@ fun InputSalaryRoute(
     viewModel: InputSalaryViewModel = koinViewModel(),
     onNavigateToDetail: (VnSalaryCalculatorEntity) -> Unit,
     onBack: () -> Unit,
+    onChangeConfig: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
     val snackBarState = remember {
@@ -114,6 +116,7 @@ fun InputSalaryRoute(
         uiState = uiState.value,
         onAction = viewModel::setIntent,
         onBack = onBack,
+        onChangeConfig = onChangeConfig,
     )
 }
 
@@ -123,6 +126,7 @@ fun InputSalaryScreen(
     uiState: InputSalaryUiState,
     onAction: (InputSalaryUiIntent) -> Unit = {},
     onBack: () -> Unit = {},
+    onChangeConfig: () -> Unit = {},
 ) {
     // <editor-fold desc="Insurance">
     val insuranceTypes = remember {
@@ -169,6 +173,14 @@ fun InputSalaryScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
+                            contentDescription = null,
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onChangeConfig) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
                             contentDescription = null,
                         )
                     }
@@ -464,7 +476,7 @@ fun InsurancePaymentOn(
             },
         ) {
             if (type == InsuranceType.OTHER && selectedInsurance == InsuranceType.OTHER) {
-                XSmartOutlineTextField(
+                XSmartTextField(
                     value = otherInsuranceAmount,
                     onValueChange = {
                         onAction(InputSalaryUiIntent.InsuranceSalaryChangeIntent(it))
@@ -548,7 +560,7 @@ fun AllowancesSection(
         }
     }
 
-    XSmartOutlineTextField(
+    XSmartTextField(
         value = allowances,
         onValueChange = {
             onAction(InputSalaryUiIntent.ChangeAllowanceMoney(it))

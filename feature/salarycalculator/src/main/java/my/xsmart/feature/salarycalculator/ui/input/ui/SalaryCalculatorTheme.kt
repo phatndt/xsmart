@@ -16,7 +16,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.Shapes
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.CompositionLocalProvider
@@ -65,6 +67,14 @@ val Rose100 = Color(0xFFFFE4E6)
 
 // Indigo colors for deductions
 val Indigo500 = Color(0xFF6366F1)
+
+// Purple colors for tax brackets
+val Purple500 = Color(0xFFA855F7)
+val Purple600 = Color(0xFF9333EA)
+
+// Orange colors for tax brackets
+val Orange500 = Color(0xFFF97316)
+val Orange600 = Color(0xFFEA580C)
 
 /* ---------- Primary ---------- */
 val Primary: Color = twPrimary
@@ -178,22 +188,24 @@ object SalaryCalculatorTextFieldDefault {
         errorContainerColor: Color = MaterialTheme.colorScheme.surface,
         focusedBorderColor: Color = Color.Transparent,
         unfocusedBorderColor: Color = Color.Transparent,
-    ) = OutlinedTextFieldDefaults.colors(
+    ) = TextFieldDefaults.colors(
         focusedContainerColor = focusedContainerColor,
         unfocusedContainerColor = unfocusedContainerColor,
         disabledContainerColor = disabledContainerColor,
         errorContainerColor = errorContainerColor,
-        focusedBorderColor = focusedBorderColor,
-        unfocusedBorderColor = unfocusedBorderColor,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+        focusedIndicatorColor = Color.Transparent,
     )
 
     @Composable
-    fun color() = OutlinedTextFieldDefaults.colors(
+    fun color() = TextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.colorScheme.surface,
         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
         disabledContainerColor = MaterialTheme.colorScheme.surface,
         errorContainerColor = MaterialTheme.colorScheme.surface,
-        focusedBorderColor = Color.Transparent,
-        unfocusedBorderColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        disabledIndicatorColor = Color.Transparent,
+        focusedIndicatorColor = Color.Transparent,
     )
 }

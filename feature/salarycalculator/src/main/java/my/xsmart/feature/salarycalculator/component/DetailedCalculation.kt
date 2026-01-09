@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
@@ -37,6 +38,7 @@ import my.xsmart.feature.salarycalculator.ui.input.ui.*
 import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
 import my.xsmart.share.ui.theme.spacing
+import java.math.BigDecimal
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -375,7 +377,7 @@ fun TaxBlock(
                                 modifier = Modifier.width(40.dp)
                             )
                             Text(
-                                text = bracket.range,
+                                text = bracket.min.toString(),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -479,10 +481,10 @@ fun DetailedCalculationPreview() {
                         allowance = KmmBigDecimal("0"),
                     ),
                     taxBrackets = listOf(
-                        TaxBracketModel(5, "0 - 5.000.000", KmmBigDecimal("250000"), true),
-                        TaxBracketModel(10, "5.000.000 - 10.000.000", KmmBigDecimal("500000"), true),
-                        TaxBracketModel(15, "10.000.000 - 18.000.000", KmmBigDecimal("335000"), true),
-                        TaxBracketModel(20, "18.000.000 - 32.000.000", KmmBigDecimal("0"), false)
+                        TaxBracketModel(5, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("250000"), true),
+                        TaxBracketModel(10, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("500000"), true),
+                        TaxBracketModel(15, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("335000"), true),
+                        TaxBracketModel(20, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("0"), false)
                     ),
                 )
             )

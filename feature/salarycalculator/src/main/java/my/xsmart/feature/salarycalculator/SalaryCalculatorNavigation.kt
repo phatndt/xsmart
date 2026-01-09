@@ -12,15 +12,5 @@ object SalaryRoutes {
     const val GRAPH = "salary-calculator"
     const val INPUT = "salary-calculator/input"
     const val DETAIL = "salary-calculator/detail"
-}
-
-fun NavGraphBuilder.salaryCalculatorNavigation(navController: NavController) {
-    navigation(
-        startDestination = SalaryRoutes.INPUT,
-        route = SalaryRoutes.GRAPH,
-    ) {
-        composable(route = SalaryRoutes.INPUT) {
-            InputSalaryRoute(onNavigateToDetail = {}) {  }
-        }
-    }
+    const val CONFIG = "salary-calculator/config"
 }

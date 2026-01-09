@@ -1,8 +1,12 @@
 package my.xsmart.share.ui.extension
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.spacing
 
-fun Modifier.paddingHorizontalLarge(): Modifier = this.padding(horizontal = Spacing.large)
+@Composable
+fun Modifier.paddingHorizontalLarge(): Modifier = this.padding(horizontal = MaterialTheme.spacing.lg)
 fun Modifier.paddingHorizontalXlLarge(): Modifier = this.padding(horizontal = Spacing.large)

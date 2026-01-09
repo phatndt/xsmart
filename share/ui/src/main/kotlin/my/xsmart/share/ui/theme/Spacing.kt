@@ -43,28 +43,62 @@ object Spacing {
 object AppSpacing {
 
     // ───────────────
-    // XS – micro spacing
+    // XS – Micro spacing (inline / tight UI)
     // ───────────────
-    val xxs = 4.dp       // space-y-1, gap-1, mt-1
-    val xs = 6.dp        // gap-1.5, px-1.5
-    val sm = 8.dp        // p-2, mt-2, py-2
+
+    val xxs = 4.dp
+    // Tailwind: space-y-1, gap-1, p-1, m-1
+    // Use: icon ↔ text, chip padding, dense list
+
+    val xs = 6.dp
+    // Tailwind: space-y-1.5, gap-1.5, px-1.5, mb-1.5
+    // Use: label ↔ value, helper text, compact form rows
+
+    val sm = 8.dp
+    // Tailwind: space-y-2, gap-2, p-2, m-2
+    // Use: small padding, list item spacing, compact cards
+
 
     // ───────────────
-    // Content spacing
+    // Content spacing (standard UI rhythm)
     // ───────────────
-    val smPlus = 10.dp   // space-y-2.5
-    val md = 12.dp       // space-y-3, gap-3, mb-3
-    val lg = 16.dp       // p-4, mb-4, my-4
-    val xl = 20.dp       // space-y-5, mb-5
-    val xxl = 24.dp      // p-6, mb-6, pb-6
+
+    val smPlus = 10.dp
+    // Tailwind: space-y-2.5, gap-2.5, mb-2.5
+    // Use: text blocks, form rows, subtle separation
+
+    val md = 12.dp
+    // Tailwind: space-y-3, gap-3, p-3, mb-3
+    // Use: card content spacing, form sections
+
+    val lg = 16.dp
+    // Tailwind: space-y-4, gap-4, p-4, m-4
+    // Use: card padding, list sections, default content spacing
+
+    val xl = 20.dp
+    // Tailwind: space-y-5, gap-5, p-5, mb-5
+    // Use: major content blocks, card ↔ card spacing
+
+    val xxl = 24.dp
+    // Tailwind: space-y-6, gap-6, p-6, mb-6
+    // Use: large cards, modal content, screen padding (compact)
+
 
     // ───────────────
-    // Section spacing
+    // Section spacing (layout / hierarchy)
     // ───────────────
-    val section = 32.dp  // mb-8, pb-8
+
+    val section = 32.dp
+    // Tailwind: space-y-8, gap-8, mb-8, pb-8
+    // Use: section ↔ section, screen content separation
+
 
     // ───────────────
-    // Screen / system
+    // Screen / system spacing
     // ───────────────
-    val bottomBarSpace = 128.dp // pb-32 (fixed bottom CTA)
+
+    val bottomBarSpace = 128.dp
+    // Tailwind: pb-32
+    // Use: fixed bottom CTA, avoid content overlap with bottom bar
 }
+

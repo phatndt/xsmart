@@ -1,5 +1,8 @@
 package my.xsmart.feature.salarycalculator.di
 
+import my.xsmart.feature.salarycalculator.domain.usecase.GetSalaryConfigUseCase
+import my.xsmart.feature.salarycalculator.domain.usecase.SaveSalaryConfigUseCase
+import my.xsmart.feature.salarycalculator.ui.config.SalaryConfigViewModel
 import my.xsmart.feature.salarycalculator.ui.input.InputSalaryViewModel
 import my.xsmart.feature.salarycalculator.ui.result.ResultViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -11,5 +14,17 @@ val salaryCalculatorModule = module {
     }
     viewModel {
         ResultViewModel( get())
+    }
+    viewModel {
+        SalaryConfigViewModel(
+            get(),
+            get(),
+        )
+    }
+    single {
+        GetSalaryConfigUseCase()
+    }
+    single {
+        SaveSalaryConfigUseCase()
     }
 }

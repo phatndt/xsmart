@@ -25,8 +25,6 @@ import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorRoute
 import my.xsmart.feature.salarycalculator.SalaryCalculatorActivity
-import my.xsmart.feature.salarycalculator.SalaryRoutes
-import my.xsmart.feature.salarycalculator.salaryCalculatorNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +104,6 @@ fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
                 navController.navigate(Destinations.BmiCalculator.route)
             }
         }
-        salaryCalculatorNavigation(navController)
     }
 }
 

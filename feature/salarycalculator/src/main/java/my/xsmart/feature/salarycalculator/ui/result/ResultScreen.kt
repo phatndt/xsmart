@@ -716,25 +716,25 @@ fun ResultScreenPreview() {
                     taxBrackets = listOf(
                         TaxBracketModel(
                             percent = 5,
-                            range = "0 - 5.000.000",
+                            min = BigDecimal(0), max = BigDecimal(5000000),
                             amount = KmmBigDecimal("250000"),
                             isActive = true
                         ),
                         TaxBracketModel(
                             percent = 10,
-                            range = "5.000.000 - 10.000.000",
+                            min = BigDecimal(0), max = BigDecimal(5000000),
                             amount = KmmBigDecimal("500000"),
                             isActive = true
                         ),
                         TaxBracketModel(
                             percent = 15,
-                            range = "10.000.000 - 18.000.000",
+                            min = BigDecimal(0), max = BigDecimal(5000000),
                             amount = KmmBigDecimal("335000"),
                             isActive = true
                         ),
                         TaxBracketModel(
                             percent = 20,
-                            range = "18.000.000 - 32.000.000",
+                            min = BigDecimal(0), max = BigDecimal(5000000),
                             amount = KmmBigDecimal("0"),
                             isActive = false
                         ),
