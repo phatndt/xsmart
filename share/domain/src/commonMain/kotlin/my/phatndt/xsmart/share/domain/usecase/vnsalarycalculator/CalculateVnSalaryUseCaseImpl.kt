@@ -15,7 +15,7 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.SalaryCalculatorRequest
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxBracket
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
-import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorConfig
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 

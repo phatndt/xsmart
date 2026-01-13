@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -43,7 +42,7 @@ import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.component.DeductionInput
 import my.xsmart.feature.salarycalculator.component.TaxBracketTable
 import my.xsmart.feature.salarycalculator.ui.config.data.ConfigConstants
-import my.xsmart.feature.salarycalculator.ui.config.model.ConfigMode
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMode
 import my.xsmart.feature.salarycalculator.ui.config.state.SalaryConfigUiEffect
 import my.xsmart.feature.salarycalculator.ui.config.state.SalaryConfigUiIntent
 import my.xsmart.feature.salarycalculator.ui.config.state.SalaryConfigUiState
@@ -93,9 +92,9 @@ fun SalaryConfigScreen(
 ) {
     val configModes = remember {
         listOf(
-            ConfigMode.BEFORE_2026,
-            ConfigMode.AFTER_2026,
-            ConfigMode.CUSTOM,
+            VnSalaryConfigMode.BEFORE_2026,
+            VnSalaryConfigMode.AFTER_2026,
+            VnSalaryConfigMode.CUSTOM,
         )
     }
 
@@ -138,7 +137,7 @@ fun SalaryConfigScreen(
             )
         },
     ) { paddingValues ->
-        if (uiState.isLoading && uiState.currentConfig == null) {
+        if (uiState.isLoading && uiState.currentConfigModel == null) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -196,7 +195,7 @@ fun SalaryConfigScreen(
                 Spacer(modifier = Modifier.padding(top = Spacing.large))
 
                 // Deduction Inputs
-                uiState.currentConfig?.let { config ->
+                uiState.currentConfigModel?.let { config ->
 
                     Text(
                         text = stringResource(R.string.title_deductions),
@@ -212,7 +211,7 @@ fun SalaryConfigScreen(
 
                     DeductionInput(
                         label = stringResource(R.string.label_personal_deduction),
-                        value = uiState.personalDeduction,
+                        value = config.config.personalDeduction.toString(),
                         onChange = { newValue ->
                             onAction(SalaryConfigUiIntent.UpdatePersonalDeduction(newValue))
                         },
@@ -226,7 +225,7 @@ fun SalaryConfigScreen(
 
                     DeductionInput(
                         label = stringResource(R.string.label_dependent_deduction),
-                        value = uiState.dependentDeduction,
+                        value = config.config.dependentDeduction.toString(),
                         onChange = { newValue ->
                             onAction(SalaryConfigUiIntent.UpdateDependentDeduction(newValue))
                         },
@@ -252,10 +251,10 @@ fun SalaryConfigScreen(
 }
 
 @Composable
-private fun getConfigModeLabel(mode: ConfigMode): String = when (mode) {
-    ConfigMode.BEFORE_2026 -> stringResource(R.string.tab_before_2026)
-    ConfigMode.AFTER_2026 -> stringResource(R.string.tab_after_2026)
-    ConfigMode.CUSTOM -> stringResource(R.string.tab_custom)
+private fun getConfigModeLabel(mode: VnSalaryConfigMode): String = when (mode) {
+    VnSalaryConfigMode.BEFORE_2026 -> stringResource(R.string.tab_before_2026)
+    VnSalaryConfigMode.AFTER_2026 -> stringResource(R.string.tab_after_2026)
+    VnSalaryConfigMode.CUSTOM -> stringResource(R.string.tab_custom)
 }
 
 @Preview(showSystemUi = true)
@@ -264,10 +263,8 @@ fun SalaryConfigScreenPreview() {
     SalaryCalculatorTheme {
         SalaryConfigScreen(
             uiState = SalaryConfigUiState(
-                currentMode = ConfigMode.BEFORE_2026,
-                currentConfig = ConfigConstants.CONFIGS[ConfigMode.BEFORE_2026],
-                personalDeduction = "11_000_000L",
-                dependentDeduction = "4_400_000L",
+                currentMode = VnSalaryConfigMode.BEFORE_2026,
+                currentConfigModel = ConfigConstants.configsModel[VnSalaryConfigMode.BEFORE_2026],
                 isLoading = false,
             ),
             onAction = {},

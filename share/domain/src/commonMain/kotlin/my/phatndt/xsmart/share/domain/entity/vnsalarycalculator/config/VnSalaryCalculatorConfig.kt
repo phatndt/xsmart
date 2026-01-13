@@ -1,24 +1,26 @@
-package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator
+package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config
 
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxBracket
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConstant
 
 data class VnSalaryCalculatorConfig(
     // Employee insurance rates
-    val socialInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.SOCIAL_INSURANCE_RATE,
-    val healthInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.HEALTH_INSURANCE_RATE,
-    val unemploymentInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.UNEMPLOYMENT_INSURANCE_RATE,
+    override val socialInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.SOCIAL_INSURANCE_RATE,
+    override val healthInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.HEALTH_INSURANCE_RATE,
+    override val unemploymentInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.UNEMPLOYMENT_INSURANCE_RATE,
 
     // Employer insurance rates
-    val employerSocialInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_SOCIAL_INSURANCE_RATE,
-    val employerHealthInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_HEALTH_INSURANCE_RATE,
-    val employerUnemploymentInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_UNEMPLOYMENT_INSURANCE_RATE,
+    override val employerSocialInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_SOCIAL_INSURANCE_RATE,
+    override val employerHealthInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_HEALTH_INSURANCE_RATE,
+    override val employerUnemploymentInsuranceRate: KmmBigDecimal = VnSalaryCalculatorConstant.EMPLOYER_UNEMPLOYMENT_INSURANCE_RATE,
 
     // Tax deductions
-    val personalDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.PERSONAL_DEDUCTION, // Deduction for the employee
-    val dependentDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.DEPENDENT_DEDUCTION, // Deduction per dependent
+    override val personalDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.PERSONAL_DEDUCTION,
+    override val dependentDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.DEPENDENT_DEDUCTION,
 
     // Tax brackets (Progressive Tax Rates)
-    val taxBrackets: List<TaxBracket> = listOf(
+    override val taxBrackets: List<TaxBracket> = listOf(
         TaxBracket(
             VnSalaryCalculatorConstant.BRACKET_1_LOWER,
             VnSalaryCalculatorConstant.BRACKET_1_UPPER,
@@ -55,4 +57,4 @@ data class VnSalaryCalculatorConfig(
             VnSalaryCalculatorConstant.RATE_7,
         ),
     ),
-)
+): VietnamSalaryConfig

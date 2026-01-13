@@ -1,4 +1,4 @@
-package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator
+package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config
 
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 

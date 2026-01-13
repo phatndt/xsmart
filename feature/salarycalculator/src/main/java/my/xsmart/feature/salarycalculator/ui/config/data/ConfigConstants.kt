@@ -1,54 +1,87 @@
 package my.xsmart.feature.salarycalculator.ui.config.data
 
-import my.xsmart.feature.salarycalculator.ui.config.model.ConfigMode
-import my.xsmart.feature.salarycalculator.ui.config.model.SalaryConfig
+import my.phatndt.xsmart.share.common.amount.AmountFormatter
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.CustomSalaryCalculatorConfig
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig2026
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMap
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMode
+import my.xsmart.feature.salarycalculator.ui.config.model.SalaryConfigModel
 import my.xsmart.feature.salarycalculator.ui.config.model.TaxBracket
 import my.xsmart.feature.salarycalculator.ui.config.model.TaxBracketColorTheme
 import java.math.BigDecimal
 
 object ConfigConstants {
-    val BRACKETS_BEFORE_2026 = listOf(
-        TaxBracket(id = 1, label = "Up to 5M", rate = 5, colorTheme = TaxBracketColorTheme.GREEN),
-        TaxBracket(id = 2, label = "5M to 10M", rate = 10, colorTheme = TaxBracketColorTheme.BLUE),
-        TaxBracket(id = 3, label = "10M to 18M", rate = 15, colorTheme = TaxBracketColorTheme.INDIGO),
-        TaxBracket(id = 4, label = "18M to 32M", rate = 20, colorTheme = TaxBracketColorTheme.PURPLE),
-        TaxBracket(id = 5, label = "32M to 52M", rate = 25, colorTheme = TaxBracketColorTheme.PINK),
-        TaxBracket(id = 6, label = "52M to 80M", rate = 30, colorTheme = TaxBracketColorTheme.ORANGE),
-        TaxBracket(id = 7, label = "Over 80M", rate = 35, colorTheme = TaxBracketColorTheme.RED),
-    )
 
-    val BRACKETS_AFTER_2026 = listOf(
-        TaxBracket(id = 1, label = "Up to 10M", rate = 5, colorTheme = TaxBracketColorTheme.GREEN),
-        TaxBracket(id = 2, label = "10M to 30M", rate = 10, colorTheme = TaxBracketColorTheme.BLUE),
-        TaxBracket(id = 3, label = "30M to 60M", rate = 15, colorTheme = TaxBracketColorTheme.INDIGO),
-        TaxBracket(id = 4, label = "60M to 100M", rate = 20, colorTheme = TaxBracketColorTheme.PURPLE),
-        TaxBracket(id = 5, label = "Over 100M", rate = 25, colorTheme = TaxBracketColorTheme.PINK),
-    )
+    val BRACKETS_BEFORE_2026 = VnSalaryConfigMap.oldConfig.taxBrackets.mapIndexed { index, bracket ->
+        TaxBracket(
+            id = index + 1,
+            label = genTaxBracketLabel(
+                bracket.upperBound,
+                bracket.lowerBound,
+            ),
+            rate = (bracket.rate * 100).toInt(),
+            colorTheme = rateToColor(bracket.rate),
+        )
+    }
 
-    val CONFIGS = mapOf(
-        ConfigMode.BEFORE_2026 to SalaryConfig(
-            personalDeduction = BigDecimal(11_000_000L),
-            dependentDeduction = BigDecimal(4_400_000L),
-            brackets = BRACKETS_BEFORE_2026,
-            description = "Current Regulation (Before 2026)",
-            isEditable = false,
-            official = true,
-        ),
-        ConfigMode.AFTER_2026 to SalaryConfig(
-            personalDeduction = BigDecimal(11_000_000L),
-            dependentDeduction = BigDecimal(4_400_000L),
-            brackets = BRACKETS_AFTER_2026,
-            description = "New Regulation (After 2026)",
-            isEditable = false,
-            official = true,
-        ),
-        ConfigMode.CUSTOM to SalaryConfig(
-            personalDeduction = BigDecimal(11_000_000L),
-            dependentDeduction = BigDecimal(4_400_000L),
-            brackets = BRACKETS_AFTER_2026,
-            description = "Custom Configuration",
-            isEditable = true,
-            official = false,
-        ),
-    )
+    val BRACKETS_AFTER_2026 = VnSalaryConfigMap.newConfig.taxBrackets.mapIndexed { index, bracket ->
+        TaxBracket(
+            id = index + 1,
+            label = genTaxBracketLabel(
+                bracket.upperBound,
+                bracket.lowerBound,
+            ),
+            rate = (bracket.rate * 100).toInt(),
+            colorTheme = rateToColor(bracket.rate),
+        )
+    }
+
+    val configsModel = VnSalaryConfigMap.configs.mapValues { (key, value) ->
+        SalaryConfigModel(
+            config = value,
+            personalDeduction = value.personalDeduction.toString(),
+            dependentDeduction = value.dependentDeduction.toString(),
+            brackets = when (key) {
+                VnSalaryConfigMode.BEFORE_2026 -> BRACKETS_BEFORE_2026
+                VnSalaryConfigMode.AFTER_2026 -> BRACKETS_AFTER_2026
+                VnSalaryConfigMode.CUSTOM -> BRACKETS_AFTER_2026
+            },
+            description = when (key) {
+                VnSalaryConfigMode.BEFORE_2026 -> "Current Regulation (Before 2026)"
+                VnSalaryConfigMode.AFTER_2026 -> "New Regulation (After 2026)"
+                VnSalaryConfigMode.CUSTOM -> "Custom Configuration"
+            },
+            isEditable = when (key) {
+                VnSalaryConfigMode.BEFORE_2026 -> false
+                VnSalaryConfigMode.AFTER_2026 -> false
+                VnSalaryConfigMode.CUSTOM -> true
+            },
+            official = when (key) {
+                VnSalaryConfigMode.BEFORE_2026 -> true
+                VnSalaryConfigMode.AFTER_2026 -> true
+                VnSalaryConfigMode.CUSTOM -> false
+            },
+        )
+    }
+
+    fun rateToColor(rate: Double): TaxBracketColorTheme = when {
+        rate <= 0.05 -> TaxBracketColorTheme.GREEN
+        rate <= 0.10 -> TaxBracketColorTheme.BLUE
+        rate <= 0.15 -> TaxBracketColorTheme.INDIGO
+        rate <= 0.20 -> TaxBracketColorTheme.PURPLE
+        rate <= 0.25 -> TaxBracketColorTheme.PINK
+        rate <= 0.30 -> TaxBracketColorTheme.ORANGE
+        else -> TaxBracketColorTheme.RED
+    }
+
+    private fun genTaxBracketLabel(
+        lowerBound: BigDecimal?,
+        upperBound: BigDecimal?,
+    ): String = when {
+        lowerBound == null && upperBound == null -> ""
+        lowerBound == null -> "Over ${AmountFormatter.toCompactFormat(upperBound)}"
+        upperBound == null -> "Up to ${AmountFormatter.toCompactFormat(lowerBound)}"
+        else -> "${AmountFormatter.toCompactFormat(upperBound)} - ${AmountFormatter.toCompactFormat(lowerBound)}"
+    }
 }

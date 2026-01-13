@@ -2,6 +2,7 @@ package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator
 
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.common.amount.plus
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
 
 data class VnSalaryCalculatorEntity(
     val grossSalary: KmmBigDecimal,

@@ -12,4 +12,8 @@ actual object AmountFormatter {
     actual fun parseAmount(value: String?): KmmBigDecimal? {
         return KmmBigDecimal(value.orEmpty())
     }
+
+    actual fun toCompactFormat(value: KmmBigDecimal?): String {
+        TODO("Not yet implemented")
+    }
 }

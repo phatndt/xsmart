@@ -36,10 +36,6 @@ fun DeductionInput(
     disabled: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    var textValue by rememberSaveable(key=value) {
-        mutableStateOf(value)
-    }
-
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = label,
@@ -50,9 +46,8 @@ fun DeductionInput(
         Spacer(modifier = Modifier.height( MaterialTheme.spacing.xs))
 
         XSmartTextField(
-            value = textValue,
+            value = value,
             onValueChange = { newValue ->
-                textValue = newValue
                 onChange(newValue)
             },
             placeholder = {

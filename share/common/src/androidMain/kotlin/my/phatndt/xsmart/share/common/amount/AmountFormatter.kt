@@ -1,6 +1,5 @@
 package my.phatndt.xsmart.share.common.amount
 
-import android.icu.math.BigDecimal
 import android.icu.number.NumberFormatter
 import android.icu.number.Precision
 import android.icu.text.DecimalFormat
@@ -8,6 +7,9 @@ import android.icu.text.DecimalFormatSymbols
 import android.icu.text.NumberFormat
 import android.icu.util.ULocale
 import my.phatndt.xsmart.utils.AndroidUtils
+import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.text.compareTo
 
 actual object AmountFormatter {
     private val locale: ULocale = ULocale.US
@@ -71,9 +73,38 @@ actual object AmountFormatter {
 
         return if (numberFormat is DecimalFormat) {
             numberFormat.isParseBigDecimal = true
-            (numberFormat.parse(trimValue) as? BigDecimal)?.toBigDecimal()
+            (numberFormat.parse(trimValue) as? BigDecimal)
         } else {
             null
         }
     }
+
+    actual fun toCompactFormat(value: KmmBigDecimal?): String {
+        value ?: return ""
+
+        val suffixes = arrayOf("", "K", "M", "B", "T", "P", "E")
+
+        if (value.compareTo(BigDecimal.ZERO) == 0) return "0"
+
+        val absValue = value.abs()
+
+        val thousand = BigDecimal("1000")
+        var base = 0
+        var divisor = BigDecimal.ONE
+
+        while (absValue >= divisor.multiply(thousand) && base < suffixes.lastIndex) {
+            divisor = divisor.multiply(thousand)
+            base++
+        }
+
+        if (base == 0) {
+            return value.setScale(0, RoundingMode.HALF_UP).toPlainString()
+        }
+
+        val scaled = value.divide(divisor, 1, RoundingMode.HALF_UP)
+            .stripTrailingZeros()
+
+        return scaled.toPlainString() + suffixes[base]
+    }
+
 }
