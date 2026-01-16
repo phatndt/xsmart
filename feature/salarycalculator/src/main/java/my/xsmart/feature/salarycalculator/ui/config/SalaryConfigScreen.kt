@@ -70,6 +70,7 @@ fun SalaryConfigRoute(
                 }
 
                 SalaryConfigUiEffect.NavigateBack -> onBack()
+                SalaryConfigUiEffect.ShowSaveConfigFail -> snackBarState.showSnackbar("Configuration saved failed")
             }
         }
     }
@@ -211,7 +212,7 @@ fun SalaryConfigScreen(
 
                     DeductionInput(
                         label = stringResource(R.string.label_personal_deduction),
-                        value = config.config.personalDeduction.toString(),
+                        value = config.personalDeduction,
                         onChange = { newValue ->
                             onAction(SalaryConfigUiIntent.UpdatePersonalDeduction(newValue))
                         },
@@ -225,7 +226,7 @@ fun SalaryConfigScreen(
 
                     DeductionInput(
                         label = stringResource(R.string.label_dependent_deduction),
-                        value = config.config.dependentDeduction.toString(),
+                        value = config.dependentDeduction,
                         onChange = { newValue ->
                             onAction(SalaryConfigUiIntent.UpdateDependentDeduction(newValue))
                         },

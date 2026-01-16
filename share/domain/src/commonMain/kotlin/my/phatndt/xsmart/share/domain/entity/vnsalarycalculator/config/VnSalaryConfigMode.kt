@@ -4,4 +4,7 @@ enum class VnSalaryConfigMode {
     BEFORE_2026,
     AFTER_2026,
     CUSTOM,
+    ;
+
+    fun isCustomMode() = this == CUSTOM
 }

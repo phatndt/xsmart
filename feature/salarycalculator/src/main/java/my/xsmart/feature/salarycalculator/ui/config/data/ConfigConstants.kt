@@ -37,7 +37,7 @@ object ConfigConstants {
         )
     }
 
-    val configsModel = VnSalaryConfigMap.configs.mapValues { (key, value) ->
+    var configsModel = VnSalaryConfigMap.configs.mapValues { (key, value) ->
         SalaryConfigModel(
             config = value,
             personalDeduction = value.personalDeduction.toString(),
@@ -84,4 +84,35 @@ object ConfigConstants {
         upperBound == null -> "Up to ${AmountFormatter.toCompactFormat(lowerBound)}"
         else -> "${AmountFormatter.toCompactFormat(upperBound)} - ${AmountFormatter.toCompactFormat(lowerBound)}"
     }
+
+    fun txt() {
+        var configsModel = VnSalaryConfigMap.configs.mapValues { (key, value) ->
+            SalaryConfigModel(
+                config = value,
+                personalDeduction = value.personalDeduction.toString(),
+                dependentDeduction = value.dependentDeduction.toString(),
+                brackets = when (key) {
+                    VnSalaryConfigMode.BEFORE_2026 -> BRACKETS_BEFORE_2026
+                    VnSalaryConfigMode.AFTER_2026 -> BRACKETS_AFTER_2026
+                    VnSalaryConfigMode.CUSTOM -> BRACKETS_AFTER_2026
+                },
+                description = when (key) {
+                    VnSalaryConfigMode.BEFORE_2026 -> "Current Regulation (Before 2026)"
+                    VnSalaryConfigMode.AFTER_2026 -> "New Regulation (After 2026)"
+                    VnSalaryConfigMode.CUSTOM -> "Custom Configuration"
+                },
+                isEditable = when (key) {
+                    VnSalaryConfigMode.BEFORE_2026 -> false
+                    VnSalaryConfigMode.AFTER_2026 -> false
+                    VnSalaryConfigMode.CUSTOM -> true
+                },
+                official = when (key) {
+                    VnSalaryConfigMode.BEFORE_2026 -> true
+                    VnSalaryConfigMode.AFTER_2026 -> true
+                    VnSalaryConfigMode.CUSTOM -> false
+                },
+            )
+        }
+    }
+
 }
