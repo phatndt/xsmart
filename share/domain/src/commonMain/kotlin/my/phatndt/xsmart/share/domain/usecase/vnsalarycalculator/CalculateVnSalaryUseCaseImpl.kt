@@ -18,24 +18,19 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VietnamSalaryConfig
 
 class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
     override fun invoke(request: SalaryCalculatorRequest): Flow<DataResult<VnSalaryCalculatorEntity>> = flow {
         emit(
-            DataResult.Success(
-                calculateNetSalary(
-                    request,
-                    VnSalaryCalculatorConfig(),
-                ),
-            ),
+            DataResult.Success(calculateNetSalary(request)),
         )
     }
 
-    private fun calculateNetSalary(
-        request: SalaryCalculatorRequest,
-        config: VnSalaryCalculatorConfig,
-    ): VnSalaryCalculatorEntity {
+    private fun calculateNetSalary(request: SalaryCalculatorRequest): VnSalaryCalculatorEntity {
         val grossSalary = request.salary
+        val config = request.config
+
         // Insurance
         val insurance = VnSalaryCalculatorInsuranceEntity(
             socialInsurance = request.insuranceSalary * config.socialInsuranceRate,

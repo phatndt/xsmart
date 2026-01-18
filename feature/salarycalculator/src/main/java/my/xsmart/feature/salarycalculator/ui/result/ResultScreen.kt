@@ -52,6 +52,7 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMap
 import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.component.DetailedCalculation
 import my.xsmart.feature.salarycalculator.component.InsuranceDetailRow
@@ -169,40 +170,44 @@ fun ResultScreen(
         ) {
             NetSalaryCard(calculationData = calculationData)
             Spacer(modifier = Modifier.height(Spacing.large))
-            SalaryBreakdownSection(uiState.salaryBreakdownItems.map {
-                when (it.type) {
-                    BreakdownSegmentType.NET_SALARY -> {
-                        SalaryBreakdownUiState(
-                            title = DeferredText.Resource(R.string.label_net_salary),
-                            percent = it.percentage,
-                            color = MaterialTheme.colorScheme.primary,
-                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount)),
-                        )
+            SalaryBreakdownSection(
+                uiState.salaryBreakdownItems.map {
+                    when (it.type) {
+                        BreakdownSegmentType.NET_SALARY -> {
+                            SalaryBreakdownUiState(
+                                title = DeferredText.Resource(R.string.label_net_salary),
+                                percent = it.percentage,
+                                color = MaterialTheme.colorScheme.primary,
+                                amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount)),
+                            )
+                        }
+
+                        BreakdownSegmentType.INSURANCE -> {
+                            SalaryBreakdownUiState(
+                                title = DeferredText.Resource(R.string.label_insurance),
+                                percent = it.percentage,
+                                color = MaterialTheme.colorScheme.secondary,
+                                amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
+                            )
+                        }
+
+                        BreakdownSegmentType.TAX -> {
+                            SalaryBreakdownUiState(
+                                title = DeferredText.Resource(R.string.label_income_tax),
+                                percent = it.percentage,
+                                color = MaterialTheme.colorScheme.tertiary,
+                                amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
+                            )
+                        }
                     }
-                    BreakdownSegmentType.INSURANCE -> {
-                        SalaryBreakdownUiState(
-                            title = DeferredText.Resource(R.string.label_insurance),
-                            percent = it.percentage,
-                            color = MaterialTheme.colorScheme.secondary,
-                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
-                        )
-                    }
-                    BreakdownSegmentType.TAX -> {
-                        SalaryBreakdownUiState(
-                            title = DeferredText.Resource(R.string.label_income_tax),
-                            percent = it.percentage,
-                            color = MaterialTheme.colorScheme.tertiary,
-                            amount = DeferredText.Constant(AmountFormatter.toDisplayAmount(it.amount))
-                        )
-                    }
-                }
-            }, onAction = onAction)
+                },
+                onAction = onAction,
+            )
             Spacer(modifier = Modifier.height(Spacing.large))
             DetailedCalculation(
                 uiState.detailedCalculationUiState,
                 modifier = Modifier.paddingHorizontalLarge(),
             )
-//            DetailedCalculationSection(calculationData = calculationData)
             Spacer(modifier = Modifier.height(Spacing.large))
             UsdEquivalent(netSalary = calculationData.netSalary.toDisplayDouble())
         }
@@ -331,254 +336,6 @@ fun SalaryBreakdownSection(
 }
 
 @Composable
-fun DetailedCalculationSection(calculationData: VnSalaryCalculatorEntity) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .paddingHorizontalLarge()
-            .background(
-                color = MaterialTheme.colorScheme.surface,
-                shape = MaterialTheme.shapes.extraLarge,
-            )
-            .padding(Spacing.xLarge),
-    ) {
-        Text(
-            text = stringResource(R.string.title_detailed_calculation),
-            style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Gross Salary
-        TextTitleValueRow(
-            title = stringResource(R.string.label_gross_salary),
-            value = AmountFormatter.toDisplayAmount(calculationData.grossSalary),
-            percent = 0.5f,
-            titleAttribute = SalaryBreakdownItemDefault.titleAttribute(
-                style = MaterialTheme.typography.titleMedium,
-            ),
-            valueAttribute =  SalaryBreakdownItemDefault.valueAttribute(
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleLarge,
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-        )
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Insurance breakdown
-        Column(
-            modifier = Modifier
-                .drawLeftBorder(
-                    MaterialTheme.colorScheme.secondary,
-                    2.dp,
-                )
-                .padding(
-                    start = Spacing.large,
-                    top = Spacing.small,
-                    bottom = Spacing.small,
-                ),
-            verticalArrangement = Arrangement.spacedBy(Spacing.medium),
-        ) {
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_social_insurance),
-                percentage = "8%",
-                amount = AmountFormatter.toDisplayAmount(calculationData.insurance.socialInsurance),
-            )
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_health_insurance),
-                percentage = "1.5%",
-                amount = AmountFormatter.toDisplayAmount(calculationData.insurance.healthInsurance),
-            )
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_unemployment_insurance),
-                percentage = "1%",
-                amount = AmountFormatter.toDisplayAmount(calculationData.insurance.unemploymentInsurance),
-            )
-        }
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Before Tax Income
-        TextTitleValueRow(
-            title = stringResource(R.string.label_before_tax_income),
-            value = AmountFormatter.toDisplayAmount(calculationData.taxInfo.beforeTaxIncome),
-            percent = 0.5f,
-            titleAttribute = SalaryBreakdownItemDefault.titleAttribute(
-                style = MaterialTheme.typography.titleMedium,
-            ),
-            valueAttribute =  SalaryBreakdownItemDefault.valueAttribute(
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleLarge,
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-        )
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-        HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Deductions
-        Column(
-            modifier = Modifier
-                .drawLeftBorder(
-                    Indigo500,
-                    2.dp,
-                )
-                .padding(
-                    start = Spacing.large,
-                    top = Spacing.small,
-                    bottom = Spacing.small,
-                ),
-            verticalArrangement = Arrangement.spacedBy(Spacing.medium),
-
-            ) {
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_personal_deduction),
-                amount = AmountFormatter.toDisplayAmount(calculationData.deduction.personal),
-            )
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_dependent_deduction),
-                amount = AmountFormatter.toDisplayAmount(calculationData.deduction.dependent),
-            )
-            InsuranceDetailRow(
-                label = stringResource(R.string.label_allowances_exempt),
-                amount = AmountFormatter.toDisplayAmount("0"),
-            )
-        }
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Tax Calculation Card
-        TaxCalculationCard(calculationData = calculationData)
-
-        Spacer(modifier = Modifier.height(Spacing.large))
-        HorizontalDivider(color = MaterialTheme.colorScheme.outline)
-        Spacer(modifier = Modifier.height(Spacing.large))
-
-        // Final Net Salary
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text = stringResource(R.string.label_net_salary),
-                style = MaterialTheme.typography.titleMedium,
-                color = Primary,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                text = "${formatCurrency(calculationData.netSalary.toDisplayDouble())} VND",
-                style = MaterialTheme.typography.titleLarge,
-                color = Primary,
-                fontWeight = FontWeight.Bold,
-            )
-        }
-    }
-}
-
-@Composable
-fun DetailRow(
-    label: String,
-    amount: Double,
-    isBold: Boolean = false,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = if (isBold) FontWeight.Bold else FontWeight.SemiBold,
-        )
-        Text(
-            text = formatCurrency(abs(amount)),
-            style = if (isBold) MaterialTheme.typography.titleMedium else MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-        )
-    }
-}
-
-@Composable
-fun TaxCalculationCard(calculationData: VnSalaryCalculatorEntity) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
-                shape = MaterialTheme.shapes.large,
-            )
-            .padding(Spacing.large),
-    ) {
-        // Header
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                text = stringResource(R.string.label_personal_income_tax),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-            )
-            TextButton(onClick = { /* TODO */ }) {
-                Text(
-                    text = stringResource(R.string.label_tax_structure),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(Spacing.medium))
-
-        // Taxable Income
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text = stringResource(R.string.label_taxable_income),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Text(
-                text = formatCurrency(calculationData.taxInfo.taxableIncome.toDisplayDouble()),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Bold,
-            )
-        }
-
-        Spacer(modifier = Modifier.height(Spacing.medium))
-        HorizontalDivider(color = MaterialTheme.colorScheme.outline)
-        Spacer(modifier = Modifier.height(Spacing.medium))
-
-        // Total Tax
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            Text(
-                text = stringResource(R.string.label_tax_amount),
-                style = MaterialTheme.typography.bodyMedium,
-                color = Rose600,
-                fontWeight = FontWeight.SemiBold,
-            )
-            Text(
-                text = "-${formatCurrency(calculationData.taxInfo.totalTax.toDisplayDouble())}",
-                style = MaterialTheme.typography.titleMedium,
-                color = Rose600,
-                fontWeight = FontWeight.Bold,
-            )
-        }
-    }
-}
-
-@Composable
 fun BottomActionButtons(onAction: (ResultUiIntent) -> Unit) {
     Row(
         modifier = Modifier
@@ -673,7 +430,8 @@ fun ResultScreenPreview() {
                     ),
                     calculatorMode = CalculatorMode.GROSS_TO_NET,
                     allowance = KmmBigDecimal("0"),
-                ),
+                    config = VnSalaryConfigMap.newConfig,
+                    ),
                 salaryBreakdownItems = listOf(
                     BreakdownSegment(
                         type = BreakdownSegmentType.NET_SALARY,
@@ -712,6 +470,7 @@ fun ResultScreenPreview() {
                         ),
                         calculatorMode = CalculatorMode.GROSS_TO_NET,
                         allowance = KmmBigDecimal("0"),
+                        config = VnSalaryConfigMap.newConfig,
                     ),
                     taxBrackets = listOf(
                         TaxBracketModel(

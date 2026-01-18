@@ -33,7 +33,9 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMap
 import my.xsmart.feature.salarycalculator.R
+import my.xsmart.feature.salarycalculator.ui.config.data.ConfigConstants
 import my.xsmart.feature.salarycalculator.ui.input.ui.*
 import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
@@ -165,7 +167,7 @@ fun DetailedCalculation(
                 )
                 DeductionRow(
                     label = stringResource(R.string.label_allowances_exempt),
-                    amount = "0",
+                    amount = AmountFormatter.toDisplayAmount(uiState.data.allowance),
                     isExempt = true
                 )
             }
@@ -377,7 +379,10 @@ fun TaxBlock(
                                 modifier = Modifier.width(40.dp)
                             )
                             Text(
-                                text = bracket.min.toString(),
+                                text = ConfigConstants.genTaxBracketLabel(
+                                    bracket.min,
+                                    bracket.max,
+                                ),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -479,6 +484,7 @@ fun DetailedCalculationPreview() {
                         ),
                         calculatorMode = CalculatorMode.GROSS_TO_NET,
                         allowance = KmmBigDecimal("0"),
+                        config = VnSalaryConfigMap.newConfig,
                     ),
                     taxBrackets = listOf(
                         TaxBracketModel(5, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("250000"), true),

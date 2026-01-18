@@ -1,6 +1,8 @@
 package my.xsmart.feature.salarycalculator.ui.input
 
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
@@ -12,6 +14,7 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.SalaryCalculator
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.CalculateVnSalaryUseCase
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.SaveCalculateVnSalaryResultUseCase
+import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.api.GetVnSalaryConfigUseCase
 import my.xsmart.feature.salarycalculator.ui.input.model.InsuranceType
 import my.xsmart.feature.salarycalculator.ui.input.state.InputSalaryUiEffect
 import my.xsmart.feature.salarycalculator.ui.input.state.InputSalaryUiIntent
@@ -22,6 +25,7 @@ import java.math.BigDecimal
 class InputSalaryViewModel(
     private val calculateVnSalaryUseCase: CalculateVnSalaryUseCase,
     private val saveCalculateVnSalaryResultUseCase: SaveCalculateVnSalaryResultUseCase,
+    private val getVnSalaryConfigUseCaseImpl: GetVnSalaryConfigUseCase,
 ) : BaseViewModel<InputSalaryUiState, InputSalaryUiIntent, InputSalaryUiEffect>() {
     override fun createInitialState(): InputSalaryUiState = InputSalaryUiState()
 
@@ -67,12 +71,31 @@ class InputSalaryViewModel(
         val numberOfDependents = uiState.value.numberOfDependents
         val insurance = calculateInsuranceAmount()
         val area = uiState.value.area
+        val allowances = AmountFormatter.parseAmount(uiState.value.allowance) ?: BigDecimal.ZERO
+        val allowanceType = uiState.value.allowanceType
         val mode = uiState.value.calculatorMode
 
-        if (income == null || insurance == null || numberOfDependents == null) return
+        if (income == null || insurance == null) return
 
         viewModelScope.launch {
-            performSalaryCalculation(income, insurance, area, numberOfDependents, mode)
+            val config = getVnSalaryConfigUseCaseImpl()
+                .firstOrNull()
+                ?.getOrNull() ?: return@launch
+
+            val request = SalaryCalculatorRequest(
+                salary = income,
+                insuranceSalary = insurance,
+                area = area,
+                dependents = numberOfDependents,
+                allowances = allowances,
+                allowanceType = allowanceType,
+                calculatorMode = CalculatorMode.GROSS_TO_NET,
+                config = config,
+            )
+
+            calculateVnSalaryUseCase(request = request).collect { result ->
+                handleCalculationResult(result)
+            }
         }
     }
 
@@ -81,29 +104,6 @@ class InputSalaryViewModel(
             AmountFormatter.parseAmount(uiState.value.income)
         } else {
             AmountFormatter.parseAmount(uiState.value.insuranceSalary)
-        }
-    }
-
-    private suspend fun performSalaryCalculation(
-        income: KmmBigDecimal,
-        insurance: KmmBigDecimal,
-        area: Area,
-        numberOfDependents: Int,
-        mode: CalculatorMode,
-    ) {
-        calculateVnSalaryUseCase(
-            request = SalaryCalculatorRequest(
-                salary = income,
-                insuranceSalary = insurance,
-                area = area,
-                dependents = numberOfDependents,
-                allowances = BigDecimal.ZERO,
-                allowanceType = AllowanceType.SEPARATED,
-                calculatorMode = CalculatorMode.GROSS_TO_NET,
-            )
-        ).collect { result ->
-
-            handleCalculationResult(result)
         }
     }
 

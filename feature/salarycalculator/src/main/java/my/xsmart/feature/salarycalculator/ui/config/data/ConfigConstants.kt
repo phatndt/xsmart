@@ -75,7 +75,7 @@ object ConfigConstants {
         else -> TaxBracketColorTheme.RED
     }
 
-    private fun genTaxBracketLabel(
+    fun genTaxBracketLabel(
         lowerBound: BigDecimal?,
         upperBound: BigDecimal?,
     ): String = when {

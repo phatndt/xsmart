@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import my.phatndt.xsmart.share.common.amount.ZERO
 import my.phatndt.xsmart.share.common.flowx.collectFold
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCase
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegment
 import my.xsmart.feature.salarycalculator.ui.result.model.BreakdownSegmentType
@@ -13,6 +14,10 @@ import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiIntent
 import my.xsmart.feature.salarycalculator.ui.result.state.ResultUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
 import my.xsmart.share.android.base.BaseViewModel
+import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.math.floor
+import kotlin.math.roundToInt
 
 class ResultViewModel(
     private val getCalculateVnSalaryResultUseCase: GetCalculateVnSalaryResultUseCase,
@@ -73,23 +78,7 @@ class ResultViewModel(
                     setUiState {
                         copy(
                             calculationData = salary,
-                            salaryBreakdownItems = listOf(
-                                BreakdownSegment(
-                                    type = BreakdownSegmentType.NET_SALARY,
-                                    percentage = (salary.netSalary / salary.grossSalary).toDouble() * 100,
-                                    amount = salary.netSalary,
-                                ),
-                                BreakdownSegment(
-                                    type = BreakdownSegmentType.INSURANCE,
-                                    percentage = (salary.insurance.totalInsurance / salary.grossSalary).toDouble() * 100,
-                                    amount = salary.insurance.totalInsurance,
-                                ),
-                                BreakdownSegment(
-                                    type = BreakdownSegmentType.TAX,
-                                    percentage = (salary.taxInfo.totalTax / salary.grossSalary).toDouble() * 100,
-                                    amount = salary.taxInfo.totalTax,
-                                ),
-                            ),
+                            salaryBreakdownItems = createSalaryBreakdownItems(salary),
                             detailedCalculationUiState = DetailedCalculationUiState(
                                 data = salary,
                                 taxBrackets = salary.taxInfo.taxBrackets.map { bracket ->
@@ -112,19 +101,67 @@ class ResultViewModel(
         }
     }
 
-    private fun normalizeToPercentages(data: List<Double>): List<Double> {
-        // 1. Calculate the sum of all values in the list
-        val sum = data.sum()
+    private fun createSalaryBreakdownItems(salary: VnSalaryCalculatorEntity): List<BreakdownSegment> {
+        if (salary.grossSalary.signum() == 0) return emptyList()
 
-        // 2. Check if the sum is zero to prevent division by zero
-        if (sum == 0.0) {
-            // Return a list of zeros if the sum is zero
-            return List(data.size) { 0.0 }
+        val hundred = BigDecimal("100")
+
+        val netPercent = salary.netSalary
+            .divide(salary.grossSalary, 10, RoundingMode.HALF_UP)
+            .multiply(hundred)
+            .setScale(0, RoundingMode.HALF_UP)
+            .toDouble()
+
+        val insurancePercent = minOf(
+            salary.insurance.totalInsurance
+                .divide(salary.grossSalary, 10, RoundingMode.HALF_UP)
+                .multiply(hundred)
+                .setScale(0, RoundingMode.HALF_UP)
+                .toDouble(),
+            100 - netPercent,
+        )
+
+        val taxPercentBd = minOf(
+            salary.taxInfo.totalTax
+                .divide(salary.grossSalary, 10, RoundingMode.HALF_UP)
+                .multiply(hundred)
+                .setScale(0, RoundingMode.HALF_UP)
+                .toDouble(),
+            100 - netPercent - insurancePercent,
+        )
+
+        val breakdownSegments: MutableList<BreakdownSegment> = mutableListOf()
+
+        if (netPercent > 0.0) {
+            breakdownSegments.add(
+                BreakdownSegment(
+                    type = BreakdownSegmentType.NET_SALARY,
+                    percentage = netPercent,
+                    amount = salary.netSalary,
+                )
+            )
         }
 
-        // 3. Normalize each value: divide by the sum and multiply by 100
-        return data.map { value ->
-            (value / sum) * 100
+        if (insurancePercent > 0.0) {
+            breakdownSegments.add(
+                BreakdownSegment(
+                    type = BreakdownSegmentType.INSURANCE,
+                    percentage = insurancePercent,
+                    amount = salary.insurance.totalInsurance,
+                )
+            )
         }
+
+        if (taxPercentBd > 0.0) {
+            breakdownSegments.add(
+                BreakdownSegment(
+                    type = BreakdownSegmentType.TAX,
+                    percentage = taxPercentBd,
+                    amount = salary.taxInfo.totalTax,
+                )
+            )
+        }
+
+        return breakdownSegments
     }
 }

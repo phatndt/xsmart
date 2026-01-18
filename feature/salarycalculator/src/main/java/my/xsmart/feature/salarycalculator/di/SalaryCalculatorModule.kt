@@ -8,7 +8,11 @@ import org.koin.dsl.module
 
 val salaryCalculatorModule = module {
     viewModel {
-        InputSalaryViewModel(get(), get())
+        InputSalaryViewModel(
+            get(),
+            get(),
+            get(),
+        )
     }
     viewModel {
         ResultViewModel( get())

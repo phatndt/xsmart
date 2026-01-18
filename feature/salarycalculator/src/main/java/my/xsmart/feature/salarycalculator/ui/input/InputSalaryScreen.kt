@@ -128,34 +128,6 @@ fun InputSalaryScreen(
     onBack: () -> Unit = {},
     onChangeConfig: () -> Unit = {},
 ) {
-    // <editor-fold desc="Insurance">
-    val insuranceTypes = remember {
-        InsuranceType.entries.toList()
-    }
-
-    val areaTypes = remember {
-        Area.entries.map { area ->
-            AreaModel(
-                text = when (area) {
-                    Area.I -> "Region I - Urban areas (Hanoi, HCMC, etc.)"
-                    Area.II -> "Region II - Provincial cities"
-                    Area.III -> "Region III - Other cities & districts"
-                    Area.IV -> "Region IV - Rural areas"
-                },
-                area = area,
-            )
-        }
-    }
-
-    val selectedArea = remember(uiState.area) {
-        areaTypes.find { it.area == uiState.area }
-    }
-
-    var expanded by remember { mutableStateOf(false) }
-    // </editor-fold>
-
-    val localFocusManager = LocalFocusManager.current
-
     Scaffold(
         modifier = Modifier.imePadding(),
         topBar = {
@@ -447,10 +419,6 @@ fun InsurancePaymentOn(
     otherInsuranceAmount: String,
     onAction: (InputSalaryUiIntent) -> Unit,
 ) {
-    val isInsuranceFull = selectedInsurance == InsuranceType.FULL
-
-    val focusRequester = remember { FocusRequester() }
-
     Text(
         stringResource(R.string.label_insurance_payment_on),
         style = MaterialTheme.typography.titleLarge,
@@ -486,8 +454,7 @@ fun InsurancePaymentOn(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = Spacing.large)
-                        .focusRequester(focusRequester),
+                        .padding(top = Spacing.large),
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Decimal,
@@ -499,9 +466,6 @@ fun InsurancePaymentOn(
                         unfocusedContainerColor = MaterialTheme.colorScheme.background,
                     ),
                 )
-                SideEffect {
-                    focusRequester.requestFocus()
-                }
             }
         }
     }
