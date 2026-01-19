@@ -12,7 +12,7 @@ data class VnSalaryCalculatorEntity(
     val deduction: DeductionEntity,
     val taxInfo: TaxInfoEntity,
     val calculatorMode: CalculatorMode,
-    val allowance: KmmBigDecimal,
+    val allowance: AllowanceEntity,
     val dependents: Int = 0,
     val config: VietnamSalaryConfig,
 )
@@ -21,6 +21,7 @@ data class VnSalaryCalculatorInsuranceEntity(
     val socialInsurance: KmmBigDecimal,
     val healthInsurance: KmmBigDecimal,
     val unemploymentInsurance: KmmBigDecimal,
+
 ) {
     val totalInsurance: KmmBigDecimal
         get() = socialInsurance + healthInsurance + unemploymentInsurance
@@ -39,4 +40,9 @@ data class TaxInfoEntity(
     val taxableIncome: KmmBigDecimal,
     val totalTax: KmmBigDecimal,
     val taxBrackets: List<Pair<KmmBigDecimal, TaxBracket>>,
+)
+
+data class AllowanceEntity(
+    val allowance: KmmBigDecimal,
+    val allowanceType: AllowanceType,
 )

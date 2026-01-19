@@ -3,6 +3,7 @@ package my.xsmart.feature.salarycalculator.ui.result
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import my.phatndt.xsmart.share.common.amount.ZERO
+import my.phatndt.xsmart.share.common.amount.toPercentStringFromRatio
 import my.phatndt.xsmart.share.common.flowx.collectFold
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
 import my.phatndt.xsmart.share.domain.usecase.vnsalarycalculator.GetCalculateVnSalaryResultUseCase
@@ -87,9 +88,12 @@ class ResultViewModel(
                                         min = bracket.second.lowerBound,
                                         max = bracket.second.upperBound,
                                         amount = bracket.first,
-                                        isActive = bracket.first != ZERO
+                                        isActive = bracket.first != ZERO,
                                     )
                                 },
+                                socialInsuranceRate = salary.config.socialInsuranceRate.toPercentStringFromRatio(),
+                                healthInsuranceRate = salary.config.healthInsuranceRate.toPercentStringFromRatio(),
+                                unemploymentInsuranceRate = salary.config.unemploymentInsuranceRate.toPercentStringFromRatio(),
                             ),
                         )
                     }

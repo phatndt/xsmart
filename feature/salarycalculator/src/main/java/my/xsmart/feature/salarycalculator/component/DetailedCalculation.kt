@@ -28,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
@@ -35,7 +37,7 @@ import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculat
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorInsuranceEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMap
 import my.xsmart.feature.salarycalculator.R
-import my.xsmart.feature.salarycalculator.ui.config.data.ConfigConstants
+import my.xsmart.feature.salarycalculator.ui.config.data.genTaxBracketLabelComposable
 import my.xsmart.feature.salarycalculator.ui.input.ui.*
 import my.xsmart.feature.salarycalculator.ui.result.state.DetailedCalculationUiState
 import my.xsmart.feature.salarycalculator.ui.result.state.TaxBracketModel
@@ -53,7 +55,6 @@ fun DetailedCalculation(
     uiState.data ?: return
     val data = uiState.data
     val fmt = { value: KmmBigDecimal -> AmountFormatter.toDisplayAmount(value) }
-    val fmtMoney = { value: KmmBigDecimal -> "${AmountFormatter.toDisplayAmount(value)} VND" }
 
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -107,17 +108,17 @@ fun DetailedCalculation(
             ) {
                 InsuranceRow(
                     label = stringResource(R.string.label_social_insurance),
-                    percent = "8%",
+                    percent = stringResource(R.string.label_insurance_social_percent),
                     amount = "-${fmt(data.insurance.socialInsurance)}"
                 )
                 InsuranceRow(
                     label = stringResource(R.string.label_health_insurance),
-                    percent = "1.5%",
+                    percent = stringResource(R.string.label_insurance_health_percent),
                     amount = "-${fmt(data.insurance.healthInsurance)}"
                 )
                 InsuranceRow(
                     label = stringResource(R.string.label_unemployment_insurance),
-                    percent = "1%",
+                    percent = stringResource(R.string.label_insurance_unemployment_percent),
                     amount = "-${fmt(data.insurance.unemploymentInsurance)}"
                 )
             }
@@ -167,7 +168,7 @@ fun DetailedCalculation(
                 )
                 DeductionRow(
                     label = stringResource(R.string.label_allowances_exempt),
-                    amount = AmountFormatter.toDisplayAmount(uiState.data.allowance),
+                    amount = AmountFormatter.toDisplayAmount(uiState.data.allowance.allowance),
                     isExempt = true
                 )
             }
@@ -197,7 +198,7 @@ fun DetailedCalculation(
                     color = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    text = fmtMoney(data.netSalary),
+                    text = stringResource(R.string.format_amount_vnd, fmt(data.netSalary)),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary
                 )
@@ -379,7 +380,7 @@ fun TaxBlock(
                                 modifier = Modifier.width(40.dp)
                             )
                             Text(
-                                text = ConfigConstants.genTaxBracketLabel(
+                                text = genTaxBracketLabelComposable(
                                     bracket.min,
                                     bracket.max,
                                 ),
@@ -483,7 +484,10 @@ fun DetailedCalculationPreview() {
                             dependent = KmmBigDecimal("0"),
                         ),
                         calculatorMode = CalculatorMode.GROSS_TO_NET,
-                        allowance = KmmBigDecimal("0"),
+                        allowance = AllowanceEntity(
+                            allowance = KmmBigDecimal("0"),
+                            allowanceType = AllowanceType.INCLUDED,
+                        ),
                         config = VnSalaryConfigMap.newConfig,
                     ),
                     taxBrackets = listOf(

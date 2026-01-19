@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_unit_converter">Chuyển đổi đơn vị</string>
+    <string name="app_name">XSmart</string>
+    <string name="full">Toàn bộ</string>
+    <string name="other">Khác</string>
+    <string name="vn_salary_gross_salary">Lương gross</string>
+    <string name="vn_salary_area_i">I</string>
+    <string name="vn_salary_area_iI">II</string>
+    <string name="vn_salary_area_iii">III</string>
+    <string name="vn_salary_area_iv">IV</string>
+    <string name="vn_salary_area_title">Vùng</string>
+    <string name="vn_salary_area_description">Chọn vùng làm việc (ảnh hưởng đến lương tối thiểu)</string>
+    <string name="vn_salary_btn_text_gross_to_net">Gross sang Net</string>
+    <string name="vn_salary_insurance_title">Lương bảo hiểm</string>
+    <string name="vn_salary_number_of_dependents_placeholder">Số người phụ thuộc</string>
+    <string name="vn_salary_number_of_dependents_placeholder_description">Số người phụ thuộc đã đăng ký để giảm trừ thuế</string>
+    <string name="vn_salary_placeholder_income">Thu nhập</string>
+    <string name="vn_salary_title_screen">Tính lương Việt Nam</string>
+    <string name="vn_salary_error_can_not_calculate_salary">Không thể tính lương, vui lòng thử lại sau!</string>
+    <string name="feature_name_vietnam_salary_calculator">Tính Lương Việt Nam</string>
+    <string name="feature_name_bmi_calculator">Tính BMI</string>
+
+    <!-- App Bar -->
+    <string name="title_salary_calculator">Tính Lương</string>
+
+    <!-- Calculation Mode (Segmented Control) -->
+    <string name="label_calc_mode_gross_to_net">Gross → Net</string>
+    <string name="label_calc_mode_net_to_gross">Net → Gross</string>
+
+    <!-- Main Salary Section -->
+    <string name="title_monthly_gross_salary">Lương Gross Hàng Tháng</string>
+    <string name="label_currency_vnd_symbol">₫</string>
+    <string name="label_currency_vnd">VND</string>
+    <string name="placeholder_salary_amount">vd. 30,000,000</string>
+    <string name="helper_salary_input">Nhập tổng thu nhập hàng tháng trước thuế.</string>
+
+    <!-- Tax Exempt Income -->
+    <string name="title_tax_exempt_income">Thu Nhập Miễn Thuế</string>
+    <string name="label_lunch_allowance">Phụ Cấp Ăn Trưa</string>
+    <string name="placeholder_lunch_allowance">vd. 1,000,000</string>
+    <string name="label_other_allowance">Khác (Điện thoại, Xe, Trang phục)</string>
+    <string name="placeholder_other_allowance">0</string>
+
+    <!-- Personal & Family -->
+    <string name="title_personal_family">Cá Nhân &amp; Gia Đình</string>
+    <string name="label_dependents">Người phụ thuộc</string>
+    <string name="helper_dependents">Giảm trừ gia cảnh (4.4 triệu VND/người)</string>
+
+    <!-- Insurance Settings -->
+    <string name="title_insurance_settings">Cài Đặt Bảo Hiểm</string>
+    <string name="helper_insurance_settings_info">Xác định mức lương tối thiểu vùng</string>
+
+    <!-- Region / Minimum Wage -->
+    <string name="label_region_minimum_wage">Vùng (Lương Tối Thiểu)</string>
+    <string name="label_region_i">I</string>
+    <string name="label_region_ii">II</string>
+    <string name="label_region_iii">III</string>
+    <string name="label_region_iv">IV</string>
+
+    <!-- Insurance Payment Base -->
+    <string name="label_insurance_payment_on">Đóng Bảo Hiểm Dựa Trên</string>
+    <string name="title_insurance_full_salary">Toàn bộ lương</string>
+    <string name="helper_insurance_full_salary">Tính dựa trên lương gross thực tế</string>
+    <string name="title_insurance_contract_salary">Lương hợp đồng</string>
+    <string name="helper_insurance_contract_salary">Số tiền tùy chỉnh cho BHXH</string>
+
+    <!-- Allowances -->
+    <string name="title_allowances">Phụ Cấp</string>
+    <string name="label_allowances_include_salary">Bao gồm trong lương</string>
+    <string name="title_allowances_separate_salary">Tách biệt với lương</string>
+
+    <!-- Action Button -->
+    <string name="button_cta_calculate_net_salary">Tính Lương Net</string>
+
+    <!-- Result Screen -->
+    <string name="title_calculation_result">Kết Quả Tính Toán</string>
+    <string name="label_your_net_salary">Lương Net Của Bạn</string>
+    <string name="label_monthly_income">Thu Nhập Hàng Tháng</string>
+    <string name="button_view_chart">Xem Biểu Đồ</string>
+    
+    <!-- Salary Breakdown Section -->
+    <string name="title_salary_breakdown">Phân Tích Lương</string>
+    <string name="label_net_salary">Lương Net</string>
+    <string name="label_insurance">Bảo Hiểm</string>
+    <string name="label_income_tax">Thuế Thu Nhập</string>
+
+    <!-- Detailed Calculation Section -->
+    <string name="title_detailed_calculation">Tính Toán Chi Tiết</string>
+    <string name="label_gross_salary">Lương Gross</string>
+    <string name="label_social_insurance">Bảo Hiểm Xã Hội</string>
+    <string name="label_health_insurance">Bảo Hiểm Y Tế</string>
+    <string name="label_unemployment_insurance">Bảo Hiểm Thất Nghiệp</string>
+    <string name="label_before_tax_income">Thu Nhập Trước Thuế</string>
+    <string name="label_personal_deduction">Giảm Trừ Bản Thân</string>
+    <string name="label_dependent_deduction">Giảm Trừ Người Phụ Thuộc</string>
+    <string name="label_allowances_exempt">Phụ Cấp (Miễn Thuế)</string>
+    <string name="label_personal_income_tax">Thuế Thu Nhập Cá Nhân</string>
+    <string name="label_taxable_income">Thu Nhập Chịu Thuế</string>
+    <string name="label_tax_structure">Biểu thuế</string>
+    <string name="label_tax_amount">Số Thuế Phải Nộp</string>
+
+    <!-- Tax Brackets -->
+    <string name="label_tax_bracket_5">5%</string>
+    <string name="label_tax_bracket_10">10%</string>
+    <string name="label_tax_bracket_15">15%</string>
+    <string name="label_tax_bracket_20">20%</string>
+    <string name="label_tax_bracket_25">25%</string>
+    <string name="label_tax_range_up_to_10m">Đến 10 triệu</string>
+    <string name="label_tax_range_10_to_30m">10 đến 30 triệu</string>
+    <string name="label_tax_range_30_to_60m">30 đến 60 triệu</string>
+    <string name="label_tax_range_60_to_100m">60 đến 100 triệu</string>
+    <string name="label_tax_range_over_100m">Trên 100 triệu</string>
+
+    <!-- Bottom Actions -->
+    <string name="button_recalculate">Tính Lại</string>
+    <string name="button_share_pdf">Chia Sẻ PDF</string>
+
+    <!-- Currency Conversion -->
+    <string name="label_usd_equivalent">≈ %1$s USD</string>
+
+    <!-- Salary Configuration Screen -->
+    <string name="title_salary_config">Cấu Hình Lương</string>
+    <string name="tab_before_2026">Trước 2026</string>
+    <string name="tab_after_2026">Sau 2026</string>
+    <string name="tab_custom">Tùy chỉnh</string>
+    <string name="title_deductions">Giảm Trừ</string>
+    <string name="title_progressive_tax_scale">Biểu Thuế Lũy Tiến</string>
+    <string name="action_reset_default">Đặt Lại Mặc Định</string>
+    <string name="label_level">Bậc</string>
+    <string name="label_rate">Tỷ lệ</string>
+    <string name="helper_tap_rows_to_edit">Nhấn vào hàng để chỉnh sửa (Mock)</string>
+    <string name="helper_editing_disabled">Chỉnh sửa bị vô hiệu hóa ở Chế Độ Tiêu Chuẩn</string>
+    <string name="action_save_config">Lưu Cấu Hình</string>
+    <string name="icon_account_balance">account_balance</string>
+    <string name="icon_people">people</string>
+    <string name="icon_edit">edit</string>
+    <string name="icon_lock">lock</string>
+
+    <!-- Insurance and Tax Percentages -->
+    <string name="label_insurance_social_percent">8%</string>
+    <string name="label_insurance_health_percent">1.5%</string>
+    <string name="label_insurance_unemployment_percent">1%</string>
+
+    <!-- Currency Format -->
+    <string name="format_amount_vnd">%1$s VND</string>
+
+    <!-- Config Mode Descriptions -->
+    <string name="config_desc_before_2026">Quy Định Hiện Tại (Trước 2026)</string>
+    <string name="config_desc_after_2026">Quy Định Mới (Sau 2026)</string>
+    <string name="config_desc_custom">Cấu Hình Tùy Chỉnh</string>
+
+    <!-- Tax Bracket Labels -->
+    <string name="label_tax_bracket_over">Trên %1$s</string>
+    <string name="label_tax_bracket_up_to">Đến %1$s</string>
+    <string name="label_tax_bracket_range">%1$s - %2$s</string>
+</resources>

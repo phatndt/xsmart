@@ -9,6 +9,7 @@ import my.phatndt.xsmart.share.common.amount.plus
 import my.phatndt.xsmart.share.common.amount.times
 import my.phatndt.xsmart.share.common.amount.toKmmBigDecimal
 import my.phatndt.xsmart.share.common.dataresult.DataResult
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
@@ -28,7 +29,11 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
     }
 
     private fun calculateNetSalary(request: SalaryCalculatorRequest): VnSalaryCalculatorEntity {
-        val grossSalary = request.salary
+        val grossSalary = request.salary + if (request.allowanceType == AllowanceType.SEPARATED) {
+            request.allowances
+        } else {
+            ZERO
+        }
         val config = request.config
 
         // Insurance
@@ -45,13 +50,9 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         )
 
         // Tax
-        val beforeTaxIncome = grossSalary - insurance.totalInsurance
-        val allowanceTax = if (request.allowanceType == AllowanceType.INCLUDED) {
-            request.allowances
-        } else {
-            ZERO
-        }
-        val taxableIncome = beforeTaxIncome - deduction.totalDeduction - allowanceTax
+        val beforeTaxIncome = grossSalary - insurance.totalInsurance  - request.allowances
+
+        val taxableIncome = maxOf(beforeTaxIncome - deduction.totalDeduction, ZERO)
         val taxBrackets = calculateTax(taxableIncome, config.taxBrackets)
         val taxInfo = TaxInfoEntity(
             beforeTaxIncome = beforeTaxIncome,
@@ -62,6 +63,11 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
 
         // Net salary
         val netSalary = grossSalary - insurance.totalInsurance - taxBrackets.first
+        // Allowance
+        val allowance = AllowanceEntity(
+            allowance = request.allowances,
+            allowanceType = request.allowanceType,
+        )
 
         return VnSalaryCalculatorEntity(
             grossSalary = grossSalary,
@@ -70,7 +76,7 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
             deduction = deduction,
             taxInfo = taxInfo,
             calculatorMode = CalculatorMode.GROSS_TO_NET,
-            allowance = request.allowances,
+            allowance = allowance,
             dependents = request.dependents,
             config = config,
         )
@@ -80,6 +86,7 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         taxableIncome: KmmBigDecimal,
         taxBrackets: List<TaxBracket>,
     ): Pair<KmmBigDecimal, List<Pair<KmmBigDecimal, TaxBracket>>> {
+        if (taxableIncome == ZERO) return ZERO to emptyList()
         var remainingAmount = taxableIncome
         var totalTax = ZERO
         val breakdowns = mutableListOf<Pair<KmmBigDecimal, TaxBracket>>()

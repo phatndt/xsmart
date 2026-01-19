@@ -25,6 +25,9 @@ data class SalaryBreakdownUiState(
 data class DetailedCalculationUiState(
     val data: VnSalaryCalculatorEntity? = null,
     val taxBrackets: List<TaxBracketModel> = emptyList(),
+    val socialInsuranceRate: String = "",
+    val healthInsuranceRate: String = "",
+    val unemploymentInsuranceRate: String = "",
 )
 
 data class TaxBracketModel(

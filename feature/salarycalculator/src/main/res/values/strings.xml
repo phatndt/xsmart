@@ -136,4 +136,22 @@
     <string name="icon_people">people</string>
     <string name="icon_edit">edit</string>
     <string name="icon_lock">lock</string>
+
+    <!-- Insurance and Tax Percentages -->
+    <string name="label_insurance_social_percent">8%</string>
+    <string name="label_insurance_health_percent">1.5%</string>
+    <string name="label_insurance_unemployment_percent">1%</string>
+
+    <!-- Currency Format -->
+    <string name="format_amount_vnd">%1$s VND</string>
+
+    <!-- Config Mode Descriptions -->
+    <string name="config_desc_before_2026">Current Regulation (Before 2026)</string>
+    <string name="config_desc_after_2026">New Regulation (After 2026)</string>
+    <string name="config_desc_custom">Custom Configuration</string>
+
+    <!-- Tax Bracket Labels -->
+    <string name="label_tax_bracket_over">Over %1$s</string>
+    <string name="label_tax_bracket_up_to">Up to %1$s</string>
+    <string name="label_tax_bracket_range">%1$s - %2$s</string>
 </resources>

@@ -1,11 +1,14 @@
 package my.xsmart.feature.salarycalculator.ui.config.data
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.CustomSalaryCalculatorConfig
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig2026
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMap
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryConfigMode
+import my.xsmart.feature.salarycalculator.R
 import my.xsmart.feature.salarycalculator.ui.config.model.SalaryConfigModel
 import my.xsmart.feature.salarycalculator.ui.config.model.TaxBracket
 import my.xsmart.feature.salarycalculator.ui.config.model.TaxBracketColorTheme
@@ -116,3 +119,32 @@ object ConfigConstants {
     }
 
 }
+
+/**
+ * Composable version of genTaxBracketLabel that uses string resources
+ */
+@Composable
+fun genTaxBracketLabelComposable(
+    lowerBound: BigDecimal?,
+    upperBound: BigDecimal?,
+): String = when {
+    lowerBound == null && upperBound == null -> ""
+    lowerBound == null -> stringResource(R.string.label_tax_bracket_over, AmountFormatter.toCompactFormat(upperBound))
+    upperBound == null -> stringResource(R.string.label_tax_bracket_up_to, AmountFormatter.toCompactFormat(lowerBound))
+    else -> stringResource(
+        R.string.label_tax_bracket_range,
+        AmountFormatter.toCompactFormat(upperBound),
+        AmountFormatter.toCompactFormat(lowerBound)
+    )
+}
+
+/**
+ * Get config mode description using string resources
+ */
+@Composable
+fun getConfigModeDescription(mode: VnSalaryConfigMode): String = when (mode) {
+    VnSalaryConfigMode.BEFORE_2026 -> stringResource(R.string.config_desc_before_2026)
+    VnSalaryConfigMode.AFTER_2026 -> stringResource(R.string.config_desc_after_2026)
+    VnSalaryConfigMode.CUSTOM -> stringResource(R.string.config_desc_custom)
+}
+

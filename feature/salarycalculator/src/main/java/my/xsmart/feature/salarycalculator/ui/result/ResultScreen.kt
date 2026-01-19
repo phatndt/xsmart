@@ -47,6 +47,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.common.deferred.DeferredText
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceEntity
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.DeductionEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxInfoEntity
@@ -97,7 +99,6 @@ fun ResultRoute(
     LaunchedEffect(uiState.value.isLoading) {
         viewModel.loadData()
     }
-
 
     LaunchedEffect(key1 = UUID.randomUUID()) {
         viewModel.effect.collect { effect ->
@@ -241,7 +242,7 @@ fun NetSalaryCard(calculationData: VnSalaryCalculatorEntity) {
                 verticalAlignment = Alignment.Bottom,
             ) {
                 Text(
-                    text = formatCurrency(calculationData.netSalary.toDisplayDouble()),
+                    text = formatCurrency(calculationData.netSalary),
                     style = MaterialTheme.typography.displayLarge,
                     color = Primary,
                     fontWeight = FontWeight.ExtraBold,
@@ -400,8 +401,8 @@ fun UsdEquivalent(netSalary: Double) {
     }
 }
 
-private fun formatCurrency(amount: Double): String {
-    return NumberFormat.getNumberInstance(Locale.US).format(amount.toLong())
+private fun formatCurrency(amount: BigDecimal): String {
+    return AmountFormatter.toDisplayAmount(amount)
 }
 
 @Preview(showSystemUi = true)
@@ -429,7 +430,10 @@ fun ResultScreenPreview() {
                         dependent = KmmBigDecimal("0"),
                     ),
                     calculatorMode = CalculatorMode.GROSS_TO_NET,
-                    allowance = KmmBigDecimal("0"),
+                    allowance = AllowanceEntity(
+                        allowance = KmmBigDecimal("0"),
+                        allowanceType = AllowanceType.INCLUDED,
+                    ),
                     config = VnSalaryConfigMap.newConfig,
                     ),
                 salaryBreakdownItems = listOf(
@@ -469,7 +473,10 @@ fun ResultScreenPreview() {
                             dependent = KmmBigDecimal("0"),
                         ),
                         calculatorMode = CalculatorMode.GROSS_TO_NET,
-                        allowance = KmmBigDecimal("0"),
+                        allowance = AllowanceEntity(
+                            allowance = KmmBigDecimal("0"),
+                            allowanceType = AllowanceType.INCLUDED,
+                        ),
                         config = VnSalaryConfigMap.newConfig,
                     ),
                     taxBrackets = listOf(
