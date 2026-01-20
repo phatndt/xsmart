@@ -26,6 +26,18 @@ object VnSalaryCalculatorConstant {
     val PERSONAL_DEDUCTION: KmmBigDecimal = KmmBigDecimal(11_000_000.0)
     val DEPENDENT_DEDUCTION: KmmBigDecimal = KmmBigDecimal(4_400_000.0)
 
+    // Base salary
+    val BASE_SALARY: KmmBigDecimal = KmmBigDecimal(2_340_000.0)
+
+    // Regional Minimum Wage
+    val REGION_I: KmmBigDecimal = KmmBigDecimal(4_960_000.0)
+
+    val REGION_II: KmmBigDecimal = KmmBigDecimal(4_410_000.0)
+
+    val REGION_III: KmmBigDecimal = KmmBigDecimal(3_860_000.0)
+
+    val REGION_IV: KmmBigDecimal = KmmBigDecimal(3_450_000.0)
+
     // Lower bounds for tax brackets
     val BRACKET_1_LOWER: KmmBigDecimal = KmmBigDecimal(0.0)
     val BRACKET_2_LOWER: KmmBigDecimal = KmmBigDecimal(5_000_000.0)

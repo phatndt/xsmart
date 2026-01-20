@@ -17,6 +17,18 @@ object VnSalaryCalculatorConstant2026 {
     val PERSONAL_DEDUCTION: KmmBigDecimal = KmmBigDecimal(15_500_000.0) // 15.5M/month
     val DEPENDENT_DEDUCTION: KmmBigDecimal = KmmBigDecimal(6_200_000.0) // 6.2M/month
 
+    // Base salary (Assuming same as 2025 for now unless specified otherwise, but reusing 2025 value might be safer or defining new if changed. User didn't specify base salary change for 2026, only min wage. I will use 2.34M as per general knowledge until updated)
+    val BASE_SALARY: KmmBigDecimal = KmmBigDecimal(2_340_000.0)
+
+    // Regional Minimum Wage (Post-2025 values provided by user)
+    val REGION_I: KmmBigDecimal = KmmBigDecimal(5_310_000.0)
+
+    val REGION_II: KmmBigDecimal = KmmBigDecimal(4_730_000.0)
+
+    val REGION_III: KmmBigDecimal = KmmBigDecimal(4_140_000.0)
+
+    val REGION_IV: KmmBigDecimal = KmmBigDecimal(3_700_000.0)
+
     // Lower bounds for 2026 tax brackets
     val BRACKET_1_LOWER: KmmBigDecimal = KmmBigDecimal(0.0)
     val BRACKET_2_LOWER: KmmBigDecimal = KmmBigDecimal(10_000_000.0)  // >10M

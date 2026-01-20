@@ -37,10 +37,17 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         val config = request.config
 
         // Insurance
+        // Insurance logic
+        val socialHealthCap = config.baseSalary * KmmBigDecimal(20.0)
+        val unemploymentCap = (config.regionalMinimumWage[request.area] ?: ZERO) * KmmBigDecimal(20.0)
+
+        val socialHealthSalary = minOf(request.insuranceSalary, socialHealthCap)
+        val unemploymentSalary = minOf(request.insuranceSalary, unemploymentCap)
+
         val insurance = VnSalaryCalculatorInsuranceEntity(
-            socialInsurance = request.insuranceSalary * config.socialInsuranceRate,
-            healthInsurance = request.insuranceSalary * config.healthInsuranceRate,
-            unemploymentInsurance = request.insuranceSalary * config.unemploymentInsuranceRate,
+            socialInsurance = socialHealthSalary * config.socialInsuranceRate,
+            healthInsurance = socialHealthSalary * config.healthInsuranceRate,
+            unemploymentInsurance = unemploymentSalary * config.unemploymentInsuranceRate,
         )
 
         // Deduction

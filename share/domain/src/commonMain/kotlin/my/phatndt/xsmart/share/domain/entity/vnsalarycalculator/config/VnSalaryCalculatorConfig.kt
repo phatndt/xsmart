@@ -1,6 +1,7 @@
 package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config
 
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.TaxBracket
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConstant
 
@@ -18,6 +19,15 @@ data class VnSalaryCalculatorConfig(
     // Tax deductions
     override val personalDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.PERSONAL_DEDUCTION,
     override val dependentDeduction: KmmBigDecimal = VnSalaryCalculatorConstant.DEPENDENT_DEDUCTION,
+    
+    // Base salary & Regional Minimum Wage
+    override val baseSalary: KmmBigDecimal = VnSalaryCalculatorConstant.BASE_SALARY,
+    override val regionalMinimumWage: Map<Area, KmmBigDecimal> = mapOf(
+        Area.I to VnSalaryCalculatorConstant.REGION_I,
+        Area.II to VnSalaryCalculatorConstant.REGION_II,
+        Area.III to VnSalaryCalculatorConstant.REGION_III,
+        Area.IV to VnSalaryCalculatorConstant.REGION_IV,
+    ),
 
     // Tax brackets (Progressive Tax Rates)
     override val taxBrackets: List<TaxBracket> = listOf(
