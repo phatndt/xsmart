@@ -24,3 +24,8 @@ include(":share:data")
 include(":share:domain")
 include(":share:common")
 include(":share:di")
+include(":share:android")
+include(":share:ui")
+
+include(":feature")
+include(":feature:salarycalculator")

@@ -1,7 +1,7 @@
 package my.phatndt.xsmart.android.features.vnsalarycalculator.main.state
 
-import my.phatndt.xsmart.android.core.base.UiSideEffects
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.VnSalaryCalculatorEntity
+import my.xsmart.share.android.base.UiSideEffects
 
 sealed interface VnSalaryCalculatorUiEffect : UiSideEffects {
     data object ShowDialogCanNotCalculateSalary : VnSalaryCalculatorUiEffect

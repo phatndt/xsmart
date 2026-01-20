@@ -13,11 +13,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,10 +31,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import my.phatndt.xsmart.android.core.ui.theme.BmiCalculatorColor
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTextStyles
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
-import my.phatndt.xsmart.android.core.ui.widget.XSmartButton
+import my.xsmart.share.ui.theme.BmiCalculatorColor
+import my.xsmart.share.ui.theme.XSmartTextStyles
+import my.xsmart.share.ui.theme.XSmartTheme
+import my.xsmart.share.ui.widget.XSmartButton
 import my.phatndt.xsmart.android.core.utils.getDateTimeFromString
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiUIState
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.viewmodel.BmiViewModel
@@ -66,7 +67,6 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
             ).safeDrawingPadding(),
     ) {
         Card(
-            elevation = 4.dp,
             shape = RoundedCornerShape(8.dp),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -111,7 +111,6 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
         }
         AnimatedVisibility(visible = visible) {
             Card(
-                elevation = 4.dp,
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -155,7 +154,7 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
             LazyColumn {
                 items(count = state.bmi.size) {
                     Card(
-                        elevation = 1.dp,
+                        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 1.dp),
                         shape = RoundedCornerShape(4.dp),
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
@@ -193,8 +192,8 @@ fun BmiCalculatorHomeScreen(state: BmiUIState, onNavigateToBmiCalculatorScreen: 
         XSmartButton(
             onClick = onNavigateToBmiCalculatorScreen,
             content = "Calculate BMI now!",
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = BmiCalculatorColor,
+            colors = ButtonDefaults.buttonColors().copy(
+                containerColor = BmiCalculatorColor,
                 contentColor = Color.White,
             ),
         )
@@ -238,7 +237,7 @@ fun setBmiLevel(value: Double): BmiLevel {
 fun BmiCalculatorHomeScreenPreview() {
     XSmartTheme() {
         BmiCalculatorHomeScreen(BmiUIState(bmi = listOf(
-            my.phatndt.xsmart.share.domain.entity.bmi.BmiEntity(
+            BmiEntity(
                 1,
                 17.24,
                 "1683340656634"

@@ -1,9 +1,9 @@
 package my.phatndt.xsmart.android.features.vnsalarycalculator.main.state
 
-import my.phatndt.xsmart.android.core.base.UiState
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.model.InsuranceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.Area
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
+import my.xsmart.share.android.base.UiState
 
 data class VnSalaryCalculatorUiState(
     val income: String? = null,

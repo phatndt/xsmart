@@ -2,26 +2,47 @@ package my.phatndt.xsmart.share.domain.entity.vnsalarycalculator
 
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
 import my.phatndt.xsmart.share.common.amount.plus
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VietnamSalaryConfig
+import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.config.VnSalaryCalculatorConfig
 
 data class VnSalaryCalculatorEntity(
     val grossSalary: KmmBigDecimal,
     val netSalary: KmmBigDecimal,
     val insurance: VnSalaryCalculatorInsuranceEntity,
-    val personalDeduction: KmmBigDecimal,
-    val dependentDeduction: KmmBigDecimal,
-    val beforeTaxIncome: KmmBigDecimal,
-    val tax: KmmBigDecimal,
-    val taxableIncome: KmmBigDecimal,
+    val deduction: DeductionEntity,
+    val taxInfo: TaxInfoEntity,
     val calculatorMode: CalculatorMode,
-    val allowance: KmmBigDecimal,
-    val bonus: KmmBigDecimal,
+    val allowance: AllowanceEntity,
+    val dependents: Int = 0,
+    val config: VietnamSalaryConfig,
 )
 
 data class VnSalaryCalculatorInsuranceEntity(
     val socialInsurance: KmmBigDecimal,
     val healthInsurance: KmmBigDecimal,
     val unemploymentInsurance: KmmBigDecimal,
+
 ) {
     val totalInsurance: KmmBigDecimal
         get() = socialInsurance + healthInsurance + unemploymentInsurance
 }
+
+data class DeductionEntity(
+    val personal: KmmBigDecimal,
+    val dependent: KmmBigDecimal,
+) {
+    val totalDeduction: KmmBigDecimal
+        get() = personal + dependent
+}
+
+data class TaxInfoEntity(
+    val beforeTaxIncome: KmmBigDecimal,
+    val taxableIncome: KmmBigDecimal,
+    val totalTax: KmmBigDecimal,
+    val taxBrackets: List<Pair<KmmBigDecimal, TaxBracket>>,
+)
+
+data class AllowanceEntity(
+    val allowance: KmmBigDecimal,
+    val allowanceType: AllowanceType,
+)

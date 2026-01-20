@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import my.phatndt.xsmart.android.R
-import my.phatndt.xsmart.android.core.ui.theme.Spacing
-import my.phatndt.xsmart.android.core.ui.widget.XSmartSpacerXLarge
+import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.widget.XSmartSpacerXLarge
 import my.phatndt.xsmart.android.core.utils.DeferredText
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureItem
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType

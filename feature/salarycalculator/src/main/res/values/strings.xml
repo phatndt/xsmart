@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_unit_converter">UnitConverter</string>
+    <string name="app_name">XSmart</string>
+    <string name="full">Full</string>
+    <string name="other">Other</string>
+    <string name="vn_salary_gross_salary">Gross salary</string>
+    <string name="vn_salary_area_i">I</string>
+    <string name="vn_salary_area_iI">II</string>
+    <string name="vn_salary_area_iii">III</string>
+    <string name="vn_salary_area_iv">IV</string>
+    <string name="vn_salary_area_title">Region</string>
+    <string name="vn_salary_area_description">Select your work location region (affects minimum wage)</string>
+    <string name="vn_salary_btn_text_gross_to_net">Gross to Net</string>
+    <string name="vn_salary_insurance_title">Insurance salary</string>
+    <string name="vn_salary_number_of_dependents_placeholder">Number of dependents</string>
+    <string name="vn_salary_number_of_dependents_placeholder_description">Number of registered dependents for tax deduction</string>
+    <string name="vn_salary_placeholder_income">Income</string>
+    <string name="vn_salary_title_screen">VN salary calculator</string>
+    <string name="vn_salary_error_can_not_calculate_salary">Can not calculate salary, please try later!</string>
+    <string name="feature_name_vietnam_salary_calculator">Vietnam Salary Calculator</string>
+    <string name="feature_name_bmi_calculator">BMI Calculator</string>
+
+    <!-- App Bar -->
+    <string name="title_salary_calculator">Salary Calculator</string>
+
+    <!-- Calculation Mode (Segmented Control) -->
+    <string name="label_calc_mode_gross_to_net">Gross → Net</string>
+    <string name="label_calc_mode_net_to_gross">Net → Gross</string>
+
+    <!-- Main Salary Section -->
+    <string name="title_monthly_gross_salary">Monthly Gross Salary</string>
+    <string name="label_currency_vnd_symbol">₫</string>
+    <string name="label_currency_vnd">VND</string>
+    <string name="placeholder_salary_amount">e.g. 30,000,000</string>
+    <string name="helper_salary_input">Enter your total monthly income before tax.</string>
+
+    <!-- Tax Exempt Income -->
+    <string name="title_tax_exempt_income">Tax Exempt Income</string>
+    <string name="label_lunch_allowance">Lunch Allowance</string>
+    <string name="placeholder_lunch_allowance">e.g. 1,000,000</string>
+    <string name="label_other_allowance">Other (Phone, Parking, Attire)</string>
+    <string name="placeholder_other_allowance">0</string>
+
+    <!-- Personal & Family -->
+    <string name="title_personal_family">Personal &amp; Family</string>
+    <string name="label_dependents">Dependents</string>
+    <string name="helper_dependents">Family relief (4.4M VND/person)</string>
+
+    <!-- Insurance Settings -->
+    <string name="title_insurance_settings">Insurance Settings</string>
+    <string name="helper_insurance_settings_info">Determines minimum wage caps</string>
+
+    <!-- Region / Minimum Wage -->
+    <string name="label_region_minimum_wage">Region (Minimum Wage)</string>
+    <string name="label_region_i">I</string>
+    <string name="label_region_ii">II</string>
+    <string name="label_region_iii">III</string>
+    <string name="label_region_iv">IV</string>
+
+    <!-- Insurance Payment Base -->
+    <string name="label_insurance_payment_on">Insurance Payment On</string>
+    <string name="title_insurance_full_salary">Full Salary</string>
+    <string name="helper_insurance_full_salary">Calculate based on actual gross</string>
+    <string name="title_insurance_contract_salary">Contract Salary</string>
+    <string name="helper_insurance_contract_salary">Custom base amount for SHUI</string>
+
+    <!-- Allowances -->
+    <string name="title_allowances">Allowances</string>
+    <string name="label_allowances_include_salary">Include in salary</string>
+    <string name="title_allowances_separate_salary">Separate with salary</string>
+
+    <!-- Action Button -->
+    <string name="button_cta_calculate_net_salary">Calculate Net Salary</string>
+
+    <!-- Result Screen -->
+    <string name="title_calculation_result">Calculation Result</string>
+    <string name="label_your_net_salary">Your Net Salary</string>
+    <string name="label_monthly_income">Monthly Income</string>
+    <string name="button_view_chart">View Chart</string>
+    
+    <!-- Salary Breakdown Section -->
+    <string name="title_salary_breakdown">Salary Breakdown</string>
+    <string name="label_net_salary">Net Salary</string>
+    <string name="label_insurance">Insurance</string>
+    <string name="label_income_tax">Income Tax</string>
+    
+    <!-- Detailed Calculation Section -->
+    <string name="title_detailed_calculation">Detailed Calculation</string>
+    <string name="label_gross_salary">Gross Salary</string>
+    <string name="label_social_insurance">Social Insurance</string>
+    <string name="label_health_insurance">Health Insurance</string>
+    <string name="label_unemployment_insurance">Unemployment Ins.</string>
+    <string name="label_before_tax_income">Before Tax Income</string>
+    <string name="label_personal_deduction">Personal Deduction</string>
+    <string name="label_dependent_deduction">Dependent Deduction</string>
+    <string name="label_allowances_exempt">Allowances (Exempt)</string>
+    <string name="label_personal_income_tax">Personal Income Tax</string>
+    <string name="label_taxable_income">Taxable Income</string>
+    <string name="label_tax_structure">Tax structure</string>
+    <string name="label_tax_amount">Tax Amount</string>
+    
+    <!-- Tax Brackets -->
+    <string name="label_tax_bracket_5">5%</string>
+    <string name="label_tax_bracket_10">10%</string>
+    <string name="label_tax_bracket_15">15%</string>
+    <string name="label_tax_bracket_20">20%</string>
+    <string name="label_tax_bracket_25">25%</string>
+    <string name="label_tax_range_up_to_10m">Up to 10 mil</string>
+    <string name="label_tax_range_10_to_30m">10 to 30 mil</string>
+    <string name="label_tax_range_30_to_60m">30 to 60 mil</string>
+    <string name="label_tax_range_60_to_100m">60 to 100 mil</string>
+    <string name="label_tax_range_over_100m">Over 100 mil</string>
+    
+    <!-- Bottom Actions -->
+    <string name="button_recalculate">Recalculate</string>
+    <string name="button_share_pdf">Share PDF</string>
+    
+    <!-- Currency Conversion -->
+    <string name="label_usd_equivalent">≈ %1$s USD</string>
+
+    <!-- Salary Configuration Screen -->
+    <string name="title_salary_config">Salary Configuration</string>
+    <string name="tab_before_2026">Before 2026</string>
+    <string name="tab_after_2026">After 2026</string>
+    <string name="tab_custom">Custom</string>
+    <string name="title_deductions">Deductions</string>
+    <string name="title_progressive_tax_scale">Progressive Tax Scale</string>
+    <string name="action_reset_default">Reset Default</string>
+    <string name="label_level">Lvl</string>
+    <string name="label_rate">Rate</string>
+    <string name="helper_tap_rows_to_edit">Tap rows to edit (Mock)</string>
+    <string name="helper_editing_disabled">Editing disabled in Standard Mode</string>
+    <string name="action_save_config">Save Configuration</string>
+    <string name="icon_account_balance">account_balance</string>
+    <string name="icon_people">people</string>
+    <string name="icon_edit">edit</string>
+    <string name="icon_lock">lock</string>
+
+    <!-- Insurance and Tax Percentages -->
+    <string name="label_insurance_social_percent">8%</string>
+    <string name="label_insurance_health_percent">1.5%</string>
+    <string name="label_insurance_unemployment_percent">1%</string>
+
+    <!-- Currency Format -->
+    <string name="format_amount_vnd">%1$s VND</string>
+
+    <!-- Config Mode Descriptions -->
+    <string name="config_desc_before_2026">Current Regulation (Before 2026)</string>
+    <string name="config_desc_after_2026">New Regulation (After 2026)</string>
+    <string name="config_desc_custom">Custom Configuration</string>
+
+    <!-- Tax Bracket Labels -->
+    <string name="label_tax_bracket_over">Over %1$s</string>
+    <string name="label_tax_bracket_up_to">Up to %1$s</string>
+    <string name="label_tax_bracket_range">%1$s - %2$s</string>
+</resources>

@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import my.phatndt.xsmart.android.core.extension.paddingHorizontalXlLarge
-import my.phatndt.xsmart.android.core.ui.theme.Spacing
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
+import my.xsmart.share.ui.extension.paddingHorizontalXlLarge
+import my.xsmart.share.ui.theme.Spacing
+import my.xsmart.share.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.state.VnSalaryCalculatorDetailUiState
 import org.koin.androidx.compose.koinViewModel
 

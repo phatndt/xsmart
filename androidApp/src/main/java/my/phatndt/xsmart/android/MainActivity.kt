@@ -1,6 +1,7 @@
 package my.phatndt.xsmart.android
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,19 +10,21 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import my.phatndt.xsmart.android.core.ui.theme.XSmartTheme
+import my.xsmart.share.ui.theme.XSmartTheme
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorHomeRoute
 import my.phatndt.xsmart.android.features.bmicalculator.presentation.view.BmiCalculatorRoute
 import my.phatndt.xsmart.android.features.dashboard.DashboardRoute
 import my.phatndt.xsmart.android.features.dashboard.model.FeatureType
 import my.phatndt.xsmart.android.features.vnsalarycalculator.detail.VnSalaryCalculatorDetailRoute
 import my.phatndt.xsmart.android.features.vnsalarycalculator.main.VnSalaryCalculatorRoute
+import my.xsmart.feature.salarycalculator.SalaryCalculatorActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             XSmartTheme {
                 Surface(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background,
                 ) {
                     XSmart()
@@ -49,6 +51,7 @@ fun XSmart() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
+    val context = LocalContext.current
     NavHost(
         navController = navController,
         startDestination = Destinations.Dashboard.route,
@@ -63,6 +66,11 @@ fun XSmartNavHost(navController: NavHostController = rememberNavController()) {
 
                     FeatureType.BMI_CALCULATOR -> {
                         navController.navigate(Destinations.BmiCalculatorHome.route)
+                    }
+
+                    FeatureType.VN_SALARY_CALCULATOR_V2 -> {
+                        context.startActivity(Intent(context, SalaryCalculatorActivity::class.java))
+//                        navController.navigate(SalaryRoutes.GRAPH)
                     }
                 }
             }
