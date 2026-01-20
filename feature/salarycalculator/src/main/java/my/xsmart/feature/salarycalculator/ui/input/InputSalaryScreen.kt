@@ -255,17 +255,17 @@ fun DependentSection(
     dependents: Int,
     onAction: (InputSalaryUiIntent) -> Unit,
 ) {
-    Text(
-        stringResource(R.string.title_personal_family),
-        style = MaterialTheme.typography.titleLarge,
-        modifier = Modifier
-            .padding(top = Spacing.large)
-            .paddingHorizontalXlLarge(),
-    )
+//    Text(
+//        stringResource(R.string.title_personal_family),
+//        style = MaterialTheme.typography.titleLarge,
+//        modifier = Modifier
+//            .padding(top = Spacing.large)
+//            .paddingHorizontalXlLarge(),
+//    )
 
     Row(
         modifier = Modifier
-            .padding(top = Spacing.medium)
+            .padding(top = Spacing.large)
             .paddingHorizontalXlLarge()
             .fillMaxWidth()
             .background(
@@ -396,18 +396,18 @@ fun InsuranceSection(
 
     Spacer(Modifier.height(Spacing.large))
 
-    AreaSection(
-        selectedItem = selectedItem,
-        items = Area.entries,
+    InsurancePaymentOn(
+        selectedInsurance = selectedInsurance,
+        insuranceTypes = InsuranceType.entries,
+        otherInsuranceAmount = otherInsuranceAmount,
         onAction = onAction,
     )
 
     Spacer(Modifier.height(Spacing.large))
 
-    InsurancePaymentOn(
-        selectedInsurance = selectedInsurance,
-        insuranceTypes = InsuranceType.entries,
-        otherInsuranceAmount = otherInsuranceAmount,
+    AreaSection(
+        selectedItem = selectedItem,
+        items = Area.entries,
         onAction = onAction,
     )
 }
@@ -553,6 +553,23 @@ fun AllowancesSection(
 fun getAllowanceTypeDisplay(allowanceType: AllowanceType) = when (allowanceType) {
     AllowanceType.SEPARATED -> stringResource(R.string.title_allowances_separate_salary)
     AllowanceType.INCLUDED -> stringResource(R.string.label_allowances_include_salary)
+}
+
+@Composable
+fun Union(
+    allowances: String,
+    selectedAllowanceType: AllowanceType,
+    onAction: (InputSalaryUiIntent) -> Unit,
+) {
+    val allowanceTypes = remember { AllowanceType.entries }
+    Text(
+        stringResource(R.string.title_allowances),
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier
+            .padding(top = Spacing.large)
+            .paddingHorizontalXlLarge(),
+    )
+
 }
 
 @Preview(
