@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("com.google.gms.google-services")
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
