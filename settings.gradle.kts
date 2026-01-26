@@ -19,7 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "X_Smart"
 include(":androidApp")
-include(":shared")
 include(":share:data")
 include(":share:domain")
 include(":share:common")

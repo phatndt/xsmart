@@ -70,7 +70,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
     implementation(projects.share.common)
     implementation(projects.share.domain)
     implementation(projects.share.di)
