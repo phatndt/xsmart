@@ -2,7 +2,16 @@
     <application>
         <activity
             android:name="my.xsmart.feature.salarycalculator.SalaryCalculatorActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="app" android:host="bmi"/>
+            </intent-filter>
+
+        </activity>
     </application>
 </manifest>

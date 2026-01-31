@@ -28,3 +28,4 @@ include(":share:ui")
 
 include(":feature")
 include(":feature:salarycalculator")
+include(":feature:dashboard")

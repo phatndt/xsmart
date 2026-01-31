@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Top Bar -->
+    <string name="dashboard_greeting_hello">Hello,</string>
+    <string name="dashboard_greeting_have_nice_day">Have a nice day</string>
+
+    <!-- Financial Summary Card -->
+    <string name="dashboard_financial_summary">Financial Summary</string>
+    <string name="dashboard_safe_mode_active">Safe mode active</string>
+    <string name="dashboard_using_2024_regulations">Using 2024 Regulations</string>
+    <string name="dashboard_region_i_hanoi_hcmc">Region I (Hanoi/HCMC)</string>
+    <string name="dashboard_start_calculating">Start Calculating</string>
+
+    <!-- Quick Tools Section -->
+    <string name="dashboard_quick_tools">Quick Tools</string>
+    
+    <!-- Tool Cards -->
+    <string name="dashboard_tool_salary_calc">Salary Calculator</string>
+    <string name="dashboard_tool_salary_calc_subtitle">Convert Gross to Net &amp; vice versa</string>
+    <string name="dashboard_tool_tax_info">Personal Income Tax</string>
+    <string name="dashboard_tool_tax_info_subtitle">Regulations</string>
+    <string name="dashboard_tool_overtime">Overtime Tracker</string>
+    <string name="dashboard_tool_overtime_subtitle">Track overtime hours</string>
+    <string name="dashboard_tool_insurance">Insurance</string>
+    <string name="dashboard_tool_insurance_subtitle">Insurance information</string>
+    <string name="dashboard_tool_history">Salary History</string>
+    <string name="dashboard_tool_history_subtitle">View past calculations</string>
+    <string name="dashboard_tool_holidays">Holidays</string>
+    <string name="dashboard_tool_holidays_subtitle">Public holidays calendar</string>
+
+    <!-- Daily Insight Card -->
+    <string name="dashboard_insight_overtime_holidays">Overtime on Holidays?</string>
+    <string name="dashboard_insight_overtime_description">Did you know? Under Vietnamese labor law, working on public holidays entitles you to at least </string>
+    <string name="dashboard_insight_overtime_rate">300%</string>
+    <string name="dashboard_insight_overtime_suffix"> of your normal hourly wage.</string>
+
+    <!-- Recent Updates Section -->
+    <string name="dashboard_recent_updates">Recent Updates</string>
+    <string name="dashboard_update_social_insurance">Updated Social Insurance Policy</string>
+    <string name="dashboard_update_effective_date">Effective from July 2024</string>
+    <string name="dashboard_update_time_ago">2d ago</string>
+</resources>

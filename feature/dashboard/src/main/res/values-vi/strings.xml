@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Top Bar -->
+    <string name="dashboard_greeting_hello">Xin chào,</string>
+    <string name="dashboard_greeting_have_nice_day">Chúc một ngày tốt lành</string>
+
+    <!-- Financial Summary Card -->
+    <string name="dashboard_financial_summary">Tổng Quan Tài Chính</string>
+    <string name="dashboard_safe_mode_active">Chế độ an toàn đang hoạt động</string>
+    <string name="dashboard_using_2024_regulations">Sử dụng Quy Định 2024</string>
+    <string name="dashboard_region_i_hanoi_hcmc">Vùng I (Hà Nội/TP.HCM)</string>
+    <string name="dashboard_start_calculating">Bắt Đầu Tính Toán</string>
+
+    <!-- Quick Tools Section -->
+    <string name="dashboard_quick_tools">Công Cụ Nhanh</string>
+    
+    <!-- Tool Cards -->
+    <string name="dashboard_tool_salary_calc">Tính Lương</string>
+    <string name="dashboard_tool_salary_calc_subtitle">Chuyển đổi Gross sang Net và ngược lại</string>
+    <string name="dashboard_tool_tax_info">Thuế Thu Nhập Cá Nhân</string>
+    <string name="dashboard_tool_tax_info_subtitle">Quy định về thuế</string>
+    <string name="dashboard_tool_overtime">Làm Thêm Giờ</string>
+    <string name="dashboard_tool_overtime_subtitle">Theo dõi giờ làm thêm</string>
+    <string name="dashboard_tool_insurance">Bảo Hiểm</string>
+    <string name="dashboard_tool_insurance_subtitle">Thông tin bảo hiểm</string>
+    <string name="dashboard_tool_history">Lịch Sử Lương</string>
+    <string name="dashboard_tool_history_subtitle">Xem tính toán trước đó</string>
+    <string name="dashboard_tool_holidays">Nghỉ Lễ</string>
+    <string name="dashboard_tool_holidays_subtitle">Lịch ngày lễ</string>
+
+    <!-- Daily Insight Card -->
+    <string name="dashboard_insight_overtime_holidays">Làm Thêm Giờ Ngày Lễ?</string>
+    <string name="dashboard_insight_overtime_description">Bạn có biết? Theo luật lao động Việt Nam, làm việc vào ngày lễ sẽ được trả ít nhất </string>
+    <string name="dashboard_insight_overtime_rate">300%</string>
+    <string name="dashboard_insight_overtime_suffix"> mức lương giờ thông thường.</string>
+
+    <!-- Recent Updates Section -->
+    <string name="dashboard_recent_updates">Cập Nhật Gần Đây</string>
+    <string name="dashboard_update_social_insurance">Chính Sách Bảo Hiểm Xã Hội Mới</string>
+    <string name="dashboard_update_effective_date">Có hiệu lực từ tháng 7/2024</string>
+    <string name="dashboard_update_time_ago">2 ngày trước</string>
+</resources>
