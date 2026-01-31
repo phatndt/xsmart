@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("com.google.gms.google-services")
+    alias(libs.plugins.kotlin.compose.compiler)
 }
 
 android {
@@ -70,7 +71,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":shared"))
     implementation(projects.share.common)
     implementation(projects.share.domain)
     implementation(projects.share.di)

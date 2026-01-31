@@ -1,5 +1,5 @@
 import SwiftUI
-import shared
+import commonKit
 
 struct ContentView: View {
 	let greet = "Hi"
