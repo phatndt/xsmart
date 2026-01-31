@@ -78,6 +78,7 @@ dependencies {
     implementation(projects.share.ui)
 
     implementation(projects.feature.salarycalculator)
+    implementation(projects.feature.dashboard)
     
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
