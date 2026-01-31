@@ -1,5 +1,6 @@
 package my.xsmart.share.ui.theme
 
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.dp
 
 object Spacing {
@@ -39,8 +40,7 @@ object Spacing {
     val xxxLarge = 40.dp
 }
 
-
-object AppSpacing {
+class AppSpacing {
 
     // ───────────────
     // XS – Micro spacing (inline / tight UI)
@@ -102,3 +102,4 @@ object AppSpacing {
     // Use: fixed bottom CTA, avoid content overlap with bottom bar
 }
 
+internal val LocalSpacing = compositionLocalOf { AppSpacing() }

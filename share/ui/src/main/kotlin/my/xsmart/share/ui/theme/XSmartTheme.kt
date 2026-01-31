@@ -72,8 +72,6 @@ fun solution(inputString: String): Boolean {
     return true
 }
 
-val LocalSpacing = compositionLocalOf { AppSpacing }
-
-val MaterialTheme.spacing: AppSpacing
+val MaterialTheme.spacing
     @Composable
     get() = LocalSpacing.current
