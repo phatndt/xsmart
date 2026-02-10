@@ -67,4 +67,7 @@ data class VnSalaryCalculatorConfig(
             VnSalaryCalculatorConstant.RATE_7,
         ),
     ),
+
+    override val unionFeeRate: Double = VnSalaryCalculatorConstant.UNION_RATE
+
 ): VietnamSalaryConfig

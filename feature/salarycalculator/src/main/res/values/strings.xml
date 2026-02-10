@@ -70,6 +70,16 @@
     <string name="label_allowances_include_salary">Bao gồm trong lương</string>
     <string name="title_allowances_separate_salary">Tách biệt với lương</string>
 
+    <!-- Union Fee Section -->
+    <string name="title_union_fee">Phí Công Đoàn</string>
+    <string name="label_union_fee">Khấu trừ 0.05% phí công đoàn</string>
+    <string name="helper_union_fee">Thành viên công đoàn thường đóng 1% lương gross</string>
+
+    <!-- Additional Income Section -->
+    <string name="title_additional_income">Thu Nhập Bổ Sung</string>
+    <string name="placeholder_additional_income">Nhập thu nhập hàng tháng bổ sung</string>
+    <string name="helper_additional_income">Bao gồm thu nhập từ các nguồn khác để tính thuế chính xác</string>
+
     <!-- Action Button -->
     <string name="button_cta_calculate_net_salary">Tính Lương Net</string>
 

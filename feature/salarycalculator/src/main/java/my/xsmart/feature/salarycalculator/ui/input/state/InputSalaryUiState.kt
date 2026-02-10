@@ -15,4 +15,6 @@ data class InputSalaryUiState(
     val calculatorMode: CalculatorMode = CalculatorMode.GROSS_TO_NET,
     val allowance: String? = "",
     val allowanceType: AllowanceType = AllowanceType.SEPARATED,
+    val unionFeeEnabled: Boolean = true,
+    val additionalIncome: String? = null,
 ): UiState

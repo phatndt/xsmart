@@ -64,4 +64,6 @@ object VnSalaryCalculatorConstant {
     val RATE_5: Double = 0.25
     val RATE_6: Double = 0.30
     val RATE_7: Double = 0.35
+
+    val UNION_RATE = 0.05
 }

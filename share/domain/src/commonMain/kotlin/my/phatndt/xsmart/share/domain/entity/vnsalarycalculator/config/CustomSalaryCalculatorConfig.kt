@@ -27,4 +27,7 @@ data class CustomSalaryCalculatorConfig(
     ),
 
     override val taxBrackets: List<TaxBracket>,
+
+    override val unionFeeRate: Double = VnSalaryCalculatorConstant.UNION_RATE
+
 ) : VietnamSalaryConfig

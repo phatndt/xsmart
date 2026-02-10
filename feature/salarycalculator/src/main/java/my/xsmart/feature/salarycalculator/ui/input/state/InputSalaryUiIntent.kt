@@ -21,4 +21,8 @@ sealed interface InputSalaryUiIntent: UiIntent {
     data class ChangeAllowanceType(val value: AllowanceType) : InputSalaryUiIntent
 
     data class ChangeAllowanceMoney(val value: String) : InputSalaryUiIntent
+
+    data class UnionFeeChangeIntent(val enabled: Boolean) : InputSalaryUiIntent
+
+    data class AdditionalIncomeChangeIntent(val value: String) : InputSalaryUiIntent
 }

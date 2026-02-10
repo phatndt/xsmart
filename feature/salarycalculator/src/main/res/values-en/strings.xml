@@ -70,6 +70,16 @@
     <string name="label_allowances_include_salary">Include in salary</string>
     <string name="title_allowances_separate_salary">Separate with salary</string>
 
+    <!-- Union Fee Section -->
+    <string name="title_union_fee">Union Fee</string>
+    <string name="label_union_fee">Deduct 0.05% union fee</string>
+    <string name="helper_union_fee">Union members typically pay 1% of gross salary</string>
+
+    <!-- Additional Income Section -->
+    <string name="title_additional_income">Additional Income</string>
+    <string name="placeholder_additional_income">Enter additional monthly income</string>
+    <string name="helper_additional_income">Include income from other sources for accurate tax calculation</string>
+
     <!-- Action Button -->
     <string name="button_cta_calculate_net_salary">Calculate Net Salary</string>
 

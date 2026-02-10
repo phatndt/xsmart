@@ -34,6 +34,10 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         } else {
             ZERO
         }
+        
+        // Add additional income to gross salary
+        val totalGrossSalary = grossSalary + request.additionalIncome
+        
         val config = request.config
 
         // Insurance
@@ -56,8 +60,15 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
             dependent = config.dependentDeduction * KmmBigDecimal(request.dependents),
         )
 
+        // Union fee (1% of gross salary when enabled)
+        val unionFee = if (request.unionFeeEnabled) {
+            socialHealthSalary * config.unionFeeRate.toKmmBigDecimal()
+        } else {
+            ZERO
+        }
+
         // Tax
-        val beforeTaxIncome = grossSalary - insurance.totalInsurance  - request.allowances
+        val beforeTaxIncome = totalGrossSalary - insurance.totalInsurance - request.allowances
 
         val taxableIncome = maxOf(beforeTaxIncome - deduction.totalDeduction, ZERO)
         val taxBrackets = calculateTax(taxableIncome, config.taxBrackets)
@@ -68,8 +79,8 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
             taxBrackets = taxBrackets.second,
         )
 
-        // Net salary
-        val netSalary = grossSalary - insurance.totalInsurance - taxBrackets.first
+        // Net salary (deduct union fee from final calculation)
+        val netSalary = totalGrossSalary - insurance.totalInsurance - taxBrackets.first - unionFee
         // Allowance
         val allowance = AllowanceEntity(
             allowance = request.allowances,
@@ -77,7 +88,7 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         )
 
         return VnSalaryCalculatorEntity(
-            grossSalary = grossSalary,
+            grossSalary = totalGrossSalary,
             netSalary = netSalary,
             insurance = insurance,
             deduction = deduction,
@@ -86,6 +97,8 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
             allowance = allowance,
             dependents = request.dependents,
             config = config,
+            unionFee = unionFee,
+            additionalIncome = request.additionalIncome,
         )
     }
 

@@ -63,6 +63,14 @@ class InputSalaryViewModel(
             is InputSalaryUiIntent.ChangeAllowanceType -> setUiState {
                 copy(allowanceType = intent.value)
             }
+
+            is InputSalaryUiIntent.UnionFeeChangeIntent -> setUiState {
+                copy(unionFeeEnabled = intent.enabled)
+            }
+
+            is InputSalaryUiIntent.AdditionalIncomeChangeIntent -> setUiState {
+                copy(additionalIncome = intent.value)
+            }
         }
     }
 
@@ -74,6 +82,8 @@ class InputSalaryViewModel(
         val allowances = AmountFormatter.parseAmount(uiState.value.allowance) ?: BigDecimal.ZERO
         val allowanceType = uiState.value.allowanceType
         val mode = uiState.value.calculatorMode
+        val unionFeeEnabled = uiState.value.unionFeeEnabled
+        val additionalIncome = AmountFormatter.parseAmount(uiState.value.additionalIncome) ?: BigDecimal.ZERO
 
         if (income == null || insurance == null) return
 
@@ -91,6 +101,8 @@ class InputSalaryViewModel(
                 allowanceType = allowanceType,
                 calculatorMode = CalculatorMode.GROSS_TO_NET,
                 config = config,
+                unionFeeEnabled = unionFeeEnabled,
+                additionalIncome = additionalIncome,
             )
 
             calculateVnSalaryUseCase(request = request).collect { result ->

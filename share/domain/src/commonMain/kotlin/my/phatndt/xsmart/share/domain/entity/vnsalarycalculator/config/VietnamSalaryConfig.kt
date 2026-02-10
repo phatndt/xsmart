@@ -19,4 +19,6 @@ sealed interface VietnamSalaryConfig {
     val regionalMinimumWage: Map<Area, KmmBigDecimal>
 
     val taxBrackets: List<TaxBracket>
+
+    val unionFeeRate: Double
 }
