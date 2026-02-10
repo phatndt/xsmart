@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -199,6 +200,16 @@ fun InputSalaryScreen(
                 uiState.allowance.orEmpty(),
                 uiState.allowanceType,
                 onAction,
+            )
+
+            UnionFeeSection(
+                unionFeeEnabled = uiState.unionFeeEnabled,
+                onAction = onAction,
+            )
+
+            AdditionalIncomeSection(
+                additionalIncome = uiState.additionalIncome.orEmpty(),
+                onAction = onAction,
             )
         }
     }
@@ -556,20 +567,89 @@ fun getAllowanceTypeDisplay(allowanceType: AllowanceType) = when (allowanceType)
 }
 
 @Composable
-fun Union(
-    allowances: String,
-    selectedAllowanceType: AllowanceType,
+fun UnionFeeSection(
+    unionFeeEnabled: Boolean,
     onAction: (InputSalaryUiIntent) -> Unit,
 ) {
-    val allowanceTypes = remember { AllowanceType.entries }
+    Row(
+        modifier = Modifier
+            .padding(top = Spacing.large)
+            .paddingHorizontalXlLarge()
+            .fillMaxWidth()
+            .background(
+                MaterialTheme.colorScheme.surface,
+                MaterialTheme.shapes.large,
+            )
+            .padding(Spacing.large),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(
+                stringResource(R.string.label_union_fee),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                stringResource(R.string.helper_union_fee),
+                style = MaterialTheme.typography.labelMedium,
+            )
+        }
+
+        Spacer(modifier = Modifier.width(Spacing.medium))
+
+        Checkbox(
+            checked = unionFeeEnabled,
+            onCheckedChange = { enabled ->
+                onAction(InputSalaryUiIntent.UnionFeeChangeIntent(enabled))
+            }
+        )
+    }
+}
+
+@Composable
+fun AdditionalIncomeSection(
+    additionalIncome: String,
+    onAction: (InputSalaryUiIntent) -> Unit,
+) {
     Text(
-        stringResource(R.string.title_allowances),
+        text = stringResource(R.string.title_additional_income),
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier
             .padding(top = Spacing.large)
             .paddingHorizontalXlLarge(),
     )
 
+    XSmartTextField(
+        value = additionalIncome,
+        onValueChange = {
+            onAction(InputSalaryUiIntent.AdditionalIncomeChangeIntent(it))
+        },
+        placeholder = {
+            Text(
+                text = stringResource(R.string.placeholder_additional_income),
+            )
+        },
+        supportingText = {
+            Text(
+                text = stringResource(R.string.helper_additional_income),
+                style = MaterialTheme.typography.labelMedium,
+            )
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .paddingHorizontalLarge()
+            .padding(top = Spacing.medium),
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Decimal,
+            imeAction = ImeAction.Done,
+        ),
+        visualTransformation = XSmartTextFieldTransformation(),
+        shape = MaterialTheme.shapes.small,
+        colors = SalaryCalculatorTextFieldDefault.color(),
+    )
 }
 
 @Preview(

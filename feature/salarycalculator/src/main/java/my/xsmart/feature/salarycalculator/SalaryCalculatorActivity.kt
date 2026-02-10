@@ -3,6 +3,7 @@ package my.xsmart.feature.salarycalculator
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,7 +21,7 @@ import my.xsmart.feature.salarycalculator.ui.input.ui.SalaryCalculatorTheme
 import my.xsmart.feature.salarycalculator.ui.result.ResultRoute
 import my.xsmart.share.ui.theme.XSmartTheme
 
-class SalaryCalculatorActivity : ComponentActivity() {
+class SalaryCalculatorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
