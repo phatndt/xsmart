@@ -70,7 +70,7 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         // Tax
         val beforeTaxIncome = totalGrossSalary - insurance.totalInsurance - request.allowances
 
-        val taxableIncome = maxOf(beforeTaxIncome - deduction.totalDeduction, ZERO)
+        val taxableIncome = maxOf(beforeTaxIncome - deduction.totalDeduction - unionFee, ZERO)
         val taxBrackets = calculateTax(taxableIncome, config.taxBrackets)
         val taxInfo = TaxInfoEntity(
             beforeTaxIncome = beforeTaxIncome,
@@ -88,7 +88,7 @@ class CalculateVnSalaryUseCaseImpl : CalculateVnSalaryUseCase {
         )
 
         return VnSalaryCalculatorEntity(
-            grossSalary = totalGrossSalary,
+            grossSalary = grossSalary,
             netSalary = netSalary,
             insurance = insurance,
             deduction = deduction,

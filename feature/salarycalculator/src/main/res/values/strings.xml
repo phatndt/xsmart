@@ -72,8 +72,8 @@
 
     <!-- Union Fee Section -->
     <string name="title_union_fee">Phí Công Đoàn</string>
-    <string name="label_union_fee">Khấu trừ 0.05% phí công đoàn</string>
-    <string name="helper_union_fee">Thành viên công đoàn thường đóng 1% lương gross</string>
+    <string name="label_union_fee">Khấu trừ 0.5% phí công đoàn</string>
+    <string name="helper_union_fee">Thành viên công đoàn thường đóng 0.5% lương bảo hiểm xã hội</string>
 
     <!-- Additional Income Section -->
     <string name="title_additional_income">Thu Nhập Bổ Sung</string>

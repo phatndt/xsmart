@@ -478,6 +478,8 @@ fun ResultScreenPreview() {
                             allowanceType = AllowanceType.INCLUDED,
                         ),
                         config = VnSalaryConfigMap.newConfig,
+                        unionFee = KmmBigDecimal("300000"),
+                        additionalIncome = KmmBigDecimal("5000000"),
                     ),
                     taxBrackets = listOf(
                         TaxBracketModel(

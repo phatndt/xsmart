@@ -72,8 +72,8 @@
 
     <!-- Union Fee Section -->
     <string name="title_union_fee">Union Fee</string>
-    <string name="label_union_fee">Deduct 0.05% union fee</string>
-    <string name="helper_union_fee">Union members typically pay 1% of gross salary</string>
+    <string name="label_union_fee">Deduct 0.5% union fee</string>
+    <string name="helper_union_fee">Union members typically pay 0.5% of social insurance salary</string>
 
     <!-- Additional Income Section -->
     <string name="title_additional_income">Additional Income</string>

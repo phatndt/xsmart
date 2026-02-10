@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import my.phatndt.xsmart.share.common.amount.AmountFormatter
 import my.phatndt.xsmart.share.common.amount.KmmBigDecimal
+import my.phatndt.xsmart.share.common.amount.ZERO
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceEntity
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.AllowanceType
 import my.phatndt.xsmart.share.domain.entity.vnsalarycalculator.CalculatorMode
@@ -92,6 +93,12 @@ fun DetailedCalculation(
                     color = MaterialTheme.colorScheme.onSurface
                 )
             }
+
+            DeductionRow(
+                label = stringResource(R.string.title_additional_income),
+                amount = fmt(data.additionalIncome),
+                isExempt = data.additionalIncome == ZERO
+            )
 
             HorizontalDivider(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -165,6 +172,12 @@ fun DetailedCalculation(
                 DeductionRow(
                     label = stringResource(R.string.label_dependent_deduction) + " (${uiState.data.dependents})",
                     amount = if (data.deduction.dependent == KmmBigDecimal("0")) "0" else "-${fmt(data.deduction.dependent)}"
+                )
+                // Union Fee
+                DeductionRow(
+                    label = stringResource(R.string.title_union_fee),
+                    amount = "-${fmt(data.unionFee)}",
+                    isExempt = data.unionFee == ZERO,
                 )
                 DeductionRow(
                     label = stringResource(R.string.label_allowances_exempt),
@@ -489,6 +502,8 @@ fun DetailedCalculationPreview() {
                             allowanceType = AllowanceType.INCLUDED,
                         ),
                         config = VnSalaryConfigMap.newConfig,
+                        unionFee = KmmBigDecimal("300000"),
+                        additionalIncome = KmmBigDecimal("5000000"),
                     ),
                     taxBrackets = listOf(
                         TaxBracketModel(5, min = BigDecimal(0), max = BigDecimal(5000000), KmmBigDecimal("250000"), true),

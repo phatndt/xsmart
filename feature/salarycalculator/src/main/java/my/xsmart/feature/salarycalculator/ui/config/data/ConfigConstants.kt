@@ -133,8 +133,8 @@ fun genTaxBracketLabelComposable(
     upperBound == null -> stringResource(R.string.label_tax_bracket_up_to, AmountFormatter.toCompactFormat(lowerBound))
     else -> stringResource(
         R.string.label_tax_bracket_range,
-        AmountFormatter.toCompactFormat(upperBound),
-        AmountFormatter.toCompactFormat(lowerBound)
+        AmountFormatter.toCompactFormat(lowerBound),
+        AmountFormatter.toCompactFormat(upperBound)
     )
 }
 
