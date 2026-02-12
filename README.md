@@ -75,6 +75,14 @@ The application features a clean, intuitive user interface inspired by modern de
 - **Multiple Calculation Modes** (Standard and Custom)
 - **Detailed Results View** showing all deduction components
 
+<table align="center">
+  <tr>
+    <td><img src="screens/vn_salary_calculator_dashboard.png" width="300"/></td>
+    <td><img src="screens/vn_salary_calculator_result.png" width="300"/></td>
+    <td><img src="screens/vn_salary_calculator_config.png" width="300"/></td>
+  </tr>
+</table>
+
 ### 🌐 Localization
 - **Vietnamese (VI)** - Default language
 - **English (EN)** - Full translation support
