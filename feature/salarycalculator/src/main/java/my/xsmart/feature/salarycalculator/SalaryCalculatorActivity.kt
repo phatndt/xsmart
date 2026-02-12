@@ -41,7 +41,7 @@ class SalaryCalculatorActivity : AppCompatActivity() {
                                     navController.navigate(SalaryRoutes.DETAIL)
                                 },
                                 onBack = {
-                                    navController.popBackStack()
+                                    finish()
                                 },
                                 onChangeConfig = {
                                     navController.navigate(SalaryRoutes.CONFIG)
