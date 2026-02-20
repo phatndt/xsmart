@@ -158,9 +158,9 @@ fun ResultScreen(
                 },
             )
         },
-        bottomBar = {
-            BottomActionButtons(onAction = onAction)
-        },
+//        bottomBar = {
+//            BottomActionButtons(onAction = onAction)
+//        },
     ) { paddingValues ->
         Column(
             modifier = Modifier
